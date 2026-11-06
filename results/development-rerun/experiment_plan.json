@@ -1,0 +1,38 @@
+{
+  "name": "Direct and staged comparison",
+  "dataset_version": "2",
+  "prompt_version": "4",
+  "workflow_version": "3",
+  "cases": "data/processed/cases.jsonl",
+  "labels": "data/labels/answers.jsonl",
+  "backend": "mlx",
+  "model": "mlx-community/Qwen3-4B-4bit",
+  "max_tokens": 512,
+  "temperature": 0.0,
+  "order_seed": 17,
+  "repeats": 2,
+  "splits": {
+    "dev": {
+      "expected_cases": 66,
+      "repeat_case_ids": [
+        "scenario-01-1",
+        "scenario-08-2",
+        "scenario-05-1",
+        "fewrel-p159-0219",
+        "fewrel-p127-0144",
+        "fewrel-p39-0056"
+      ]
+    },
+    "test": {
+      "expected_cases": 66,
+      "repeat_case_ids": [
+        "scenario-01-3",
+        "scenario-08-4",
+        "scenario-05-3",
+        "fewrel-p159-0296",
+        "fewrel-p127-0129",
+        "fewrel-p39-0055"
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "source_url": "https://raw.githubusercontent.com/thunlp/FewRel/master/data/train_wiki.json",
+  "license_url": "https://raw.githubusercontent.com/thunlp/FewRel/master/LICENSE",
+  "annotation_revision": "2",
+  "annotation_review": "Development trace review added two explicitly stated full headquarters phrases and permits the source's former qualifier on historical office titles. The original run's answer snapshot and scores remain unchanged; reviewed scoring uses a separate analysis directory.",
+  "selection_rule": "Read the complete sentence; require the requested relation to be explicit for the labelled subject. Prefer company ownership and explicitly named headquarters. Do not infer dates from year-only, month-only, publication, or unrelated event dates.",
+  "selections": {
+    "P39": [22, 23, 24, 25, 26, 30, 31, 32, 34, 35, 38, 39, 40, 42, 47, 48, 51, 53, 55, 56],
+    "P127": [26, 30, 35, 37, 59, 60, 72, 74, 85, 102, 103, 105, 114, 117, 129, 131, 135, 144, 147, 164],
+    "P159": [26, 41, 43, 64, 149, 154, 174, 219, 222, 252, 260, 284, 287, 296, 303, 317, 324, 326, 357, 448]
+  },
+  "value_alternatives": {
+    "P159:26": ["Cognac, France", "Cognac, Charente, France", "the town of Cognac, in the department of Charente, France"],
+    "P159:41": ["Beijing, China"],
+    "P159:43": ["Wellington, New Zealand"],
+    "P159:64": ["Sunnyvale"],
+    "P159:149": ["North Flying Terminal at Aalborg Airport", "the North Flying Terminal at Aalborg Airport"],
+    "P159:174": ["Lake Charles", "Chennault International Airport", "Chennault International Airport, Lake Charles, Louisiana"],
+    "P159:219": ["Cary"],
+    "P159:222": ["Chaoyang District, Beijing", "Chaoyang District, Beijing, China", "Beijing, China"],
+    "P159:252": ["Midtown West", "Midtown West in Tokyo Midtown", "Akasaka, Minato, Tokyo", "Minato, Tokyo", "Tokyo", "Midtown West in Tokyo Midtown, Akasaka, Minato, Tokyo"],
+    "P159:260": ["Seoul, Korea"],
+    "P159:284": ["Torrance"],
+    "P159:296": ["Langley"],
+    "P159:303": ["Chicago"],
+    "P159:317": ["Santa Monica"],
+    "P159:326": ["Moultrie"],
+    "P159:357": ["Austin"],
+    "P159:448": ["Glenview"]
+  },
+  "annotation_notes": {
+    "P39": "Historical office holders; organization is null unless an employer organization is explicitly stated. Countries in office titles are not inferred employers. None of these passages states a full effective day.",
+    "P127": "The target organization is explicitly owned, acquired, or a subsidiary. Ownership is not necessarily exclusive. Acquisition month/year does not supply a full effective date.",
+    "P159": "Require headquarters/head office wording for the target. Allow explicit city/facility granularity and optional region/country; do not count branches or unrelated locations. Historical and former headquarters are valid historical facts."
+  },
+  "reviewed_exclusions": [
+    {"relation": "P127", "row_index": 22, "reason": "A game at a stadium in Spokane does not state ownership."},
+    {"relation": "P127", "row_index": 24, "reason": "Being CEO does not establish ownership of Eicher Motors."},
+    {"relation": "P127", "row_index": 25, "reason": "Constructing a building is not an explicit ownership statement; outside company target scope."},
+    {"relation": "P127", "row_index": 61, "reason": "A signed deal to buy Volvo Cars does not establish completed acquisition."},
+    {"relation": "P127", "row_index": 70, "reason": "A preliminary acquisition agreement adds temporal ambiguity; omit from the positive subset."},
+    {"relation": "P127", "row_index": 138, "reason": "The acquisition in the sentence is of Altadis, not the labelled Reemtsma."},
+    {"relation": "P159", "row_index": 22, "reason": "Leverkusen modifies Covestro, not necessarily Bayer headquarters."},
+    {"relation": "P159", "row_index": 27, "reason": "A future relocation headline needs a different temporal task."},
+    {"relation": "P159", "row_index": 40, "reason": "London-based is weaker than an explicit headquarters statement."},
+    {"relation": "P159", "row_index": 113, "reason": "The headquarters refers to an unnamed subsidiary, not the labelled parent JAL."},
+    {"relation": "P159", "row_index": 128, "reason": "Ambiguous attachment of headquarters to department versus Insolvency Service."},
+    {"relation": "P159", "row_index": 268, "reason": "Would continue describes a projected merged company; avoid asserting completed state."},
+    {"relation": "P159", "row_index": 419, "reason": "Headquarters belongs to Chengdu Airlines, not labelled parent Sichuan Airlines."},
+    {"relation": "P159", "row_index": 438, "reason": "The annotated tail is the word headquarters rather than its location."}
+  ]
+}

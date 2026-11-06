@@ -1,0 +1,13 @@
+{
+  "python": "3.12.12",
+  "system": "Darwin",
+  "architecture": "arm64",
+  "packages": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.30.7",
+    "transformers": "5.22.1",
+    "tokenizers": "0.23.3",
+    "huggingface-hub": "2.4.0"
+  },
+  "note": "Runtime used for this comparison; model loading is excluded from per-case latency."
+}

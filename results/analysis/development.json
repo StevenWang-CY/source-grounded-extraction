@@ -1,0 +1,480 @@
+{
+  "main": {
+    "direct": {
+      "accepted_accuracy": {
+        "count": 29,
+        "total": 57,
+        "low": 0.38259898403961834,
+        "high": 0.6338371767360632
+      },
+      "useful_coverage": {
+        "count": 29,
+        "total": 38,
+        "low": 0.607931875050628,
+        "high": 0.8700629304541203
+      },
+      "unsafe_accepted": {
+        "count": 21,
+        "total": 28,
+        "low": 0.5664432952864777,
+        "high": 0.873235051493787
+      },
+      "decisions": {
+        "count": 36,
+        "total": 66,
+        "low": 0.42615011252555934,
+        "high": 0.6597587458532113
+      },
+      "invalid": 9
+    },
+    "staged": {
+      "accepted_accuracy": {
+        "count": 26,
+        "total": 31,
+        "low": 0.6736564589149602,
+        "high": 0.9290737560150889
+      },
+      "useful_coverage": {
+        "count": 26,
+        "total": 38,
+        "low": 0.5254423998209402,
+        "high": 0.8091539640323836
+      },
+      "unsafe_accepted": {
+        "count": 0,
+        "total": 28,
+        "low": 0.0,
+        "high": 0.12064330643947074
+      },
+      "decisions": {
+        "count": 55,
+        "total": 66,
+        "low": 0.7256941278334147,
+        "high": 0.9043041669442377
+      },
+      "invalid": 4
+    }
+  },
+  "paired": {
+    "decision": {
+      "direct_only": 6,
+      "staged_only": 25,
+      "p": 0.0008779102936387062,
+      "difference_interval": [
+        -28.903212070734213,
+        -9.096787929265789
+      ]
+    },
+    "unsafe": {
+      "direct_only": 21,
+      "staged_only": 0,
+      "p": 9.5367431640625e-07,
+      "difference_interval": [
+        16.509158305305785,
+        25.490841694694215
+      ]
+    },
+    "useful": {
+      "direct_only": 8,
+      "staged_only": 5,
+      "p": 0.5810546875,
+      "difference_interval": [
+        -4.002081565371829,
+        10.002081565371828
+      ]
+    }
+  },
+  "stages": {
+    "direct": {
+      "resolution": {
+        "count": 48,
+        "total": 66
+      },
+      "quote": {
+        "count": 63,
+        "total": 64
+      },
+      "allowed": {
+        "count": 53,
+        "total": 57
+      },
+      "verification": {
+        "count": 0,
+        "total": 0
+      },
+      "model_calls": 66,
+      "input_tokens": 56462,
+      "output_tokens": 8393,
+      "seconds": 6.171140871878544
+    },
+    "staged": {
+      "resolution": {
+        "count": 57,
+        "total": 66
+      },
+      "quote": {
+        "count": 56,
+        "total": 56
+      },
+      "allowed": {
+        "count": 31,
+        "total": 31
+      },
+      "verification": {
+        "count": 40,
+        "total": 42
+      },
+      "model_calls": 122,
+      "input_tokens": 58936,
+      "output_tokens": 10255,
+      "seconds": 7.138377097146021
+    }
+  },
+  "fields": {
+    "direct": {
+      "Names": {
+        "correct": 62,
+        "extracted": 64,
+        "expected": 64
+      },
+      "Roles": {
+        "correct": 37,
+        "extracted": 41,
+        "expected": 40
+      },
+      "Relationships": {
+        "correct": 19,
+        "extracted": 23,
+        "expected": 24
+      },
+      "Organizations": {
+        "correct": 30,
+        "extracted": 42,
+        "expected": 30
+      },
+      "Effective dates": {
+        "correct": 26,
+        "extracted": 26,
+        "expected": 26
+      }
+    },
+    "staged": {
+      "Names": {
+        "correct": 55,
+        "extracted": 56,
+        "expected": 64
+      },
+      "Roles": {
+        "correct": 36,
+        "extracted": 36,
+        "expected": 40
+      },
+      "Relationships": {
+        "correct": 19,
+        "extracted": 20,
+        "expected": 24
+      },
+      "Organizations": {
+        "correct": 22,
+        "extracted": 24,
+        "expected": 30
+      },
+      "Effective dates": {
+        "correct": 26,
+        "extracted": 29,
+        "expected": 26
+      }
+    }
+  },
+  "origins": {
+    "direct": {
+      "fewrel_adapted": {
+        "correct": 20,
+        "useful": 24
+      },
+      "synthetic": {
+        "correct": 9,
+        "useful": 14
+      }
+    },
+    "staged": {
+      "fewrel_adapted": {
+        "correct": 16,
+        "useful": 24
+      },
+      "synthetic": {
+        "correct": 10,
+        "useful": 14
+      }
+    }
+  },
+  "direct_choices": {
+    "valid accept": 57,
+    "invalid reject": 4,
+    "invalid accept": 5
+  },
+  "invalid_kinds": {
+    "direct": {
+      "match": 8,
+      "candidate": 1
+    },
+    "staged": {
+      "match": 0,
+      "candidate": 4
+    }
+  },
+  "from_direct_candidates": {
+    "became_valid": 8,
+    "unsafe_accepted_from_them": 3,
+    "lost_useful": 6,
+    "gained_useful": 2
+  },
+  "extra_stops_with_staged_extraction": {
+    "missing_organization": 4,
+    "no_candidate": 1
+  },
+  "wrong_writes_verifier_called_supported": 5,
+  "original_answer_key": {
+    "direct": 27,
+    "staged": 23
+  },
+  "variants": [
+    {
+      "name": "Direct",
+      "accepted": 57,
+      "correct": 29,
+      "unsafe_accepted": 21,
+      "decisions": 36,
+      "invalid": 9
+    },
+    {
+      "name": "Direct's candidate, Python steps, no verifier",
+      "accepted": 37,
+      "correct": 25,
+      "unsafe_accepted": 7,
+      "decisions": 51,
+      "invalid": 1
+    },
+    {
+      "name": "Staged extraction, Python steps, no verifier",
+      "accepted": 33,
+      "correct": 26,
+      "unsafe_accepted": 2,
+      "decisions": 53,
+      "invalid": 4
+    },
+    {
+      "name": "Full staged workflow",
+      "accepted": 31,
+      "correct": 26,
+      "unsafe_accepted": 0,
+      "decisions": 55,
+      "invalid": 4
+    }
+  ],
+  "variants_second_run": [
+    {
+      "name": "Direct",
+      "accepted": 59,
+      "correct": 28,
+      "unsafe_accepted": 23,
+      "decisions": 36,
+      "invalid": 7
+    },
+    {
+      "name": "Direct's candidate, Python steps, no verifier",
+      "accepted": 37,
+      "correct": 24,
+      "unsafe_accepted": 7,
+      "decisions": 51,
+      "invalid": 1
+    },
+    {
+      "name": "Staged extraction, Python steps, no verifier",
+      "accepted": 32,
+      "correct": 25,
+      "unsafe_accepted": 2,
+      "decisions": 52,
+      "invalid": 4
+    },
+    {
+      "name": "Full staged workflow",
+      "accepted": 30,
+      "correct": 25,
+      "unsafe_accepted": 0,
+      "decisions": 54,
+      "invalid": 4
+    }
+  ],
+  "verifier_check": {
+    "name": "Answer-key candidate, model verifier, Python steps",
+    "accepted": 39,
+    "correct": 38,
+    "unsafe_accepted": 1,
+    "decisions": 65,
+    "invalid": 0,
+    "model_calls": 64
+  },
+  "answer_key_check": {
+    "name": "Answer-key candidate and flags, Python steps",
+    "accepted": 38,
+    "correct": 38,
+    "unsafe_accepted": 0,
+    "decisions": 66,
+    "invalid": 0
+  },
+  "review_reject": {
+    "ambiguous_identity": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "conflicting_sources": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 2
+    },
+    "disallowed_source": {
+      "cases": 5,
+      "direct_accepted": 4,
+      "staged_accepted": 0,
+      "intended": 5,
+      "checked": 5
+    },
+    "duplicate_records": {
+      "cases": 5,
+      "direct_accepted": 5,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 5
+    },
+    "explicit_denial": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 0,
+      "checked": 2
+    },
+    "future_update": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "irrelevant_document": {
+      "cases": 2,
+      "direct_accepted": 1,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "same_date_conflict": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 2
+    },
+    "stale_update": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "tentative_claim": {
+      "cases": 2,
+      "direct_accepted": 1,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 1
+    },
+    "undated_conflict": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 2
+    }
+  },
+  "other_stops": {
+    "missing_organization": 7,
+    "no_candidate": 1,
+    "pipeline_error": 1
+  },
+  "staged_failures": {
+    "Effective date not stated in the source": {
+      "wrong": [
+        "fewrel-p127-0072",
+        "scenario-14-1",
+        "scenario-14-2"
+      ],
+      "missed": [],
+      "example": "\u201cAugust 2015\u201d stored as 2015-08-01"
+    },
+    "Duplicate identity": {
+      "wrong": [
+        "fewrel-p159-0303"
+      ],
+      "missed": [],
+      "example": "\u201cUAL Corporation\u201d added beside the UAL record"
+    },
+    "Wrong attribute": {
+      "wrong": [
+        "scenario-17-1"
+      ],
+      "missed": [],
+      "example": "\u201cworking\u201d stored as a role for an employer update"
+    },
+    "Entity type does not fit the attribute": {
+      "wrong": [],
+      "missed": [
+        "fewrel-p127-0102",
+        "fewrel-p159-0287",
+        "fewrel-p159-0317"
+      ],
+      "example": "\u201corganization\u201d returned as the entity type of a company"
+    },
+    "No candidate returned": {
+      "wrong": [],
+      "missed": [
+        "fewrel-p39-0030",
+        "fewrel-p39-0032",
+        "fewrel-p39-0039"
+      ],
+      "example": "No role found in \u201cAttorney General Jeff Sessions\u201d"
+    },
+    "Organization left out": {
+      "wrong": [],
+      "missed": [
+        "scenario-02-2"
+      ],
+      "example": "\u201cBL\u201d not returned as Pavel Reeve's organization"
+    }
+  },
+  "consistency": {
+    "repeated_executions": 12,
+    "repeats_same_first_run": 12,
+    "repeats_same_second_run": 12,
+    "executions": 144,
+    "same_responses": 98,
+    "same_outcomes": 136
+  },
+  "second_run": {
+    "direct": {
+      "correct": 28,
+      "accepted": 59,
+      "seconds": 1.2488075454655865
+    },
+    "staged": {
+      "correct": 25,
+      "accepted": 30,
+      "seconds": 1.5259429380318827
+    }
+  }
+}

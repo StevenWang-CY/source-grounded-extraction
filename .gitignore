@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.DS_Store
+.env
+# scripts/collect_fewrel.py downloads this when needed.
+data/raw/fewrel/train_wiki.json

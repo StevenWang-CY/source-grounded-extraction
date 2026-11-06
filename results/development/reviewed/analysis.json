@@ -1,0 +1,6 @@
+{
+  "source_run": "..",
+  "fresh_inference": false,
+  "scoring_version": "4",
+  "description": "Re-scoring the source run's saved live executions; no additional model executions or samples"
+}

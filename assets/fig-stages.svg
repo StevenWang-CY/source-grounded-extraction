@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 500" width="1120" height="500" role="img">
+<desc>Workflow variants on the 66 development cases: Direct, 21 of 28 review/reject cases accepted, 36 of 66 correct decisions; Direct&#x27;s candidate + Python, 7 of 28 review/reject cases accepted, 51 of 66 correct decisions; Staged extraction + Python, 2 of 28 review/reject cases accepted, 53 of 66 correct decisions; Full staged workflow, 0 of 28 review/reject cases accepted, 55 of 66 correct decisions; Answer-key candidate, 1 of 28 review/reject cases accepted, 65 of 66 correct decisions</desc>
+<style>@font-face{font-family:'STIX Two Text';src:url(data:font/woff;base64,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) format('woff')}
+svg{font-family:'STIX Two Text',serif;font-size:21px}
+text{fill:#1f2328}
+.soft{fill:#3d444d}
+.mute{fill:#656d76}
+.page{fill:#ffffff}
+.grid{stroke:#e3e7ee;stroke-width:1}
+.axis{stroke:#2b3138;stroke-width:1.2}
+.bar{stroke:#2b3138;stroke-width:1.1}
+.whisker{stroke:#1f2328;stroke-width:1.5}
+.direct{fill:#b7bdc8}
+.partial{fill:#c5d9f4}
+.staged{fill:#3a7bd5}
+.answer-key{fill:url(#hatch)}
+.hatch-page{fill:#ffffff}
+.hatch-line{stroke:#656d76;stroke-width:1.6}
+@media (prefers-color-scheme:dark){
+text{fill:#e6edf3}
+.soft{fill:#c9d1d9}
+.mute{fill:#9198a1}
+.page{fill:#0d1117}
+.grid{stroke:#2a3038}
+.axis{stroke:#d0d7de}
+.bar{stroke:#d0d7de}
+.whisker{stroke:#e6edf3}
+.direct{fill:#68717d}
+.partial{fill:#24405f}
+.staged{fill:#5b9bf0}
+.hatch-page{fill:#0d1117}
+.hatch-line{stroke:#9198a1}
+}
+</style>
+<defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="hatch-page" width="7" height="7"/><line class="hatch-line" x1="0" y1="0" x2="0" y2="7"/></pattern></defs>
+<rect class="page" width="1120" height="500"/>
+<text x="560.0" y="34.0" font-size="23" text-anchor="middle">What each stage contributes on the 66 development cases</text>
+<text x="560.0" y="62.0" font-size="18" text-anchor="middle" class="soft">From direct to full staged, then with the answer key&#x27;s candidate</text>
+<text x="299.0" y="102.0" font-size="21" text-anchor="middle">Review/reject cases accepted</text>
+<text x="299.0" y="126.0" font-size="18" text-anchor="middle" class="soft">Of 28 cases • Lower is better</text>
+<line x1="54.0" y1="396.0" x2="544.0" y2="396.0" class="axis"/>
+<text x="45.0" y="402.0" font-size="18" text-anchor="end" class="mute">0</text>
+<line x1="54.0" y1="338.0" x2="544.0" y2="338.0" class="grid"/>
+<text x="45.0" y="344.0" font-size="18" text-anchor="end" class="mute">7</text>
+<line x1="54.0" y1="280.0" x2="544.0" y2="280.0" class="grid"/>
+<text x="45.0" y="286.0" font-size="18" text-anchor="end" class="mute">14</text>
+<line x1="54.0" y1="222.0" x2="544.0" y2="222.0" class="grid"/>
+<text x="45.0" y="228.0" font-size="18" text-anchor="end" class="mute">21</text>
+<line x1="54.0" y1="164.0" x2="544.0" y2="164.0" class="grid"/>
+<text x="45.0" y="170.0" font-size="18" text-anchor="end" class="mute">28</text>
+<line x1="54.0" y1="164.0" x2="54.0" y2="396.0" class="axis"/>
+<path class="bar direct" d="M61.0 396.0V225.0Q61.0 222.0 64.0 222.0H142.0Q145.0 222.0 145.0 225.0V396.0Z"/>
+<text x="103.0" y="213.0" font-size="18" text-anchor="middle">21</text>
+<text x="103.0" y="422.0" font-size="18" text-anchor="middle">Direct</text>
+<path class="bar partial" d="M159.0 396.0V341.0Q159.0 338.0 162.0 338.0H240.0Q243.0 338.0 243.0 341.0V396.0Z"/>
+<text x="201.0" y="329.0" font-size="18" text-anchor="middle">7</text>
+<text x="201.0" y="422.0" font-size="18" text-anchor="middle">Direct&#x27;s</text>
+<text x="201.0" y="445.0" font-size="18" text-anchor="middle">candidate</text>
+<text x="201.0" y="468.0" font-size="18" text-anchor="middle">+ Python</text>
+<path class="bar partial" d="M257.0 396.0V382.4Q257.0 379.4 260.0 379.4H338.0Q341.0 379.4 341.0 382.4V396.0Z"/>
+<text x="299.0" y="370.4" font-size="18" text-anchor="middle">2</text>
+<text x="299.0" y="422.0" font-size="18" text-anchor="middle">Staged</text>
+<text x="299.0" y="445.0" font-size="18" text-anchor="middle">extraction</text>
+<text x="299.0" y="468.0" font-size="18" text-anchor="middle">+ Python</text>
+<text x="397.0" y="387.0" font-size="18" text-anchor="middle">0</text>
+<text x="397.0" y="422.0" font-size="18" text-anchor="middle">Full staged</text>
+<text x="397.0" y="445.0" font-size="18" text-anchor="middle">workflow</text>
+<path class="bar answer-key" d="M453.0 396.0V390.7Q453.0 387.7 456.0 387.7H534.0Q537.0 387.7 537.0 390.7V396.0Z"/>
+<text x="495.0" y="378.7" font-size="18" text-anchor="middle">1</text>
+<text x="495.0" y="422.0" font-size="18" text-anchor="middle">Answer-key</text>
+<text x="495.0" y="445.0" font-size="18" text-anchor="middle">candidate</text>
+<text x="835.0" y="102.0" font-size="21" text-anchor="middle">Correct decisions</text>
+<text x="835.0" y="126.0" font-size="18" text-anchor="middle" class="soft">Of 66 cases • Higher is better</text>
+<line x1="590.0" y1="396.0" x2="1080.0" y2="396.0" class="axis"/>
+<text x="581.0" y="402.0" font-size="18" text-anchor="end" class="mute">0</text>
+<line x1="590.0" y1="318.7" x2="1080.0" y2="318.7" class="grid"/>
+<text x="581.0" y="324.7" font-size="18" text-anchor="end" class="mute">22</text>
+<line x1="590.0" y1="241.3" x2="1080.0" y2="241.3" class="grid"/>
+<text x="581.0" y="247.3" font-size="18" text-anchor="end" class="mute">44</text>
+<line x1="590.0" y1="164.0" x2="1080.0" y2="164.0" class="grid"/>
+<text x="581.0" y="170.0" font-size="18" text-anchor="end" class="mute">66</text>
+<line x1="590.0" y1="164.0" x2="590.0" y2="396.0" class="axis"/>
+<path class="bar direct" d="M597.0 396.0V272.5Q597.0 269.5 600.0 269.5H678.0Q681.0 269.5 681.0 272.5V396.0Z"/>
+<text x="639.0" y="260.5" font-size="18" text-anchor="middle">36</text>
+<text x="639.0" y="422.0" font-size="18" text-anchor="middle">Direct</text>
+<path class="bar partial" d="M695.0 396.0V219.7Q695.0 216.7 698.0 216.7H776.0Q779.0 216.7 779.0 219.7V396.0Z"/>
+<text x="737.0" y="207.7" font-size="18" text-anchor="middle">51</text>
+<text x="737.0" y="422.0" font-size="18" text-anchor="middle">Direct&#x27;s</text>
+<text x="737.0" y="445.0" font-size="18" text-anchor="middle">candidate</text>
+<text x="737.0" y="468.0" font-size="18" text-anchor="middle">+ Python</text>
+<path class="bar partial" d="M793.0 396.0V212.7Q793.0 209.7 796.0 209.7H874.0Q877.0 209.7 877.0 212.7V396.0Z"/>
+<text x="835.0" y="200.7" font-size="18" text-anchor="middle">53</text>
+<text x="835.0" y="422.0" font-size="18" text-anchor="middle">Staged</text>
+<text x="835.0" y="445.0" font-size="18" text-anchor="middle">extraction</text>
+<text x="835.0" y="468.0" font-size="18" text-anchor="middle">+ Python</text>
+<path class="bar staged" d="M891.0 396.0V205.7Q891.0 202.7 894.0 202.7H972.0Q975.0 202.7 975.0 205.7V396.0Z"/>
+<text x="933.0" y="193.7" font-size="18" text-anchor="middle">55</text>
+<text x="933.0" y="422.0" font-size="18" text-anchor="middle">Full staged</text>
+<text x="933.0" y="445.0" font-size="18" text-anchor="middle">workflow</text>
+<path class="bar answer-key" d="M989.0 396.0V170.5Q989.0 167.5 992.0 167.5H1070.0Q1073.0 167.5 1073.0 170.5V396.0Z"/>
+<text x="1031.0" y="158.5" font-size="18" text-anchor="middle">65</text>
+<text x="1031.0" y="422.0" font-size="18" text-anchor="middle">Answer-key</text>
+<text x="1031.0" y="445.0" font-size="18" text-anchor="middle">candidate</text>
+</svg>

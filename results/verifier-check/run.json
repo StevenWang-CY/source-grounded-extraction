@@ -1,0 +1,28 @@
+{
+  "started": "2026-11-04T11:23:56.804988-05:00",
+  "completed": "2026-11-04T11:24:41.986161-05:00",
+  "description": "Answer-key candidates with live verification calls; a check of one stage",
+  "model_settings": {
+    "backend": "mlx",
+    "model": "mlx-community/Qwen3-4B-4bit",
+    "max_tokens": 512,
+    "temperature": 0.0,
+    "thinking": false,
+    "seed": 17,
+    "estimated_api_cost_usd": 0.0,
+    "cost_basis": "local inference; no billed API calls; hardware and electricity excluded"
+  },
+  "environment": {
+    "python": "3.12.12",
+    "system": "Darwin",
+    "architecture": "arm64",
+    "packages": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.30.7",
+      "transformers": "5.22.1",
+      "tokenizers": "0.23.3",
+      "huggingface-hub": "2.4.0"
+    },
+    "note": "Runtime used for this comparison; model loading is excluded from per-case latency."
+  }
+}

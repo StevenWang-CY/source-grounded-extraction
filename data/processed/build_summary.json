@@ -1,0 +1,26 @@
+{
+  "dataset_version": "2",
+  "annotation_revision": "2",
+  "total_cases": 132,
+  "by_origin": {
+    "fewrel_adapted": 60,
+    "synthetic": 72
+  },
+  "by_split": {
+    "test": 66,
+    "dev": 66
+  },
+  "by_decision": {
+    "accept": 76,
+    "review": 34,
+    "reject": 22
+  },
+  "public_unique_source_records": 60,
+  "synthetic_scenarios": 18,
+  "cleaning": [
+    "Unicode NFC and token punctuation/whitespace normalization",
+    "retained original records, spans, QIDs and relation/row positions",
+    "reviewed explicit subject-relation support and date interpretation",
+    "unknown public dates remain null; simulated permissions and CRM are labelled adaptations"
+  ]
+}
