@@ -1,4 +1,8 @@
 {
+  "split": "development",
+  "workflow_version": "3",
+  "cases": 66,
+  "useful_cases": 38,
   "main": {
     "direct": {
       "accepted_accuracy": {
@@ -209,9 +213,9 @@
     }
   },
   "direct_choices": {
-    "valid accept": 57,
+    "invalid accept": 5,
     "invalid reject": 4,
-    "invalid accept": 5
+    "valid accept": 57
   },
   "invalid_kinds": {
     "direct": {
@@ -227,6 +231,9 @@
     "became_valid": 8,
     "unsafe_accepted_from_them": 3,
     "lost_useful": 6,
+    "lost_reasons": {
+      "ambiguous_identity": 6
+    },
     "gained_useful": 2
   },
   "extra_stops_with_staged_extraction": {
@@ -234,13 +241,12 @@
     "no_candidate": 1
   },
   "wrong_writes_verifier_called_supported": 5,
-  "original_answer_key": {
-    "direct": 27,
-    "staged": 23
-  },
   "variants": [
     {
       "name": "Direct",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
       "accepted": 57,
       "correct": 29,
       "unsafe_accepted": 21,
@@ -249,6 +255,9 @@
     },
     {
       "name": "Direct's candidate, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
       "accepted": 37,
       "correct": 25,
       "unsafe_accepted": 7,
@@ -257,6 +266,9 @@
     },
     {
       "name": "Staged extraction, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
       "accepted": 33,
       "correct": 26,
       "unsafe_accepted": 2,
@@ -265,6 +277,9 @@
     },
     {
       "name": "Full staged workflow",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
       "accepted": 31,
       "correct": 26,
       "unsafe_accepted": 0,
@@ -272,42 +287,11 @@
       "invalid": 4
     }
   ],
-  "variants_second_run": [
-    {
-      "name": "Direct",
-      "accepted": 59,
-      "correct": 28,
-      "unsafe_accepted": 23,
-      "decisions": 36,
-      "invalid": 7
-    },
-    {
-      "name": "Direct's candidate, Python steps, no verifier",
-      "accepted": 37,
-      "correct": 24,
-      "unsafe_accepted": 7,
-      "decisions": 51,
-      "invalid": 1
-    },
-    {
-      "name": "Staged extraction, Python steps, no verifier",
-      "accepted": 32,
-      "correct": 25,
-      "unsafe_accepted": 2,
-      "decisions": 52,
-      "invalid": 4
-    },
-    {
-      "name": "Full staged workflow",
-      "accepted": 30,
-      "correct": 25,
-      "unsafe_accepted": 0,
-      "decisions": 54,
-      "invalid": 4
-    }
-  ],
   "verifier_check": {
     "name": "Answer-key candidate, model verifier, Python steps",
+    "cases": 66,
+    "useful": 38,
+    "unsafe": 28,
     "accepted": 39,
     "correct": 38,
     "unsafe_accepted": 1,
@@ -317,6 +301,9 @@
   },
   "answer_key_check": {
     "name": "Answer-key candidate and flags, Python steps",
+    "cases": 66,
+    "useful": 38,
+    "unsafe": 28,
     "accepted": 38,
     "correct": 38,
     "unsafe_accepted": 0,
@@ -457,24 +444,131 @@
       "example": "\u201cBL\u201d not returned as Pavel Reeve's organization"
     }
   },
-  "consistency": {
-    "repeated_executions": 12,
-    "repeats_same_first_run": 12,
-    "repeats_same_second_run": 12,
-    "executions": 144,
-    "same_responses": 98,
-    "same_outcomes": 136
+  "repeats": {
+    "repeated": 12,
+    "same": 12
   },
+  "original_answer_key": {
+    "direct": 27,
+    "staged": 23
+  },
+  "variants_second_run": [
+    {
+      "name": "Direct",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 59,
+      "correct": 28,
+      "unsafe_accepted": 23,
+      "decisions": 36,
+      "invalid": 7
+    },
+    {
+      "name": "Direct's candidate, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 37,
+      "correct": 24,
+      "unsafe_accepted": 7,
+      "decisions": 51,
+      "invalid": 1
+    },
+    {
+      "name": "Staged extraction, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 32,
+      "correct": 25,
+      "unsafe_accepted": 2,
+      "decisions": 52,
+      "invalid": 4
+    },
+    {
+      "name": "Full staged workflow",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 30,
+      "correct": 25,
+      "unsafe_accepted": 0,
+      "decisions": 54,
+      "invalid": 4
+    }
+  ],
   "second_run": {
     "direct": {
-      "correct": 28,
-      "accepted": 59,
+      "accepted_accuracy": {
+        "count": 28,
+        "total": 59,
+        "low": 0.3526587662591666,
+        "high": 0.5996020492373858
+      },
+      "useful_coverage": {
+        "count": 28,
+        "total": 38,
+        "low": 0.5799115368203089,
+        "high": 0.8502837881339644
+      },
+      "unsafe_accepted": {
+        "count": 23,
+        "total": 28,
+        "low": 0.6440857505322257,
+        "high": 0.9212149810424002
+      },
+      "decisions": {
+        "count": 36,
+        "total": 66,
+        "low": 0.42615011252555934,
+        "high": 0.6597587458532113
+      },
+      "invalid": 7,
+      "model_calls": 66,
+      "input_tokens": 56462,
+      "output_tokens": 8364,
       "seconds": 1.2488075454655865
     },
     "staged": {
-      "correct": 25,
-      "accepted": 30,
+      "accepted_accuracy": {
+        "count": 25,
+        "total": 30,
+        "low": 0.6643564934133498,
+        "high": 0.9266345767456822
+      },
+      "useful_coverage": {
+        "count": 25,
+        "total": 38,
+        "low": 0.4989210342647263,
+        "high": 0.7878758490381226
+      },
+      "unsafe_accepted": {
+        "count": 0,
+        "total": 28,
+        "low": 0.0,
+        "high": 0.12064330643947074
+      },
+      "decisions": {
+        "count": 54,
+        "total": 66,
+        "low": 0.7085480722568388,
+        "high": 0.8928139363945568
+      },
+      "invalid": 4,
+      "model_calls": 122,
+      "input_tokens": 58926,
+      "output_tokens": 10278,
       "seconds": 1.5259429380318827
     }
+  },
+  "repeats_second_run": {
+    "repeated": 12,
+    "same": 12
+  },
+  "across_machines": {
+    "executions": 144,
+    "same_responses": 98,
+    "same_outcomes": 136
   }
 }

@@ -2,6 +2,7 @@
 
 import random
 from collections import Counter, defaultdict
+from itertools import combinations
 
 from .schema import (
     DECISIONS,
@@ -13,6 +14,10 @@ from .schema import (
     validate_resolution,
 )
 
+# Development guides the design, test is the held-out comparison, and test2 is a second
+# held-out set built after the post-test fixes.
+SPLITS = ("dev", "test", "test2")
+
 
 def validate_dataset(cases: list[dict], labels: list[dict]) -> dict:
     ids = [c["id"] for c in cases]
@@ -23,7 +28,7 @@ def validate_dataset(cases: list[dict], labels: list[dict]) -> dict:
         raise ValueError("Cases and answer keys must have the same unique IDs")
     seen = set()
     for case in cases:
-        if case["split"] not in {"dev", "test"}:
+        if case["split"] not in SPLITS:
             raise ValueError("Unknown dataset split")
         if case["time_scope"] not in {"current", "historical"}:
             raise ValueError("Unknown time scope")
@@ -150,11 +155,14 @@ def audit_split(cases: list[dict], labels: list[dict]) -> dict:
             raise ValueError(f"Missing split groups in {case['id']}")
         keys[case["split"]].update(case["split_keys"])
         keys[case["split"]].update(identity_keys(case))
-    overlap = keys["dev"] & keys["test"]
-    if overlap:
-        raise ValueError(f"Cross-split entity/source/template overlap: {sorted(overlap)}")
+    for first, second in combinations(SPLITS, 2):
+        overlap = keys[first] & keys[second]
+        if overlap:
+            raise ValueError(
+                f"{first} and {second} share an entity, source, or template: {sorted(overlap)}"
+            )
     distributions = {}
-    for split in ("dev", "test"):
+    for split in SPLITS:
         selected = [c for c in cases if c["split"] == split]
         distributions[split] = {
             "cases": len(selected),
@@ -171,7 +179,6 @@ def audit_split(cases: list[dict], labels: list[dict]) -> dict:
         }
     return {
         **validation,
-        "dataset_version": "2",
         "assignment_seed": 20261115,
         "cross_split_overlap": [],
         "splits": distributions,

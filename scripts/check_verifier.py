@@ -1,7 +1,8 @@
 """Run the evidence check on the answer key's candidates, so extraction errors cannot hide it.
 
 This tests one stage and is not a workflow. The answer key supplies each candidate, only the
-verification call goes to the model, and the Python stages make the decision as usual.
+verification call goes to the model, and the Python stages make the decision as usual. It
+uses the cases, answers, and workflow version of a saved run.
 """
 
 import argparse
@@ -35,12 +36,14 @@ class AnswerKeyExtraction:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--development-run", type=Path, default=Path("results/development"))
+    parser.add_argument("--run", type=Path, default=Path("results/development"))
+    parser.add_argument("--answers", type=Path, help="Defaults to the run's answers.jsonl")
     parser.add_argument("--out", type=Path, default=Path("results/verifier-check"))
     parser.add_argument("--model", default=DEFAULT_MODEL)
     args = parser.parse_args()
-    cases = read_jsonl(args.development_run / "cases.jsonl")
-    answers = read_jsonl(args.development_run / "reviewed/answers.jsonl")
+    cases = read_jsonl(args.run / "cases.jsonl")
+    answers = read_jsonl(args.answers or args.run / "answers.jsonl")
+    workflow = read_jsonl(args.run / "predictions.jsonl")[0]["workflow_version"]
     by_id = {answer["case_id"]: answer for answer in answers}
     backend = MLXBackend(args.model)
     started = datetime.now().astimezone().isoformat()
@@ -48,7 +51,7 @@ def main():
     for number, case in enumerate(cases, 1):
         candidates = by_id[case["id"]]["candidates"]
         extraction = AnswerKeyExtraction(backend, candidates[0] if candidates else None)
-        result = run_case(case, "staged", extraction) | {"repeat": 0}
+        result = run_case(case, "staged", extraction, workflow) | {"repeat": 0}
         result["calls"] = [c for c in result["calls"] if c["stage"] == "verification"]
         results.append(result)
         print(f"[{number}/{len(cases)}] {case['id']}: {result['prediction']['decision']}")
@@ -58,6 +61,7 @@ def main():
         "started": started,
         "completed": datetime.now().astimezone().isoformat(),
         "description": "Answer-key candidates with live verification calls; a check of one stage",
+        "source_run": str(args.run),
         "model_settings": backend.settings,
         "environment": environment(),
     }

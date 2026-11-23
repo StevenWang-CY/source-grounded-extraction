@@ -1,8 +1,28 @@
-"""The staged workflow's decision rules and the shared CRM writer."""
+"""The staged workflow's contract check and decision rules, and the shared CRM writer."""
 
 from copy import deepcopy
 
-from .schema import Candidate, normalize, normalize_fact_value, quote_in_source
+from .schema import Candidate, date_stated, normalize, normalize_fact_value, quote_in_source
+
+
+def contract_check(case: dict, data):
+    """Apply two rules of the extraction contract to a raw model candidate (workflow 4).
+
+    An effective date counts only when the cited source writes it in full, and an
+    organization written as the string "null" is missing. Returns the candidate to use
+    and the changes, which the trace records. Anything but an object is left to the schema.
+    """
+    if not isinstance(data, dict):
+        return data, {}
+    changes = {}
+    if data.get("organization") == "null":
+        changes["organization"] = {"model": "null", "stored": None}
+    value = data.get("effective_date")
+    source = next((s["text"] for s in case["sources"] if s["id"] == data.get("source_id")), "")
+    if value is not None and not date_stated(value, source):
+        # A bare year, a month and year, or a publication date is not a stated effective date.
+        changes["effective_date"] = {"model": value, "stored": None}
+    return {**data, **{field: None for field in changes}}, changes
 
 
 def decide(

@@ -3,12 +3,23 @@
 import time
 
 from .backends import Call
-from .policy import apply_update, decide
-from .prompts import PROMPT_VERSION, direct_messages, extraction_messages, verification_messages
+from .policy import apply_update, contract_check, decide
+from .prompts import (
+    PROMPT_VERSION,
+    direct_messages,
+    extraction_messages,
+    guided_messages,
+    verification_messages,
+)
 from .resolution import ambiguous, resolve
 from .schema import DECISIONS, Candidate, parse_json_response, validate_resolution
 
-WORKFLOW_VERSION = "3"
+# Workflow 3 is the staged workflow as it ran in the held-out test. Workflow 4 adds the four
+# fixes made after reading the test errors. Saved runs record which one they used.
+WORKFLOW_VERSIONS = ("3", "4")
+WORKFLOW_VERSION = "4"
+# Direct and guided are one-call workflows. Guided adds explicit checks and worked examples.
+STRATEGIES = ("direct", "guided", "staged")
 # A failed call or an invalid response raises one of these; the case is then a pipeline error.
 RESPONSE_ERRORS = (ValueError, TypeError, LookupError, RuntimeError, OSError)
 
@@ -17,9 +28,9 @@ class RecordedCallError(RuntimeError):
     """A failed model call whose message already names the original error type."""
 
 
-def run_direct(case: dict, ask) -> dict:
+def run_direct(case: dict, ask, guided: bool = False) -> dict:
     """One model response supplies the candidate, the CRM match, and the decision."""
-    prediction = ask("direct", direct_messages(case))
+    prediction = ask("direct", guided_messages(case) if guided else direct_messages(case))
     candidate = prediction["candidate"]
     candidate = Candidate.from_dict(candidate) if candidate is not None else None
     validate_resolution(prediction["resolution"])
@@ -29,12 +40,16 @@ def run_direct(case: dict, ask) -> dict:
     return prediction
 
 
-def run_staged(case: dict, ask, stages: list[dict]) -> dict:
+def run_staged(case: dict, ask, stages: list[dict], fixes: bool) -> dict:
     """Model extraction, Python matching, model verification, then Python decision rules."""
     extracted = ask("extraction", extraction_messages(case))
-    candidate = extracted["candidate"]
-    candidate = Candidate.from_dict(candidate) if candidate is not None else None
-    resolution = resolve(candidate, case["crm"]) if candidate else ambiguous([])
+    data = extracted["candidate"]
+    if fixes:
+        data, changes = contract_check(case, data)
+        if changes:
+            stages.append({"stage": "contract_check", "output": changes})
+    candidate = Candidate.from_dict(data) if data is not None else None
+    resolution = resolve(candidate, case["crm"], fixes) if candidate else ambiguous([])
     stages.append({"stage": "resolution", "output": resolution})
     semantic = None
     if candidate:
@@ -59,9 +74,11 @@ def total(calls: list[dict], key: str) -> int | None:
     return None if None in values else sum(values)
 
 
-def run_case(case: dict, strategy: str, backend) -> dict:
-    if strategy not in {"direct", "staged"}:
+def run_case(case: dict, strategy: str, backend, workflow_version: str = WORKFLOW_VERSION) -> dict:
+    if strategy not in STRATEGIES:
         raise ValueError(f"Unknown strategy: {strategy}")
+    if workflow_version not in WORKFLOW_VERSIONS:
+        raise ValueError(f"Unknown workflow version: {workflow_version}")
     start = time.perf_counter()
     stages, calls = [], []
 
@@ -81,9 +98,10 @@ def run_case(case: dict, strategy: str, backend) -> dict:
 
     error = None
     try:
-        prediction = (
-            run_direct(case, ask) if strategy == "direct" else run_staged(case, ask, stages)
-        )
+        if strategy != "staged":
+            prediction = run_direct(case, ask, guided=strategy == "guided")
+        else:
+            prediction = run_staged(case, ask, stages, fixes=workflow_version == "4")
         simulation = apply_update(case, prediction)
     except RESPONSE_ERRORS as exc:
         # A failed response is recorded as an error, never scored as a successful review.
@@ -100,7 +118,7 @@ def run_case(case: dict, strategy: str, backend) -> dict:
         "case_id": case["id"],
         "dataset_version": case.get("dataset_version", "1"),
         "strategy": strategy,
-        "workflow_version": WORKFLOW_VERSION,
+        "workflow_version": workflow_version,
         "prompt_version": PROMPT_VERSION,
         "prediction": prediction,
         "stages": stages,

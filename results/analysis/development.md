@@ -1,6 +1,6 @@
 # Development analysis
 
-Written by `scripts/analyze_development.py` from the saved runs.
+Written by `scripts/analyze.py` from the saved run in `results/development/` (workflow 3).
 
 ## Main measures, with 95% Wilson intervals
 
@@ -29,6 +29,21 @@ Written by `scripts/analyze_development.py` from the saved runs.
 | Relationships | 19/23 | 19/24 | 19/20 | 19/24 |
 | Organizations | 30/42 | 30/30 | 22/24 | 22/30 |
 | Effective dates | 26/26 | 26/26 | 26/29 | 26/26 |
+
+## Steps and cost
+
+| Measure | Direct | Staged |
+| --- | ---: | ---: |
+| Entity resolution | 48/66 | 57/66 |
+| Quotation found in the cited source | 63/64 | 56/56 |
+| Accepted updates from allowed sources | 53/57 | 31/31 |
+| Evidence flags right on correct candidates | n/a | 40/42 |
+| Model calls | 66 | 122 |
+| Input tokens | 56462 | 58936 |
+| Output tokens | 8393 | 10255 |
+| Mean seconds per case | 6.17 | 7.14 |
+
+What the direct responses chose: invalid accept (5), invalid reject (4), valid accept (57).
 
 ## What each stage contributes
 
@@ -70,7 +85,9 @@ The same steps on the second Mac:
 
 Other rules that stopped a case: missing_organization (7), no_candidate (1), pipeline_error (1).
 
-## Staged failures on useful cases
+## Staged failures
+
+Wrong writes are accept decisions that did not produce a correct write. Missed updates are useful updates that were not accepted.
 
 | Group | Wrong writes | Missed updates | Example | Cases |
 | --- | ---: | ---: | ---: | ---: |
@@ -83,4 +100,5 @@ Other rules that stopped a case: missing_organization (7), no_candidate (1), pip
 
 ## Consistency
 
-Repeated executions matched their first response in 12 of 12 on the first Mac and 12 of 12 on the second. Across the two Macs, 98 of 144 executions gave identical responses, and 136 gave the same candidate, match, and decision.
+Repeated executions matched their first response in 12 of 12.
+On the second Mac the repeats matched in 12 of 12. Across the two Macs, 98 of 144 executions gave identical responses, and 136 gave the same candidate, match, and decision.

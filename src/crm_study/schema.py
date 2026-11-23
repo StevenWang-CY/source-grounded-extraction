@@ -19,6 +19,8 @@ ROLE_ALIASES = {
     "chief financial officer": "cfo",
     "chief operating officer": "coo",
 }
+MONTHS = """january february march april may june july
+august september october november december""".split()
 
 
 def normalize(text: str) -> str:
@@ -61,6 +63,30 @@ def validate_date(value: str | None) -> None:
         if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
             raise ValueError("Dates must be YYYY-MM-DD or null; do not invent a day")
         date.fromisoformat(value)
+
+
+def date_stated(value, text: str) -> bool:
+    """Whether the text writes out this full date, e.g. September 13, 2026 or 13 Sept. 2026.
+
+    A value that is not a YYYY-MM-DD date, such as a bare year, is never stated.
+    """
+    try:
+        validate_date(value)
+        day = date.fromisoformat(value)
+    except (TypeError, ValueError):
+        return False
+    month = MONTHS[day.month - 1]
+    spellings = [month, month[:3], *(["sept"] if month == "september" else [])]
+    name = rf"(?:{'|'.join(spellings)})\.?"
+    number = rf"0?{day.day}(?:st|nd|rd|th)?"
+    forms = (
+        rf"{name}\s+{number},?\s+{day.year}",
+        rf"{number}\s+(?:of\s+)?{name},?\s+{day.year}",
+        value,
+        rf"0?{day.month}/0?{day.day}/{day.year}",
+        rf"0?{day.day}/0?{day.month}/{day.year}",
+    )
+    return any(re.search(rf"\b{form}\b", text, re.IGNORECASE) for form in forms)
 
 
 @dataclass

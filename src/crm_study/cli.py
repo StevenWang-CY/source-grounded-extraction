@@ -9,7 +9,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .backends import HTTPBackend, MLXBackend, ReplayBackend
-from .data import audit_split
+from .data import SPLITS, audit_split
 from .evaluation import (
     SCORING_VERSION,
     evaluate,
@@ -17,7 +17,7 @@ from .evaluation import (
     validate_results,
     write_scores,
 )
-from .pipeline import WORKFLOW_VERSION, run_case
+from .pipeline import STRATEGIES, WORKFLOW_VERSION, WORKFLOW_VERSIONS, run_case
 from .prompts import PROMPT_VERSION
 from .schema import read_jsonl, write_jsonl
 
@@ -57,7 +57,7 @@ def validate(args):
 
 
 def run(args):
-    cases = [c for c in read_jsonl(args.cases) if args.split == "all" or c["split"] == args.split]
+    cases = [c for c in read_jsonl(args.cases) if c["split"] == args.split]
     if args.case_ids:
         cases = [c for c in cases if c["id"] in args.case_ids]
         if {c["id"] for c in cases} != set(args.case_ids):
@@ -71,7 +71,7 @@ def run(args):
     random.Random(args.order_seed).shuffle(cases)
     config = {
         "prompt_version": PROMPT_VERSION,
-        "workflow_version": WORKFLOW_VERSION,
+        "workflow_version": args.workflow,
         "backend": args.backend,
         "model": args.model,
         "max_tokens": args.max_tokens,
@@ -85,6 +85,8 @@ def run(args):
     }
     if args.backend == "http":
         config["base_url"] = args.base_url.rstrip("/")
+    if args.thinking:
+        config["thinking"] = True
 
     args.out.mkdir(parents=True, exist_ok=True)
     manifest_path, output = args.out / "run.json", args.out / "predictions.jsonl"
@@ -117,12 +119,12 @@ def run(args):
     ]
     if pending:
         if args.backend == "mlx":
-            backend = MLXBackend(args.model, args.max_tokens, args.temperature)
+            backend = MLXBackend(args.model, args.max_tokens, args.temperature, args.thinking)
         else:
             backend = HTTPBackend(args.model, args.base_url, args.max_tokens, args.temperature)
         with output.open("a", encoding="utf-8") as stream:
             for number, (case, strategy, repeat) in enumerate(pending, len(saved) + 1):
-                result = run_case(case, strategy, backend) | {"repeat": repeat}
+                result = run_case(case, strategy, backend, args.workflow) | {"repeat": repeat}
                 stream.write(json.dumps(result, ensure_ascii=False) + "\n")
                 stream.flush()
                 status = f" ERROR {result['error']}" if result["error"] else ""
@@ -186,9 +188,9 @@ def saved_execution(args) -> dict:
 
 
 def replay_execution(case: dict, saved: dict) -> tuple[dict, dict]:
-    """Run saved model responses through the current Python stages and compare outcomes."""
+    """Run saved model responses through the Python stages again and compare outcomes."""
     backend = ReplayBackend(saved)
-    replayed = run_case(case, saved["strategy"], backend)
+    replayed = run_case(case, saved["strategy"], backend, saved["workflow_version"])
     return replayed, {
         "all_saved_calls_used": backend.position == len(backend.calls),
         "same_prediction": replayed["prediction"] == saved["prediction"],
@@ -209,8 +211,7 @@ def replay(args):
     replayed, comparison = replay_execution(case, saved)
     write = replayed["stages"][-1]["output"]
     report = {
-        "saved_workflow_version": saved.get("workflow_version", "1"),
-        "current_workflow_version": WORKFLOW_VERSION,
+        "workflow_version": saved["workflow_version"],
         "prediction": replayed["prediction"],
         "write_applied": write["applied"],
         "write_error": write.get("error"),
@@ -223,14 +224,8 @@ def replay(args):
 def replay_check(args):
     cases = {c["id"]: c for c in read_jsonl(args.run / "cases.jsonl")}
     saved = read_jsonl(args.run / "predictions.jsonl")
-    if any(
-        (r["prompt_version"], r.get("workflow_version")) != (PROMPT_VERSION, WORKFLOW_VERSION)
-        for r in saved
-    ):
-        raise SystemExit(
-            "This run was saved by other prompt or workflow versions; "
-            "replay it with the commit that produced it"
-        )
+    if any(r["prompt_version"] != PROMPT_VERSION for r in saved):
+        raise SystemExit("This run was saved with other prompts and cannot be replayed")
     mismatches = [
         {"case_id": row["case_id"], "strategy": row["strategy"], "repeat": row["repeat"]}
         for row in saved
@@ -252,18 +247,32 @@ def main():
 
     command = commands.add_parser("run", help="Run the workflows and save every execution")
     command.add_argument("--cases", default=DEFAULT_CASES)
-    command.add_argument("--split", choices=["dev", "test", "all"], default="dev")
+    command.add_argument("--split", choices=SPLITS, default="dev")
     command.add_argument("--case-ids", nargs="+")
     command.add_argument("--limit", type=positive)
-    command.add_argument("--strategy", choices=["direct", "staged", "both"], default="both")
+    command.add_argument(
+        "--strategy",
+        choices=[*STRATEGIES, "both"],
+        default="both",
+        help="both runs direct and staged",
+    )
     command.add_argument("--backend", choices=["mlx", "http"], default="mlx")
     command.add_argument("--model", default=DEFAULT_MODEL)
     command.add_argument("--base-url", default="http://127.0.0.1:8080/v1")
     command.add_argument("--max-tokens", type=positive, default=512)
     command.add_argument("--temperature", type=float, default=0.0)
+    command.add_argument(
+        "--thinking", action="store_true", help="Let an MLX model reason before it answers"
+    )
     command.add_argument("--repeats", type=positive, default=1)
     command.add_argument(
         "--repeat-case-ids", nargs="+", help="Repeat only these cases after the primary runs"
+    )
+    command.add_argument(
+        "--workflow",
+        choices=WORKFLOW_VERSIONS,
+        default=WORKFLOW_VERSION,
+        help="3 is the workflow as tested; 4 adds the fixes made after the test",
     )
     command.add_argument("--order-seed", type=int, default=17)
     command.add_argument("--out", type=Path, required=True)
@@ -287,7 +296,7 @@ def main():
         command = commands.add_parser(name, help=help_text)
         command.add_argument("run", type=Path)
         command.add_argument("case_id")
-        command.add_argument("--strategy", choices=["direct", "staged"], default="staged")
+        command.add_argument("--strategy", choices=STRATEGIES, default="staged")
         command.add_argument("--repeat", type=int, default=0)
         command.set_defaults(handler=handler)
 

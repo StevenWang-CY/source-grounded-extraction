@@ -1,21 +1,25 @@
 {
-  "dataset_version": "2",
+  "dataset_versions": {
+    "2": "development and test",
+    "3": "second test set"
+  },
   "annotation_revision": "2",
-  "total_cases": 132,
+  "total_cases": 198,
   "by_origin": {
-    "fewrel_adapted": 60,
-    "synthetic": 72
+    "fewrel_adapted": 90,
+    "synthetic": 108
   },
   "by_split": {
     "test": 66,
-    "dev": 66
+    "dev": 66,
+    "test2": 66
   },
   "by_decision": {
-    "accept": 76,
-    "review": 34,
-    "reject": 22
+    "accept": 114,
+    "review": 51,
+    "reject": 33
   },
-  "public_unique_source_records": 60,
+  "public_unique_source_records": 90,
   "synthetic_scenarios": 18,
   "cleaning": [
     "Unicode NFC and token punctuation/whitespace normalization",

@@ -1,4 +1,8 @@
-"""Build version 2 offline from reviewed FewRel records and authored scenarios."""
+"""Build the dataset offline from the reviewed FewRel records and the authored scenarios.
+
+Development and test are dataset version 2. The second test set, added after the post-test
+fixes, is version 3 and leaves the earlier cases unchanged.
+"""
 
 import json
 import re
@@ -8,7 +12,7 @@ from pathlib import Path
 
 from synthetic_cases import fact, record, source, synthetic_cases
 
-from crm_study.data import audit_split, grouped_split
+from crm_study.data import SPLITS, audit_split, grouped_split
 from crm_study.schema import normalize, write_jsonl
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,7 +36,8 @@ def mention(row, key):
 def public_cases():
     plan = json.loads((ROOT / "data/curation/fewrel_selection.json").read_text())
     selected = json.loads((ROOT / "data/raw/fewrel/selected.json").read_text())
-    expected = {(r, i) for r, indices in plan["selections"].items() for i in indices}
+    second = {(r, i) for r, indices in plan["second_test_selections"].items() for i in indices}
+    expected = {(r, i) for r, indices in plan["selections"].items() for i in indices} | second
     if {(e["relation"], e["row_index"]) for e in selected} != expected or len(selected) != len(
         expected
     ):
@@ -44,6 +49,7 @@ def public_cases():
         attribute = {"P39": "role", "P127": "owned_by", "P159": "headquarters"}[relation]
         entity_type = "person" if relation == "P39" else "company"
         case_id = f"fewrel-{relation.lower()}-{index:04d}"
+        version = "3" if (relation, index) in second else "2"
         keys = {
             "qid:" + row["h"][1],
             "identity:" + normalize(subject),
@@ -67,7 +73,7 @@ def public_cases():
         cases.append(
             {
                 "id": case_id,
-                "dataset_version": "2",
+                "dataset_version": version,
                 "origin": "fewrel_adapted",
                 "category": attribute,
                 "query": query,
@@ -106,7 +112,7 @@ def public_cases():
         labels.append(
             {
                 "case_id": case_id,
-                "dataset_version": "2",
+                "dataset_version": version,
                 "decision": "accept",
                 "resolution": {"status": "matched", "entity_id": "public-1"},
                 "candidates": candidates,
@@ -119,14 +125,16 @@ def public_cases():
                 "annotation": "Upstream FewRel relation/spans; passage selection, alternatives, and CRM decision authored for this study",
             }
         )
-    assignment = grouped_split(cases)
+    # The first 60 passages are assigned to development and test as before. The later 30 are
+    # the second test set.
+    assignment = grouped_split([c for c in cases if c["dataset_version"] == "2"])
     by_id = {g["case_id"]: g for g in labels}
     for case in cases:
-        case["split"] = assignment[case["id"]]
+        case["split"] = assignment.get(case["id"], "test2")
     # Each split/relation: eight ordinary, one duplicate-CRM, one permission case.
     # Conditions use distinct documents, never copies of a source across the split.
     for relation in plan["selections"]:
-        for split in ("dev", "test"):
+        for split in SPLITS:
             group = sorted(
                 [
                     c
@@ -165,12 +173,12 @@ def main():
     for answer in labels:
         answer["annotation_revision"] = revision
     audit_split(cases, labels)
-    if len(cases) != 132:
-        raise ValueError("Version 2 must contain 72 synthetic and 60 public cases")
+    if len(cases) != 198:
+        raise ValueError("The dataset must contain 108 synthetic and 90 public cases")
     write_jsonl(ROOT / "data/processed/cases.jsonl", cases)
     write_jsonl(ROOT / "data/labels/answers.jsonl", labels)
     summary = {
-        "dataset_version": "2",
+        "dataset_versions": {"2": "development and test", "3": "second test set"},
         "annotation_revision": revision,
         "total_cases": len(cases),
         "by_origin": dict(Counter(c["origin"] for c in cases)),

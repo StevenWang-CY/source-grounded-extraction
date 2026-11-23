@@ -12,12 +12,12 @@ from crm_study.backends import Call, HTTPBackend
 from crm_study.cli import main, read_checkpoint
 from crm_study.data import audit_split, grouped_split
 from crm_study.evaluation import SCORING_VERSION, evaluate, execution_schedule, score_one
-from crm_study.pipeline import run_case
+from crm_study.pipeline import WORKFLOW_VERSIONS, run_case
 from crm_study.policy import apply_update, decide
 from crm_study.resolution import resolve
 from crm_study.schema import Candidate, read_jsonl
 from crm_study.stats import exact_mcnemar, paired_difference_interval, wilson_interval
-from crm_study.variants import candidate_only, from_answer_key, without_verifier
+from crm_study.variants import candidate_only, from_answer_key, lenient_match, without_verifier
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = read_jsonl(ROOT / "data/processed/cases.jsonl")
@@ -26,7 +26,8 @@ LABELS = {g["case_id"]: g for g in read_jsonl(ROOT / "data/labels/answers.jsonl"
 
 def test_benchmark_is_balanced_and_its_splits_are_disjoint():
     report = audit_split(CASES, list(LABELS.values()))
-    assert report["cases"] == 132
+    assert report["cases"] == 198
+    assert set(report["splits"]) == {"dev", "test", "test2"}
     for split in report["splits"].values():
         assert split["cases"] == 66
         assert split["decisions"] == {"accept": 38, "review": 17, "reject": 11}
@@ -258,10 +259,10 @@ def test_wilson_interval_and_exact_mcnemar_match_known_values():
     assert paired_difference_interval(8, 5, 38) == pytest.approx((-4.0, 10.0), abs=0.1)
 
 
-def test_python_steps_given_every_answer_reach_the_expected_decision():
-    dev = [c for c in CASES if c["split"] == "dev"]
-    for case in dev:
-        result = from_answer_key(case, LABELS[case["id"]])
+@pytest.mark.parametrize("workflow", WORKFLOW_VERSIONS)
+def test_python_steps_given_every_answer_reach_the_expected_decision(workflow):
+    for case in CASES:
+        result = from_answer_key(case, LABELS[case["id"]], workflow)
         assert result["prediction"]["decision"] == LABELS[case["id"]]["decision"], case["id"]
         assert score_one({**result, "repeat": 0}, case, LABELS[case["id"]])["decision_correct"]
 
@@ -277,6 +278,24 @@ def test_variant_keeps_only_the_candidate_of_a_direct_response():
         }
     )
     # The model's impossible match and its acceptance are both dropped: the rules reject this stale fact.
-    result = without_verifier(case, candidate_only(response))
+    result = without_verifier(case, candidate_only(response), "3")
     assert result["error"] is None and result["prediction"]["reason"] == "stale_update"
-    assert without_verifier(case, candidate_only("not json"))["error"]
+    assert without_verifier(case, candidate_only("not json"), "3")["error"]
+
+
+def test_lenient_reading_treats_a_named_record_as_the_match():
+    case = next(c for c in CASES if c["id"] == "scenario-01-1")
+    gold = LABELS[case["id"]]
+    response = json.dumps(
+        {
+            "candidate": gold["candidates"][0],
+            "resolution": {"status": "new", "entity_id": "person-1"},
+            "decision": "accept",
+        }
+    )
+    # A status of new together with a record ID is invalid as written.
+    assert run_case(case, "direct", FixedBackend(json.loads(response)))["error"]
+    result = lenient_match(case, response)
+    assert result["error"] is None
+    assert score_one({**result, "repeat": 0}, case, gold)["correct_write"]
+    assert lenient_match(case, "not json")["error"]

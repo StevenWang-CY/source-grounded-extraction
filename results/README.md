@@ -4,14 +4,22 @@
 | --- | --- |
 | `development/` | The development comparison, run on October 17. The `reviewed/` folder inside has the scores used in the reports |
 | `development-rerun/` | The same schedule on an M5 Max, to see how far results move between the two Macs |
-| `verifier-check/` | The verifier alone on the answer key's candidates, 64 model calls |
-| `analysis/` | Intervals, paired tests, workflow variants, and failure groups built from the runs above |
+| `test/` | The held-out test comparison, run on November 2 with the workflow as tested (workflow 3) |
+| `fixes-development/`, `fixes-test/` | Both sets again with the four fixes (workflow 4) |
+| `second-test/` | The second test set with workflow 4 |
+| `second-test-before-fixes/` | The staged workflow on the second test set with workflow 3 |
+| `models/` | Both workflows on the second test set with Qwen3-1.7B, 8B, and 14B |
+| `variants/` | The stronger one-call workflows, direct with thinking and guided direct, on development and the second test set |
+| `verifier-check/`, `verifier-check-test/`, `verifier-check-second-test/` | The verifier alone on the answer key's candidates, for each set |
+| `analysis/` | Tables built from the runs above by `scripts/analyze.py` |
 
-A good place to start is [`analysis/development.md`](analysis/development.md), then
-[`development/reviewed/report.md`](development/reviewed/report.md).
+A good place to start is [`analysis/test.md`](analysis/test.md), then
+[`analysis/comparisons.md`](analysis/comparisons.md). The analysis folder has one page per set
+of cases and one page for the comparisons across runs.
 
-`development/` and `development-rerun/` have these files. `verifier-check/` has the same kinds
-of files, except that it reuses the development inputs and answers.
+Each run folder has the files below. A run of only one workflow has no `paired_cases.csv`.
+The verifier checks reuse the inputs and answers of the run they belong to, so they keep only
+`predictions.jsonl`, `run.json`, and the score files.
 
 | File | Contents |
 | --- | --- |

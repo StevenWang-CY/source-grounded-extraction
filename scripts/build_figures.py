@@ -1,4 +1,4 @@
-"""Draw the README figures from results/analysis/development.json.
+"""Draw the README figures from the analysis files in results/analysis.
 
 Each figure is an SVG with its text kept as text and a small subset of STIX Two
 Text embedded, so it looks the same on every machine. Wide figures use a canvas
@@ -15,7 +15,7 @@ from fontTools import subset
 from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
-ANALYSIS = ROOT / "results/analysis/development.json"
+ANALYSIS = ROOT / "results/analysis"
 ASSETS = ROOT / "assets"
 FONT_FILE = ASSETS / "fonts/STIXTwoText-Regular.ttf"
 WIDE, NARROW = 1120, 420
@@ -171,12 +171,12 @@ def count(row):
 
 def results_figure(measures):
     """Direct and staged on the four main measures, on one 0 to 100 percent scale."""
-    description = "Direct and staged on the 66 development cases: " + "; ".join(
-        f"{name}, direct {count(direct)}, staged {count(staged)}"
+    description = "Direct and staged on the 66 held-out test cases: " + "; ".join(
+        f"{' '.join(name)}, direct {count(direct)}, staged {count(staged)}"
         for _, name, direct, staged in measures
     )
     figure = Figure(WIDE, 576, description)
-    figure.text(WIDE / 2, 34, "Direct and staged workflows on the 66 development cases", TITLE)
+    figure.text(WIDE / 2, 34, "Direct and staged workflows on the 66 held-out test cases", TITLE)
     figure.text(
         WIDE / 2,
         62,
@@ -222,10 +222,10 @@ def results_figure(measures):
 
 
 def results_narrow(measures):
-    description = "Direct and staged on the 66 development cases, one group of rows per measure."
+    description = "Direct and staged on the 66 held-out test cases, one group of rows per measure."
     figure = Figure(NARROW, 0, description)
     figure.text(NARROW / 2, 30, "Direct and staged workflows", TITLE)
-    figure.text(NARROW / 2, 57, "on the 66 development cases", TITLE)
+    figure.text(NARROW / 2, 57, "on the 66 held-out test cases", TITLE)
     figure.text(NARROW / 2, 84, "Whiskers show 95% Wilson intervals", NOTE, kind="soft")
     y = 124
     left, length, height = 70, 216, 18
@@ -253,13 +253,13 @@ def results_narrow(measures):
 
 def stages_figure(rows):
     """Review/reject cases accepted and correct decisions as the workflow changes."""
-    description = "Workflow variants on the 66 development cases: " + "; ".join(
+    description = "Workflow variants on the 66 test cases: " + "; ".join(
         f"{' '.join(row['label'])}, {row['unsafe_accepted']} of 28 review/reject cases accepted, "
         f"{row['decisions']} of 66 correct decisions"
         for row in rows
     )
     figure = Figure(WIDE, 500, description)
-    figure.text(WIDE / 2, 34, "What each stage contributes on the 66 development cases", TITLE)
+    figure.text(WIDE / 2, 34, "What each stage contributes on the 66 test cases", TITLE)
     figure.text(
         WIDE / 2,
         62,
@@ -309,10 +309,10 @@ def stages_figure(rows):
 
 
 def stages_narrow(rows):
-    description = "Workflow variants on the 66 development cases, one group of rows per measure."
+    description = "Workflow variants on the 66 test cases, one group of rows per measure."
     figure = Figure(NARROW, 0, description)
     figure.text(NARROW / 2, 30, "What each stage contributes", TITLE)
-    figure.text(NARROW / 2, 57, "on the 66 development cases", TITLE)
+    figure.text(NARROW / 2, 57, "on the 66 test cases", TITLE)
     y = 96
     left, length, height = 14, 340, 16
     panels = (
@@ -334,8 +334,92 @@ def stages_narrow(rows):
     figure.save("fig-stages-narrow.svg")
 
 
+MODEL_PANELS = (
+    ("Review/reject cases accepted", "Of 28 cases • Lower is better", "unsafe_accepted", 28),
+    ("Useful updates written", "Of 38 cases • Higher is better", "useful_coverage", 38),
+    ("Invalid responses", "Of 66 cases • Lower is better", "invalid", 66),
+)
+MODEL_TICKS = {28: (0, 7, 14, 21, 28), 38: (0, 19, 38), 66: (0, 22, 44, 66)}
+
+
+def model_value(row: dict, key: str) -> int:
+    value = row[key]
+    return value["count"] if isinstance(value, dict) else value
+
+
+def models_figure(models):
+    """Direct and staged for each model size, on the second test set."""
+    description = "Direct and staged by Qwen3 model size on the 66 second-test cases: " + "; ".join(
+        f"{name}, review/reject cases accepted {model_value(m['direct'], 'unsafe_accepted')} direct "
+        f"and {model_value(m['staged'], 'unsafe_accepted')} staged, useful updates written "
+        f"{model_value(m['direct'], 'useful_coverage')} direct and "
+        f"{model_value(m['staged'], 'useful_coverage')} staged, invalid responses "
+        f"{m['direct']['invalid']} direct and {m['staged']['invalid']} staged"
+        for name, m in models.items()
+    )
+    figure = Figure(WIDE, 470, description)
+    figure.text(WIDE / 2, 34, "Direct and staged workflows by model size", TITLE)
+    figure.text(
+        WIDE / 2, 62, "Qwen3 models on the 66 cases of the second test set", NOTE, kind="soft"
+    )
+    figure.swatch(WIDE / 2 - 96, 80, "direct")
+    figure.text(WIDE / 2 - 72, 94, "Direct", NOTE, "start", "soft")
+    figure.swatch(WIDE / 2 + 18, 80, "staged")
+    figure.text(WIDE / 2 + 42, 94, "Staged", NOTE, "start", "soft")
+
+    top, bottom = 196, 396
+    slot, width = 78, 32
+    for left, (title, subtitle, key, total) in zip((48, 420, 792), MODEL_PANELS):
+        right = left + slot * len(models)
+        middle = (left + right) / 2
+        figure.text(middle, 132, title, LABEL)
+        figure.text(middle, 156, subtitle, NOTE, kind="soft")
+        for tick in MODEL_TICKS[total]:
+            y = bottom - (bottom - top) * tick / total
+            figure.line(left, y, right, y, "axis" if tick == 0 else "grid")
+            figure.text(left - 9, y + 6, str(tick), NOTE, "end", "mute")
+        figure.line(left, top, left, bottom, "axis")
+        for index, (name, m) in enumerate(models.items()):
+            center = left + slot * index + slot / 2
+            for kind, x in (("direct", center - width - 1.5), ("staged", center + 1.5)):
+                value = model_value(m[kind], key)
+                bar_top = bottom - (bottom - top) * value / total
+                figure.column(x, width, bar_top, bottom, kind)
+                figure.text(x + width / 2, bar_top - 8, str(value), NOTE)
+            figure.text(center, bottom + 27, name.removeprefix("Qwen3-"), NAME)
+        figure.text(middle, bottom + 56, "Qwen3 model size", NOTE, kind="mute")
+    figure.save("fig-models.svg")
+
+
+def models_narrow(models):
+    description = "Direct and staged by Qwen3 model size, one group of rows per measure."
+    figure = Figure(NARROW, 0, description)
+    figure.text(NARROW / 2, 30, "Direct and staged workflows", TITLE)
+    figure.text(NARROW / 2, 57, "by Qwen3 model size", TITLE)
+    figure.text(NARROW / 2, 84, "66 cases of the second test set", NOTE, kind="soft")
+    y = 124
+    left, length, height = 70, 250, 15
+    for title, subtitle, key, total in MODEL_PANELS:
+        figure.text(14, y, title, LABEL, "start")
+        figure.text(14, y + 23, subtitle, NOTE, "start", "soft")
+        y += 40
+        for name, m in models.items():
+            figure.text(14, y + 24, name.removeprefix("Qwen3-"), NOTE, "start")
+            for kind in ("direct", "staged"):
+                value = model_value(m[kind], key)
+                figure.row(left, length * value / total, y, height, kind)
+                x = left + length * value / total + 7
+                figure.text(x, y + 13, f"{value} {kind}", NOTE, "start", "soft")
+                y += 19
+            figure.line(left, y - 40, left, y - 2, "axis")
+            y += 10
+        y += 22
+    figure.height = y - 24
+    figure.save("fig-models-narrow.svg")
+
+
 def main():
-    a = json.loads(ANALYSIS.read_text())
+    a = json.loads((ANALYSIS / "test.json").read_text())
     table = a["main"]
     measures = [
         (
@@ -376,6 +460,11 @@ def main():
     ]
     stages_figure(rows)
     stages_narrow(rows)
+
+    comparisons = json.loads((ANALYSIS / "comparisons.json").read_text())
+    models = {name: m["main"] for name, m in comparisons["models"].items()}
+    models_figure(models)
+    models_narrow(models)
 
 
 if __name__ == "__main__":

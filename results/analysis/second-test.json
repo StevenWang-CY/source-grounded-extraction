@@ -1,0 +1,451 @@
+{
+  "split": "second-test",
+  "workflow_version": "4",
+  "cases": 66,
+  "useful_cases": 38,
+  "main": {
+    "direct": {
+      "accepted_accuracy": {
+        "count": 23,
+        "total": 53,
+        "low": 0.3095039647138256,
+        "high": 0.5673464867389011
+      },
+      "useful_coverage": {
+        "count": 23,
+        "total": 38,
+        "low": 0.4471786787542184,
+        "high": 0.7440192434476809
+      },
+      "unsafe_accepted": {
+        "count": 19,
+        "total": 28,
+        "low": 0.4933884303549963,
+        "high": 0.8206675316309071
+      },
+      "decisions": {
+        "count": 34,
+        "total": 66,
+        "low": 0.397105911971002,
+        "high": 0.6315303741552548
+      },
+      "invalid": 13
+    },
+    "staged": {
+      "accepted_accuracy": {
+        "count": 25,
+        "total": 30,
+        "low": 0.6643564934133498,
+        "high": 0.9266345767456822
+      },
+      "useful_coverage": {
+        "count": 25,
+        "total": 38,
+        "low": 0.4989210342647263,
+        "high": 0.7878758490381226
+      },
+      "unsafe_accepted": {
+        "count": 1,
+        "total": 28,
+        "low": 0.0063325197789164955,
+        "high": 0.17712197905773489
+      },
+      "decisions": {
+        "count": 54,
+        "total": 66,
+        "low": 0.7085480722568388,
+        "high": 0.8928139363945568
+      },
+      "invalid": 5
+    }
+  },
+  "paired": {
+    "decision": {
+      "direct_only": 6,
+      "staged_only": 26,
+      "p": 0.0005350527353584766,
+      "difference_interval": [
+        -29.982239990298794,
+        -10.017760009701204
+      ]
+    },
+    "unsafe": {
+      "direct_only": 18,
+      "staged_only": 0,
+      "p": 7.62939453125e-06,
+      "difference_interval": [
+        13.030584258855832,
+        22.969415741144168
+      ]
+    },
+    "useful": {
+      "direct_only": 4,
+      "staged_only": 6,
+      "p": 0.75390625,
+      "difference_interval": [
+        -8.16524328150901,
+        4.165243281509011
+      ]
+    }
+  },
+  "stages": {
+    "direct": {
+      "resolution": {
+        "count": 44,
+        "total": 66
+      },
+      "quote": {
+        "count": 62,
+        "total": 63
+      },
+      "allowed": {
+        "count": 48,
+        "total": 53
+      },
+      "verification": {
+        "count": 0,
+        "total": 0
+      },
+      "model_calls": 66,
+      "input_tokens": 56982,
+      "output_tokens": 8888,
+      "seconds": 1.042939273982704
+    },
+    "staged": {
+      "resolution": {
+        "count": 54,
+        "total": 66
+      },
+      "quote": {
+        "count": 55,
+        "total": 55
+      },
+      "allowed": {
+        "count": 30,
+        "total": 30
+      },
+      "verification": {
+        "count": 39,
+        "total": 41
+      },
+      "model_calls": 121,
+      "input_tokens": 59444,
+      "output_tokens": 10585,
+      "seconds": 1.2316158138053266
+    }
+  },
+  "fields": {
+    "direct": {
+      "Names": {
+        "correct": 58,
+        "extracted": 63,
+        "expected": 64
+      },
+      "Roles": {
+        "correct": 33,
+        "extracted": 40,
+        "expected": 40
+      },
+      "Relationships": {
+        "correct": 17,
+        "extracted": 23,
+        "expected": 24
+      },
+      "Organizations": {
+        "correct": 30,
+        "extracted": 45,
+        "expected": 30
+      },
+      "Effective dates": {
+        "correct": 26,
+        "extracted": 29,
+        "expected": 26
+      }
+    },
+    "staged": {
+      "Names": {
+        "correct": 52,
+        "extracted": 55,
+        "expected": 64
+      },
+      "Roles": {
+        "correct": 30,
+        "extracted": 37,
+        "expected": 40
+      },
+      "Relationships": {
+        "correct": 16,
+        "extracted": 18,
+        "expected": 24
+      },
+      "Organizations": {
+        "correct": 24,
+        "extracted": 29,
+        "expected": 30
+      },
+      "Effective dates": {
+        "correct": 25,
+        "extracted": 25,
+        "expected": 26
+      }
+    }
+  },
+  "origins": {
+    "direct": {
+      "fewrel_adapted": {
+        "correct": 15,
+        "useful": 24
+      },
+      "synthetic": {
+        "correct": 8,
+        "useful": 14
+      }
+    },
+    "staged": {
+      "fewrel_adapted": {
+        "correct": 12,
+        "useful": 24
+      },
+      "synthetic": {
+        "correct": 13,
+        "useful": 14
+      }
+    }
+  },
+  "direct_choices": {
+    "invalid accept": 6,
+    "invalid reject": 7,
+    "valid accept": 53
+  },
+  "invalid_kinds": {
+    "direct": {
+      "match": 13,
+      "candidate": 0
+    },
+    "staged": {
+      "match": 0,
+      "candidate": 5
+    }
+  },
+  "from_direct_candidates": {
+    "became_valid": 13,
+    "unsafe_accepted_from_them": 6,
+    "lost_useful": 0,
+    "lost_reasons": {},
+    "gained_useful": 4
+  },
+  "extra_stops_with_staged_extraction": {
+    "no_candidate": 3,
+    "missing_organization": 2
+  },
+  "wrong_writes_verifier_called_supported": 5,
+  "variants": [
+    {
+      "name": "Direct",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 53,
+      "correct": 23,
+      "unsafe_accepted": 19,
+      "decisions": 34,
+      "invalid": 13
+    },
+    {
+      "name": "Direct's candidate, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 43,
+      "correct": 27,
+      "unsafe_accepted": 7,
+      "decisions": 56,
+      "invalid": 0
+    },
+    {
+      "name": "Staged extraction, Python steps, no verifier",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 31,
+      "correct": 25,
+      "unsafe_accepted": 2,
+      "decisions": 53,
+      "invalid": 5
+    },
+    {
+      "name": "Full staged workflow",
+      "cases": 66,
+      "useful": 38,
+      "unsafe": 28,
+      "accepted": 30,
+      "correct": 25,
+      "unsafe_accepted": 1,
+      "decisions": 54,
+      "invalid": 5
+    }
+  ],
+  "verifier_check": {
+    "name": "Answer-key candidate, model verifier, Python steps",
+    "cases": 66,
+    "useful": 38,
+    "unsafe": 28,
+    "accepted": 38,
+    "correct": 37,
+    "unsafe_accepted": 1,
+    "decisions": 64,
+    "invalid": 0,
+    "model_calls": 64
+  },
+  "answer_key_check": {
+    "name": "Answer-key candidate and flags, Python steps",
+    "cases": 66,
+    "useful": 38,
+    "unsafe": 28,
+    "accepted": 38,
+    "correct": 38,
+    "unsafe_accepted": 0,
+    "decisions": 66,
+    "invalid": 0
+  },
+  "review_reject": {
+    "ambiguous_identity": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "conflicting_sources": {
+      "cases": 2,
+      "direct_accepted": 1,
+      "staged_accepted": 1,
+      "intended": 0,
+      "checked": 1
+    },
+    "disallowed_source": {
+      "cases": 5,
+      "direct_accepted": 5,
+      "staged_accepted": 0,
+      "intended": 5,
+      "checked": 5
+    },
+    "duplicate_records": {
+      "cases": 5,
+      "direct_accepted": 5,
+      "staged_accepted": 0,
+      "intended": 5,
+      "checked": 5
+    },
+    "explicit_denial": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 0,
+      "checked": 2
+    },
+    "future_update": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 2
+    },
+    "irrelevant_document": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "same_date_conflict": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "stale_update": {
+      "cases": 2,
+      "direct_accepted": 2,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    },
+    "tentative_claim": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 1,
+      "checked": 2
+    },
+    "undated_conflict": {
+      "cases": 2,
+      "direct_accepted": 0,
+      "staged_accepted": 0,
+      "intended": 2,
+      "checked": 2
+    }
+  },
+  "other_stops": {
+    "missing_organization": 3,
+    "no_candidate": 2
+  },
+  "staged_failures": {
+    "Value includes extra words": {
+      "wrong": [
+        "fewrel-p127-0172",
+        "fewrel-p39-0066"
+      ],
+      "missed": [],
+      "example": "\u201cSouth African group Steinhoff International\u201d stored as the owner"
+    },
+    "Wrong subject": {
+      "wrong": [
+        "fewrel-p39-0057",
+        "fewrel-p39-0064"
+      ],
+      "missed": [
+        "fewrel-p39-0061"
+      ],
+      "example": "The doctor \u201cAdamidi\u201d extracted instead of Abbas II of Egypt"
+    },
+    "Conflicting sources not detected": {
+      "wrong": [
+        "scenario-06-5"
+      ],
+      "missed": [],
+      "example": "A newsletter and a staff directory give different roles"
+    },
+    "Entity type does not fit the attribute": {
+      "wrong": [],
+      "missed": [
+        "fewrel-p127-0173",
+        "fewrel-p127-0186",
+        "fewrel-p159-0457",
+        "fewrel-p159-0458",
+        "fewrel-p159-0522"
+      ],
+      "example": "\u201corganization\u201d returned as the entity type of the Arab League"
+    },
+    "No candidate returned": {
+      "wrong": [],
+      "missed": [
+        "fewrel-p127-0175",
+        "fewrel-p39-0060"
+      ],
+      "example": "No owner found in \u201ctaken over by Virgin Money\u201d"
+    },
+    "Organization left out": {
+      "wrong": [],
+      "missed": [
+        "scenario-16-6"
+      ],
+      "example": "\u201cFernhill Consulting\u201d not returned as Ivo Duarte's organization"
+    }
+  },
+  "repeats": {
+    "repeated": 12,
+    "same": 12
+  }
+}

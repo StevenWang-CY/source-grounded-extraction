@@ -10,7 +10,7 @@ from .reporting import write_report
 from .resolution import canonical_organization
 from .schema import Candidate, normalize, normalize_fact_value, quote_in_source, validate_resolution
 
-SCORING_VERSION = "4"
+SCORING_VERSION = "5"
 
 FIELDS = (
     "entity_type",
@@ -114,6 +114,7 @@ def rate(numerator: int, denominator: int) -> dict:
 
 def score_one(result: dict, case: dict, gold: dict) -> dict:
     prediction = result["prediction"]
+    # Score the candidate the workflow used: the extraction with any contract-check changes.
     # A later failure does not erase a completed extraction; decision and write measures
     # still count it as a pipeline error.
     stages = {s["stage"]: s["output"] for s in result["stages"]}
@@ -121,6 +122,9 @@ def score_one(result: dict, case: dict, gold: dict) -> dict:
     predicted, extraction_valid = {}, False
     if isinstance(extracted, dict) and "candidate" in extracted:
         candidate = extracted["candidate"]
+        if "contract_check" in stages:
+            changes = {k: v["stored"] for k, v in stages["contract_check"].items()}
+            candidate = {**candidate, **changes}
         try:
             predicted = Candidate.from_dict(candidate).to_dict() if candidate is not None else {}
             extraction_valid = True
@@ -150,8 +154,8 @@ def score_one(result: dict, case: dict, gold: dict) -> dict:
         compared, key=lambda c: (c[0], sum(v["tp"] for v in c[1].values()))
     )
     resolution = stages.get("resolution")
-    if result["strategy"] == "direct" and isinstance(extracted, dict):
-        resolution = extracted.get("resolution")
+    if result["strategy"] != "staged" and isinstance(extracted, dict):
+        resolution = extracted.get("resolution")  # a one-call workflow states its own match
     try:
         validate_resolution(resolution)
     except (ValueError, TypeError):  # raw model output, e.g. an unhashable status
@@ -418,7 +422,7 @@ def validate_results(
         settings = results[0]["model_settings"]
         if versions != {planned} or any(
             settings.get(k) != configuration[k]
-            for k in ("backend", "model", "max_tokens", "temperature", "base_url")
+            for k in ("backend", "model", "max_tokens", "temperature", "thinking", "base_url")
             if k in configuration
         ):
             raise ValueError("Saved result settings differ from the run configuration")

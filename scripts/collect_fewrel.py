@@ -21,7 +21,8 @@ def main():
     corpus = json.loads(download.read_text())
     records = [
         {"relation": relation, "row_index": index, "record": corpus[relation][index]}
-        for relation, indices in plan["selections"].items()
+        for selection in (plan["selections"], plan["second_test_selections"])
+        for relation, indices in selection.items()
         for index in indices
     ]
     (raw / "selected.json").write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n")

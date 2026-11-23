@@ -1,8 +1,8 @@
-"""Authored CRM scenarios in four document forms.
+"""Authored CRM scenarios in six document forms.
 
-Forms 0 and 1 are development and forms 2 and 3 are test, so a form never crosses the
-split. Both splits share the scenario categories; entities, source text, and wording
-differ.
+Forms 0 and 1 are development, forms 2 and 3 are test, and forms 4 and 5 are the second test
+set, so a form never crosses a split. The splits share the scenario categories, while the
+entities, source text, and wording differ.
 """
 
 from copy import deepcopy
@@ -32,13 +32,24 @@ Imani Jasper Keira Leon Maelle Nikhil Opal Pavel Quinn Rhea Stefan Uma Vera Wesl
 Yara Zane Alina Benedict Camille Desmond Emilia Florian Giselle Henrik Ingrid Jonas
 Karina Lorenzo Marisol Nikolai Odette Pascal Romina Soren Tatiana Ulrich Valeria Wilfred
 Xander Yvette Zora Amelie Bastian Carina Dominic Estelle Frederick Gemma Hector Isobel
-Joelle Kieran Luciana Matteo Nadine Orlando Paloma Quentin Rosalie""".split()
+Joelle Kieran Luciana Matteo Nadine Orlando Paloma Quentin Rosalie
+Adele Boris Clara Dimitri Esme Felix Gianna Harald Isidore Jorge Kalinda Lucius Mirela Nolan
+Ottilie Piotr Renata Silas Thea Umberto Viola Wendell Ximena Yusuf Zelda Anselm Bianca Cedric
+Delphine Emeric Fiona Gustav Helga Ivo Jacinta Kasimir""".split()
 SURNAMES = "Voss Reeve Laurent Bhat Mensah Kovacs Duarte Okafor Petrov".split()
-BRANDS = ["Alder", "Beacon", "Cypress", "Driftwood"]
+BRANDS = ["Alder", "Beacon", "Cypress", "Driftwood", "Elmwood", "Fernhill"]
 BUSINESSES = """Photonics Logistics Materials Research Mobility Software Instruments
 Storage Packaging Diagnostics Manufacturing Wireless Computing Studios Automation
 Consulting Networks Ventures""".split()
-FORMS = ["announcement", "staff_record", "meeting_minutes", "correspondence"]
+FORMS = [
+    "announcement",
+    "staff_record",
+    "meeting_minutes",
+    "correspondence",
+    "newsletter",
+    "call_notes",
+]
+SPLITS = ["dev", "dev", "test", "test", "test2", "test2"]
 
 
 def record(record_id, name, entity_type="person", organization=None, aliases=None, facts=None):
@@ -86,7 +97,7 @@ def fact(
 
 def synthetic_cases():
     cases, labels = [], []
-    for form in range(4):
+    for form in range(len(FORMS)):
         for number, category in enumerate(CATEGORIES):
             index = form * len(CATEGORIES) + number
             name = FIRST_NAMES[index] + " " + SURNAMES[index % len(SURNAMES)]
@@ -110,6 +121,8 @@ def synthetic_cases():
                 f"Staff record for {org}. Name: {name}. Position: {role}. In post since {date_text}.",
                 f"The board of {org} recorded that {name} took up the {role} post on {date_text}. The minutes were approved at the next meeting.",
                 f"To the account team: the appointment is confirmed. From {date_text}, our {role} at {org} is {name}. Please direct scheduling requests to the office.",
+                f"Company newsletter, people section: {org} welcomed {name} as its new {role}. {name} started in the post on {date_text}.",
+                f"Call notes, {org} account: the contact confirmed that {name} has been {role} at {org} since {date_text}. No other staffing changes came up.",
             ][form]
             rationale = "An explicit appointment, known effective date, and unique record support this update."
             if category == "organization_alias":
@@ -146,6 +159,8 @@ def synthetic_cases():
                     f"Department register for {org}: {name}; title {other}; start date {date_text}.",
                     f"A second committee's record lists {name} as {org}'s {other} from {date_text}.",
                     f"Reply from {org}: our records say {name} has held the {other} job since {date_text}.",
+                    f"Staff directory page of {org}: {name}, {other}, in the post since {date_text}.",
+                    f"Notes from a second call with {org}: a different contact said {name} has been {other} since {date_text}.",
                 ][form]
                 additional = [source(second, "s2", source_date="2026-10-13")]
                 alternatives = [fact(name, other, second, org, date, "s2")]
@@ -160,6 +175,8 @@ def synthetic_cases():
                     f"Draft staff record, {org}: {name} is being considered for {role}; approval is pending.",
                     f"The committee discussed whether {name} should become {role} of {org}, but made no decision.",
                     f"Regarding {org}: I heard {name} might take the {role} job. I have no confirmation of an appointment.",
+                    f"Newsletter rumor column: {name} is said to be in talks to become {role} at {org}. Nothing has been confirmed.",
+                    f"Call notes, {org} account: the contact thinks {name} could be named {role} soon, but said no decision has been made.",
                 ][form]
                 effective, support, decision = None, "uncertain", "review"
                 rationale = "A proposed or rumored role is a candidate claim, not an established appointment."
@@ -169,6 +186,8 @@ def synthetic_cases():
                     f"Staff verification, {org}: no {role} appointment exists for {name}; the reported appointment is denied.",
                     f"The board rejected the statement that {name} became {role} of {org}. No such appointment occurred.",
                     f"Please correct your note about {org}. {name} did not become our {role}; that information is incorrect.",
+                    f"Newsletter clarification: contrary to last week's item, {name} has not been named {role} of {org}. No such appointment was made.",
+                    f"Call notes, {org} account: the contact said the report is wrong and {name} is not the {role} at {org}.",
                 ][form]
                 effective, support, decision = None, "contradicted", "reject"
                 rationale = "The exact quoted passage explicitly denies the candidate appointment."
@@ -189,6 +208,8 @@ def synthetic_cases():
                     f"Future staff record for {org}: {name}, incoming {role}. The appointment starts January {day}, 2027.",
                     f"The board appointed {name} to become {org}'s {role} effective January {day}, 2027; the change has not taken effect.",
                     f"For your planning: {name} will be {role} at {org} starting January {day}, 2027. This is a future change.",
+                    f"Company newsletter: {org} announced that {name} will start as {role} on January {day}, 2027.",
+                    f"Call notes, {org} account: {name} is set to take over as {role} on January {day}, 2027. Until then nothing changes.",
                 ][form]
                 decision = "review"
                 rationale = "The appointment is explicit but its effective date is later than the case's as-of date."
@@ -198,6 +219,8 @@ def synthetic_cases():
                     f"Staff record for {org}: {name}; current title {role}; effective date not recorded.",
                     f"The minutes identify {name} as {org}'s {role} without saying when that role began.",
                     f"Our contact {name} holds the {role} position at {org}. I do not have the appointment date.",
+                    f"Newsletter staff spotlight: {name}, {role} at {org}, talks about the team's plans. The item gives no start date.",
+                    f"Call notes, {org} account: spoke with {name}, who is the {role} of {org}. A start date was not mentioned.",
                 ][form]
                 target["facts"] = {"role": {"value": other, "effective_date": "2026-08-01"}}
                 effective, decision = None, "review"
@@ -218,6 +241,8 @@ def synthetic_cases():
                     f"Deal register: {subject}. Customer company: {org}. Status: under discussion.",
                     f"The meeting linked the opportunity {subject} to {org}; no completion was recorded.",
                     f"Please associate {subject} with {org} in the opportunity list. The deal remains open.",
+                    f"Newsletter deals roundup: the opportunity called {subject} belongs to the {org} account. Talks are continuing.",
+                    f"Call notes: the customer on the {subject} opportunity is {org}. Nothing has been signed.",
                 ][form]
                 rationale = "Only the explicit deal/company association is requested; no closed-deal claim is made."
             elif category == "same_date_conflict":
@@ -234,6 +259,8 @@ def synthetic_cases():
                     f"Amended {org} staff record, October 12, 2026: replace the earlier {other} entry for {name}. Position: {role}; effective from {date_text}.",
                     f"On October 12, 2026, the board corrected its earlier {org} minutes: {name}'s appointment was to {role}, not {other}, on {date_text}.",
                     f"This October 12, 2026 reply supersedes our earlier message: {name} became {role} at {org} on {date_text}. Our {other} claim was a mistake.",
+                    f"Newsletter correction, October 12, 2026: the last issue gave {name}'s position at {org} as {other}. The correct position is {role}, held since {date_text}.",
+                    f"Follow-up call notes, October 12, 2026: the {org} contact corrected the earlier call. {name} is {role}, not {other}, and has been since {date_text}.",
                 ][form]
                 source_id = "s2"
                 rationale = (
@@ -246,6 +273,8 @@ def synthetic_cases():
                     f"Employment record: {name}. Employer: {org}. Employment start: {date_text}.",
                     f"The staffing committee confirmed that {name} started employment with {org} on {date_text}.",
                     f"For the account file: {name} joined {org} on {date_text}. The job title was not provided.",
+                    f"Company newsletter, new joiners: {name} started work at {org} on {date_text}.",
+                    f"Call notes: {name} confirmed starting a job with {org} on {date_text}. No title was given.",
                 ][form]
                 rationale = "The employer and employment start are explicit; no professional title is invented."
             elif category == "irrelevant_document":
@@ -254,6 +283,8 @@ def synthetic_cases():
                     f"Delivery record for {org}. Recipient: {name}. Shipment: two replacement keyboards.",
                     f"The committee thanked {name} for attending the {org} facilities meeting. It discussed room bookings only.",
                     f"Hello {name}, your visitor pass for {org} is ready. Please collect it at reception.",
+                    f"Newsletter events: {name} won the {org} charity raffle. Tickets for next month's raffle go on sale Friday.",
+                    f"Call notes, {org} account: left a voicemail for {name} about the invoice schedule. No reply yet.",
                 ][form]
                 decision, status, entity_id = "reject", "ambiguous", None
                 rationale = "The requested role is absent; a contact name alone does not supply a candidate role."
@@ -266,6 +297,7 @@ def synthetic_cases():
             if category == "irrelevant_document":
                 expected = []
             case_id = f"scenario-{number + 1:02d}-{form + 1}"
+            version = "2" if form < 4 else "3"
             sources = additional + [source(text, source_id, allowed, kind=FORMS[form])]
             # Source ordering carries no implicit authority; corrections are stated in the text.
             sources.sort(key=lambda s: s["id"])
@@ -275,8 +307,8 @@ def synthetic_cases():
             cases.append(
                 {
                     "id": case_id,
-                    "dataset_version": "2",
-                    "split": "dev" if form < 2 else "test",
+                    "dataset_version": version,
+                    "split": SPLITS[form],
                     "origin": "synthetic",
                     "category": category,
                     "query": f"Extract the proposed {attribute} update for {subject}. Use only the supplied source evidence.",
@@ -296,7 +328,7 @@ def synthetic_cases():
             labels.append(
                 {
                     "case_id": case_id,
-                    "dataset_version": "2",
+                    "dataset_version": version,
                     "decision": decision,
                     "resolution": {"status": status, "entity_id": entity_id},
                     "candidates": expected,

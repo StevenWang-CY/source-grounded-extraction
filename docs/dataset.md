@@ -1,12 +1,17 @@
 # Dataset
 
-The dataset has **132 cases**, 60 based on FewRel passages and 72 synthetic. Each case asks
+The dataset has **198 cases**, 90 based on FewRel passages and 108 synthetic. Each case asks
 for one fact and comes with documents, a simulated CRM, and a separate answer key.
 
 | Split | Public | Synthetic | Accept | Review | Reject | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Development | 30 | 36 | 38 | 17 | 11 | 66 |
 | Test | 30 | 36 | 38 | 17 | 11 | 66 |
+| Second test | 30 | 36 | 38 | 17 | 11 | 66 |
+
+Development guided the design. Test is the held-out comparison I planned in the proposal. I
+built the second test set in November, after fixing the failures I found on the test set, so
+that the fixed workflow could be checked on cases it had never seen.
 
 ## Public passages
 
@@ -14,8 +19,10 @@ The source is [FewRel 1.0](https://github.com/thunlp/FewRel) (MIT license), desc
 [Han et al., EMNLP 2018](https://aclanthology.org/D18-1514/). Its Wikipedia sentences were
 aligned with [Wikidata](https://doi.org/10.1145/2629489) facts by
 [distant supervision](https://aclanthology.org/P09-1113/) and then filtered by crowdworkers. I
-use 20 passages each for position held (P39), owned by (P127), and headquarters location
-(P159) from `train_wiki.json`.
+use 30 passages each for position held (P39), owned by (P127), and headquarters location
+(P159) from `train_wiki.json`. The first 20 per relation went into development and test. The
+second test set uses the next 10 per relation, read in file order from the first row after the
+ones already used.
 
 A passage has to state the relationship explicitly for the requested subject. That rules out
 ownership inferred from a CEO mention, unfinished acquisitions, and city mentions that do not
@@ -26,7 +33,8 @@ spacing. The original tokens, entity spans, and row indices are kept in
 Queries ask for the historical relationship stated in the passage. Unknown publication and
 effective dates stay null. A headquarters answer can use the stated city or facility, with
 optional region or country detail. The accepted forms are listed in
-`data/curation/fewrel_selection.json`.
+`data/curation/fewrel_selection.json`, together with the rows I read and left out. For the
+second test set I wrote the accepted forms before running any model on those passages.
 
 The CRM records and permission labels were built for this project. In each split and relation
 group, eight passages have a unique CRM record, one has duplicate records, and one is marked as
@@ -39,24 +47,25 @@ CrossRE's generic relation types would need more adaptation.
 
 ## Synthetic cases
 
-Eighteen scenario families appear in four document forms, which gives 72 cases.
+Eighteen scenario families appear in six document forms, which gives 108 cases.
 
 - Supported appointments, company aliases, ambiguous identities, and context matching.
 - Stale facts, conflicting sources, denied or tentative claims, and disallowed sources.
 - New and duplicate records, future appointments, undated or same-date conflicts, and corrections.
 - Employer extraction, deal and company association, and irrelevant documents.
 
-Announcements and staff records form the development split, and meeting minutes and
-correspondence form the test split. Names, organizations, roles, and dates vary. The text, CRM
-records, and answer keys were written for this project.
+Announcements and staff records form the development split, meeting minutes and
+correspondence form the test split, and newsletter items and call notes form the second test
+set. Names, organizations, roles, and dates vary. The text, CRM records, and answer keys were
+written for this project.
 
 ## The split
 
-Public cases are grouped by target and owner identity and by source record, then assigned with
-a fixed seed so the relations stay balanced. Synthetic identities and document forms stay within
-one split. The dataset build fails if a passage or a target identity appears in both splits.
-Shared cities and job titles are allowed. Development guides the design, and the test split is
-kept for the final comparison.
+The first 60 public cases are grouped by target and owner identity and by source record, then
+assigned to development or test with a fixed seed so the relations stay balanced. The 30 later
+passages all go to the second test set. Synthetic identities and document forms stay within one
+split. The dataset build fails if a passage or a target identity appears in two splits. Shared
+cities and job titles are allowed.
 
 ## Answer key review
 
@@ -69,7 +78,7 @@ answer key. Revision 2 adds them, and the saved responses were scored again.
 | `fewrel-p159-0252` | Midtown West in Tokyo Midtown, Akasaka, Minato, Tokyo | Full location phrase in the source |
 | `fewrel-p39-0026` | former Attorney General | The source's title includes the qualifier |
 
-The `former` rule applies wherever that exact title phrase occurs, in both splits. Inputs,
+The `former` rule applies wherever that exact title phrase occurs, in every split. Inputs,
 expected decisions, and model responses did not change.
 
 | Measure | Direct, original | Direct, reviewed | Staged, original | Staged, reviewed |
@@ -79,6 +88,14 @@ expected decisions, and model responses did not change.
 
 The reports use the reviewed answers, which are in `results/development/reviewed/`. The original
 answers and scores stay in `results/development/`.
+
+The answer keys of the test set and the second test set were not changed after their runs. On
+the test set, two values that both workflows wrote differ from the key only in form, a full
+location phrase for Aeroframe Services and a leading "The". Counting them would add two
+correct writes to each workflow. On the second test set, two values that direct wrote differ
+from the key only in form, "Brigham Young University (BYU)" and a headquarters phrase for the
+Arab League that ends with a period. Counting them would give direct 25 correct writes, the
+same as staged.
 
 ## Files
 

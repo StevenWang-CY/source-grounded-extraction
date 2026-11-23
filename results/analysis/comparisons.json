@@ -1,0 +1,1369 @@
+{
+  "fixes": {
+    "development": {
+      "before": {
+        "name": "development-rerun",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 30,
+        "correct": 25,
+        "unsafe_accepted": 0,
+        "decisions": 54,
+        "invalid": 4
+      },
+      "after": {
+        "name": "fixes-development",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 30,
+        "correct": 29,
+        "unsafe_accepted": 0,
+        "decisions": 54,
+        "invalid": 4
+      },
+      "changed": {
+        "fewrel-p127-0072": "wrong write to correct write",
+        "fewrel-p159-0303": "wrong write to withheld",
+        "fewrel-p39-0023": "not written to correct write",
+        "scenario-14-1": "wrong write to correct write",
+        "scenario-14-2": "wrong write to correct write"
+      },
+      "changes": {
+        "wrong write to correct write": 3,
+        "not written to correct write": 1,
+        "wrong write to withheld": 1
+      },
+      "correct_writes_gained": 4,
+      "correct_writes_lost": 0,
+      "p": 0.125,
+      "same_extraction_responses": 66
+    },
+    "test": {
+      "before": {
+        "name": "test",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 33,
+        "correct": 24,
+        "unsafe_accepted": 2,
+        "decisions": 55,
+        "invalid": 3
+      },
+      "after": {
+        "name": "fixes-test",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 37,
+        "correct": 30,
+        "unsafe_accepted": 2,
+        "decisions": 59,
+        "invalid": 0
+      },
+      "changed": {
+        "fewrel-p127-0037": "not written to correct write",
+        "fewrel-p127-0114": "not written to wrong write",
+        "fewrel-p159-0041": "wrong write to withheld",
+        "fewrel-p39-0022": "not written to correct write",
+        "fewrel-p39-0025": "wrong write to correct write",
+        "fewrel-p39-0035": "not written to correct write",
+        "fewrel-p39-0040": "not written to correct write",
+        "scenario-14-4": "wrong write to correct write"
+      },
+      "changes": {
+        "not written to correct write": 4,
+        "not written to wrong write": 1,
+        "wrong write to correct write": 2,
+        "wrong write to withheld": 1
+      },
+      "correct_writes_gained": 6,
+      "correct_writes_lost": 0,
+      "p": 0.03125,
+      "same_extraction_responses": 66
+    },
+    "second-test": {
+      "before": {
+        "name": "second-test-before-fixes",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 29,
+        "correct": 21,
+        "unsafe_accepted": 1,
+        "decisions": 53,
+        "invalid": 6
+      },
+      "after": {
+        "name": "second-test",
+        "cases": 66,
+        "useful": 38,
+        "unsafe": 28,
+        "accepted": 30,
+        "correct": 25,
+        "unsafe_accepted": 1,
+        "decisions": 54,
+        "invalid": 5
+      },
+      "changed": {
+        "fewrel-p127-0192": "not written to correct write",
+        "fewrel-p159-0510": "wrong write to correct write",
+        "fewrel-p39-0061": "wrong write to withheld",
+        "fewrel-p39-0065": "not written to correct write",
+        "scenario-14-5": "wrong write to correct write"
+      },
+      "changes": {
+        "wrong write to correct write": 2,
+        "wrong write to withheld": 1,
+        "not written to correct write": 2
+      },
+      "correct_writes_gained": 4,
+      "correct_writes_lost": 0,
+      "p": 0.125,
+      "same_extraction_responses": 66
+    }
+  },
+  "models": {
+    "Qwen3-1.7B": {
+      "model": "mlx-community/Qwen3-1.7B-4bit",
+      "main": {
+        "direct": {
+          "accepted_accuracy": {
+            "count": 23,
+            "total": 64,
+            "low": 0.25288402217722405,
+            "high": 0.4817914948765132
+          },
+          "useful_coverage": {
+            "count": 23,
+            "total": 38,
+            "low": 0.4471786787542184,
+            "high": 0.7440192434476809
+          },
+          "unsafe_accepted": {
+            "count": 28,
+            "total": 28,
+            "low": 0.8793566935605293,
+            "high": 1.0
+          },
+          "decisions": {
+            "count": 36,
+            "total": 66,
+            "low": 0.42615011252555934,
+            "high": 0.6597587458532113
+          },
+          "invalid": 2
+        },
+        "staged": {
+          "accepted_accuracy": {
+            "count": 20,
+            "total": 40,
+            "low": 0.35199526826950456,
+            "high": 0.6480047317304954
+          },
+          "useful_coverage": {
+            "count": 20,
+            "total": 38,
+            "low": 0.37258971272613683,
+            "high": 0.6752097678243378
+          },
+          "unsafe_accepted": {
+            "count": 7,
+            "total": 28,
+            "low": 0.12676494850621306,
+            "high": 0.4335567047135223
+          },
+          "decisions": {
+            "count": 54,
+            "total": 66,
+            "low": 0.7085480722568388,
+            "high": 0.8928139363945568
+          },
+          "invalid": 2
+        }
+      },
+      "direct_lenient_match": {
+        "accepted_accuracy": {
+          "count": 23,
+          "total": 64,
+          "low": 0.25288402217722405,
+          "high": 0.4817914948765132
+        },
+        "useful_coverage": {
+          "count": 23,
+          "total": 38,
+          "low": 0.4471786787542184,
+          "high": 0.7440192434476809
+        },
+        "unsafe_accepted": {
+          "count": 28,
+          "total": 28,
+          "low": 0.8793566935605293,
+          "high": 1.0
+        },
+        "decisions": {
+          "count": 36,
+          "total": 66,
+          "low": 0.42615011252555934,
+          "high": 0.6597587458532113
+        },
+        "invalid": 2
+      },
+      "cost": {
+        "direct": {
+          "model_calls": 66,
+          "input_tokens": 56982,
+          "output_tokens": 11695,
+          "seconds": 0.6656211647681299
+        },
+        "staged": {
+          "model_calls": 130,
+          "input_tokens": 63791,
+          "output_tokens": 13762,
+          "seconds": 0.8028586154775412
+        }
+      },
+      "paired": {
+        "decision": {
+          "direct_only": 5,
+          "staged_only": 23,
+          "p": 0.0009122341871261597,
+          "difference_interval": [
+            -27.41821521332313,
+            -8.581784786676868
+          ]
+        },
+        "unsafe": {
+          "direct_only": 21,
+          "staged_only": 0,
+          "p": 9.5367431640625e-07,
+          "difference_interval": [
+            16.509158305305785,
+            25.490841694694215
+          ]
+        },
+        "useful": {
+          "direct_only": 8,
+          "staged_only": 5,
+          "p": 0.5810546875,
+          "difference_interval": [
+            -4.002081565371829,
+            10.002081565371828
+          ]
+        }
+      },
+      "direct_choices": {
+        "invalid accept": 2,
+        "valid accept": 64
+      },
+      "invalid_kinds": {
+        "direct": {
+          "match": 0,
+          "candidate": 2
+        },
+        "staged": {
+          "match": 0,
+          "candidate": 2
+        }
+      },
+      "variants": [
+        {
+          "name": "Direct",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 64,
+          "correct": 23,
+          "unsafe_accepted": 28,
+          "decisions": 36,
+          "invalid": 2
+        },
+        {
+          "name": "Direct's candidate, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 45,
+          "correct": 27,
+          "unsafe_accepted": 8,
+          "decisions": 57,
+          "invalid": 1
+        },
+        {
+          "name": "Staged extraction, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 42,
+          "correct": 20,
+          "unsafe_accepted": 8,
+          "decisions": 54,
+          "invalid": 2
+        },
+        {
+          "name": "Full staged workflow",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 40,
+          "correct": 20,
+          "unsafe_accepted": 7,
+          "decisions": 54,
+          "invalid": 2
+        }
+      ],
+      "repeats": {
+        "repeated": 12,
+        "same": 12
+      }
+    },
+    "Qwen3-4B": {
+      "model": "mlx-community/Qwen3-4B-4bit",
+      "main": {
+        "direct": {
+          "accepted_accuracy": {
+            "count": 23,
+            "total": 53,
+            "low": 0.3095039647138256,
+            "high": 0.5673464867389011
+          },
+          "useful_coverage": {
+            "count": 23,
+            "total": 38,
+            "low": 0.4471786787542184,
+            "high": 0.7440192434476809
+          },
+          "unsafe_accepted": {
+            "count": 19,
+            "total": 28,
+            "low": 0.4933884303549963,
+            "high": 0.8206675316309071
+          },
+          "decisions": {
+            "count": 34,
+            "total": 66,
+            "low": 0.397105911971002,
+            "high": 0.6315303741552548
+          },
+          "invalid": 13
+        },
+        "staged": {
+          "accepted_accuracy": {
+            "count": 25,
+            "total": 30,
+            "low": 0.6643564934133498,
+            "high": 0.9266345767456822
+          },
+          "useful_coverage": {
+            "count": 25,
+            "total": 38,
+            "low": 0.4989210342647263,
+            "high": 0.7878758490381226
+          },
+          "unsafe_accepted": {
+            "count": 1,
+            "total": 28,
+            "low": 0.0063325197789164955,
+            "high": 0.17712197905773489
+          },
+          "decisions": {
+            "count": 54,
+            "total": 66,
+            "low": 0.7085480722568388,
+            "high": 0.8928139363945568
+          },
+          "invalid": 5
+        }
+      },
+      "direct_lenient_match": {
+        "accepted_accuracy": {
+          "count": 24,
+          "total": 57,
+          "low": 0.3018759659821775,
+          "high": 0.5501985870366884
+        },
+        "useful_coverage": {
+          "count": 24,
+          "total": 38,
+          "low": 0.4728395943392636,
+          "high": 0.7661578084131104
+        },
+        "unsafe_accepted": {
+          "count": 22,
+          "total": 28,
+          "low": 0.6046141419113311,
+          "high": 0.8978753972661142
+        },
+        "decisions": {
+          "count": 37,
+          "total": 66,
+          "low": 0.44082635288151417,
+          "high": 0.6737187916235134
+        },
+        "invalid": 5
+      },
+      "cost": {
+        "direct": {
+          "model_calls": 66,
+          "input_tokens": 56982,
+          "output_tokens": 8888,
+          "seconds": 1.042939273982704
+        },
+        "staged": {
+          "model_calls": 121,
+          "input_tokens": 59444,
+          "output_tokens": 10585,
+          "seconds": 1.2316158138053266
+        }
+      },
+      "paired": {
+        "decision": {
+          "direct_only": 6,
+          "staged_only": 26,
+          "p": 0.0005350527353584766,
+          "difference_interval": [
+            -29.982239990298794,
+            -10.017760009701204
+          ]
+        },
+        "unsafe": {
+          "direct_only": 18,
+          "staged_only": 0,
+          "p": 7.62939453125e-06,
+          "difference_interval": [
+            13.030584258855832,
+            22.969415741144168
+          ]
+        },
+        "useful": {
+          "direct_only": 4,
+          "staged_only": 6,
+          "p": 0.75390625,
+          "difference_interval": [
+            -8.16524328150901,
+            4.165243281509011
+          ]
+        }
+      },
+      "direct_choices": {
+        "invalid accept": 6,
+        "invalid reject": 7,
+        "valid accept": 53
+      },
+      "invalid_kinds": {
+        "direct": {
+          "match": 13,
+          "candidate": 0
+        },
+        "staged": {
+          "match": 0,
+          "candidate": 5
+        }
+      },
+      "variants": [
+        {
+          "name": "Direct",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 53,
+          "correct": 23,
+          "unsafe_accepted": 19,
+          "decisions": 34,
+          "invalid": 13
+        },
+        {
+          "name": "Direct's candidate, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 43,
+          "correct": 27,
+          "unsafe_accepted": 7,
+          "decisions": 56,
+          "invalid": 0
+        },
+        {
+          "name": "Staged extraction, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 31,
+          "correct": 25,
+          "unsafe_accepted": 2,
+          "decisions": 53,
+          "invalid": 5
+        },
+        {
+          "name": "Full staged workflow",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 30,
+          "correct": 25,
+          "unsafe_accepted": 1,
+          "decisions": 54,
+          "invalid": 5
+        }
+      ],
+      "repeats": {
+        "repeated": 12,
+        "same": 12
+      }
+    },
+    "Qwen3-8B": {
+      "model": "mlx-community/Qwen3-8B-4bit",
+      "main": {
+        "direct": {
+          "accepted_accuracy": {
+            "count": 19,
+            "total": 32,
+            "low": 0.42260024747333746,
+            "high": 0.7448036525707851
+          },
+          "useful_coverage": {
+            "count": 19,
+            "total": 38,
+            "low": 0.3484992825586472,
+            "high": 0.6515007174413527
+          },
+          "unsafe_accepted": {
+            "count": 9,
+            "total": 28,
+            "low": 0.179332468369093,
+            "high": 0.5066115696450038
+          },
+          "decisions": {
+            "count": 26,
+            "total": 66,
+            "low": 0.2850300041756559,
+            "high": 0.5145159929405457
+          },
+          "invalid": 19
+        },
+        "staged": {
+          "accepted_accuracy": {
+            "count": 25,
+            "total": 36,
+            "low": 0.5314372701821003,
+            "high": 0.819955484830002
+          },
+          "useful_coverage": {
+            "count": 25,
+            "total": 38,
+            "low": 0.4989210342647263,
+            "high": 0.7878758490381226
+          },
+          "unsafe_accepted": {
+            "count": 1,
+            "total": 28,
+            "low": 0.0063325197789164955,
+            "high": 0.17712197905773489
+          },
+          "decisions": {
+            "count": 61,
+            "total": 66,
+            "low": 0.8346080488906065,
+            "high": 0.9672079626445873
+          },
+          "invalid": 0
+        }
+      },
+      "direct_lenient_match": {
+        "accepted_accuracy": {
+          "count": 21,
+          "total": 37,
+          "low": 0.4091418097222649,
+          "high": 0.7132828082261852
+        },
+        "useful_coverage": {
+          "count": 21,
+          "total": 38,
+          "low": 0.39706297006975455,
+          "high": 0.6985359910311952
+        },
+        "unsafe_accepted": {
+          "count": 12,
+          "total": 28,
+          "low": 0.2650854701640365,
+          "high": 0.6092921450416022
+        },
+        "decisions": {
+          "count": 36,
+          "total": 66,
+          "low": 0.42615011252555934,
+          "high": 0.6597587458532113
+        },
+        "invalid": 3
+      },
+      "cost": {
+        "direct": {
+          "model_calls": 66,
+          "input_tokens": 56982,
+          "output_tokens": 9689,
+          "seconds": 1.9431850150629708
+        },
+        "staged": {
+          "model_calls": 129,
+          "input_tokens": 62957,
+          "output_tokens": 10592,
+          "seconds": 2.158784852899385
+        }
+      },
+      "paired": {
+        "decision": {
+          "direct_only": 0,
+          "staged_only": 35,
+          "p": 5.820766091346741e-11,
+          "difference_interval": [
+            -42.94677644404374,
+            -27.053223555956258
+          ]
+        },
+        "unsafe": {
+          "direct_only": 8,
+          "staged_only": 0,
+          "p": 0.0078125,
+          "difference_interval": [
+            3.3147899078690495,
+            12.685210092130951
+          ]
+        },
+        "useful": {
+          "direct_only": 6,
+          "staged_only": 12,
+          "p": 0.237884521484375,
+          "difference_interval": [
+            -14.093638429557872,
+            2.0936384295578723
+          ]
+        }
+      },
+      "direct_choices": {
+        "invalid accept": 8,
+        "invalid reject": 2,
+        "invalid review": 9,
+        "valid accept": 32,
+        "valid reject": 13,
+        "valid review": 2
+      },
+      "invalid_kinds": {
+        "direct": {
+          "match": 16,
+          "candidate": 3
+        },
+        "staged": {
+          "match": 0,
+          "candidate": 0
+        }
+      },
+      "variants": [
+        {
+          "name": "Direct",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 32,
+          "correct": 19,
+          "unsafe_accepted": 9,
+          "decisions": 26,
+          "invalid": 19
+        },
+        {
+          "name": "Direct's candidate, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 35,
+          "correct": 26,
+          "unsafe_accepted": 7,
+          "decisions": 48,
+          "invalid": 0
+        },
+        {
+          "name": "Staged extraction, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 41,
+          "correct": 26,
+          "unsafe_accepted": 4,
+          "decisions": 61,
+          "invalid": 0
+        },
+        {
+          "name": "Full staged workflow",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 36,
+          "correct": 25,
+          "unsafe_accepted": 1,
+          "decisions": 61,
+          "invalid": 0
+        }
+      ],
+      "repeats": {
+        "repeated": 12,
+        "same": 12
+      }
+    },
+    "Qwen3-14B": {
+      "model": "mlx-community/Qwen3-14B-4bit",
+      "main": {
+        "direct": {
+          "accepted_accuracy": {
+            "count": 18,
+            "total": 31,
+            "low": 0.4076626236738884,
+            "high": 0.7358445703570756
+          },
+          "useful_coverage": {
+            "count": 18,
+            "total": 38,
+            "low": 0.3247902321756621,
+            "high": 0.6274102872738632
+          },
+          "unsafe_accepted": {
+            "count": 6,
+            "total": 28,
+            "low": 0.10212460273388577,
+            "high": 0.3953858580886689
+          },
+          "decisions": {
+            "count": 28,
+            "total": 66,
+            "low": 0.3124251006818743,
+            "high": 0.544393468686841
+          },
+          "invalid": 31
+        },
+        "staged": {
+          "accepted_accuracy": {
+            "count": 31,
+            "total": 36,
+            "low": 0.7134046947289879,
+            "high": 0.9391818502934882
+          },
+          "useful_coverage": {
+            "count": 31,
+            "total": 38,
+            "low": 0.6658114179568251,
+            "high": 0.9077823486488728
+          },
+          "unsafe_accepted": {
+            "count": 0,
+            "total": 28,
+            "low": 0.0,
+            "high": 0.12064330643947074
+          },
+          "decisions": {
+            "count": 61,
+            "total": 66,
+            "low": 0.8346080488906065,
+            "high": 0.9672079626445873
+          },
+          "invalid": 5
+        }
+      },
+      "direct_lenient_match": {
+        "accepted_accuracy": {
+          "count": 26,
+          "total": 54,
+          "low": 0.35393972653587036,
+          "high": 0.6114829989852052
+        },
+        "useful_coverage": {
+          "count": 26,
+          "total": 38,
+          "low": 0.5254423998209402,
+          "high": 0.8091539640323836
+        },
+        "unsafe_accepted": {
+          "count": 17,
+          "total": 28,
+          "low": 0.42409044159980325,
+          "high": 0.7643431355917387
+        },
+        "decisions": {
+          "count": 47,
+          "total": 66,
+          "low": 0.5936275049338142,
+          "high": 0.8072805008337827
+        },
+        "invalid": 0
+      },
+      "cost": {
+        "direct": {
+          "model_calls": 66,
+          "input_tokens": 56982,
+          "output_tokens": 10409,
+          "seconds": 3.699783298520329
+        },
+        "staged": {
+          "model_calls": 127,
+          "input_tokens": 62270,
+          "output_tokens": 11560,
+          "seconds": 4.117596329484403
+        }
+      },
+      "paired": {
+        "decision": {
+          "direct_only": 2,
+          "staged_only": 35,
+          "p": 1.0244548320770264e-08,
+          "difference_interval": [
+            -41.874114438442184,
+            -24.125885561557816
+          ]
+        },
+        "unsafe": {
+          "direct_only": 6,
+          "staged_only": 0,
+          "p": 0.03125,
+          "difference_interval": [
+            1.7444466016615756,
+            10.255553398338424
+          ]
+        },
+        "useful": {
+          "direct_only": 1,
+          "staged_only": 14,
+          "p": 0.0009765625,
+          "difference_interval": [
+            -19.366906650799272,
+            -6.6330933492007285
+          ]
+        }
+      },
+      "direct_choices": {
+        "invalid accept": 23,
+        "invalid reject": 3,
+        "invalid review": 5,
+        "valid accept": 31,
+        "valid reject": 2,
+        "valid review": 2
+      },
+      "invalid_kinds": {
+        "direct": {
+          "match": 31,
+          "candidate": 0
+        },
+        "staged": {
+          "match": 0,
+          "candidate": 5
+        }
+      },
+      "variants": [
+        {
+          "name": "Direct",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 31,
+          "correct": 18,
+          "unsafe_accepted": 6,
+          "decisions": 28,
+          "invalid": 31
+        },
+        {
+          "name": "Direct's candidate, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 42,
+          "correct": 32,
+          "unsafe_accepted": 6,
+          "decisions": 58,
+          "invalid": 0
+        },
+        {
+          "name": "Staged extraction, Python steps, no verifier",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 40,
+          "correct": 31,
+          "unsafe_accepted": 4,
+          "decisions": 57,
+          "invalid": 5
+        },
+        {
+          "name": "Full staged workflow",
+          "cases": 66,
+          "useful": 38,
+          "unsafe": 28,
+          "accepted": 36,
+          "correct": 31,
+          "unsafe_accepted": 0,
+          "decisions": 61,
+          "invalid": 5
+        }
+      ],
+      "repeats": {
+        "repeated": 12,
+        "same": 12
+      }
+    }
+  },
+  "one_call": {
+    "development": {
+      "Direct": {
+        "accepted_accuracy": {
+          "count": 28,
+          "total": 59,
+          "low": 0.3526587662591666,
+          "high": 0.5996020492373858
+        },
+        "useful_coverage": {
+          "count": 28,
+          "total": 38,
+          "low": 0.5799115368203089,
+          "high": 0.8502837881339644
+        },
+        "unsafe_accepted": {
+          "count": 23,
+          "total": 28,
+          "low": 0.6440857505322257,
+          "high": 0.9212149810424002
+        },
+        "decisions": {
+          "count": 36,
+          "total": 66,
+          "low": 0.42615011252555934,
+          "high": 0.6597587458532113
+        },
+        "invalid": 7,
+        "model_calls": 66,
+        "input_tokens": 56462,
+        "output_tokens": 8364,
+        "seconds": 0.9936917133340047,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 28,
+            "total": 60,
+            "low": 0.3462790595365474,
+            "high": 0.5910657306657343
+          },
+          "useful_coverage": {
+            "count": 28,
+            "total": 38,
+            "low": 0.5799115368203089,
+            "high": 0.8502837881339644
+          },
+          "unsafe_accepted": {
+            "count": 24,
+            "total": 28,
+            "low": 0.6851019767727087,
+            "high": 0.9430099471990978
+          },
+          "decisions": {
+            "count": 38,
+            "total": 66,
+            "low": 0.455606531313159,
+            "high": 0.6875748993181257
+          },
+          "invalid": 3
+        },
+        "choices": {
+          "invalid accept": 3,
+          "invalid reject": 4,
+          "valid accept": 59
+        },
+        "max_tokens": 512
+      },
+      "Direct with thinking": {
+        "accepted_accuracy": {
+          "count": 19,
+          "total": 40,
+          "low": 0.329354700094151,
+          "high": 0.6250263800287721
+        },
+        "useful_coverage": {
+          "count": 19,
+          "total": 38,
+          "low": 0.3484992825586472,
+          "high": 0.6515007174413527
+        },
+        "unsafe_accepted": {
+          "count": 10,
+          "total": 28,
+          "low": 0.20705829414358318,
+          "high": 0.5416969362676942
+        },
+        "decisions": {
+          "count": 33,
+          "total": 66,
+          "low": 0.38273687937641954,
+          "high": 0.6172631206235805
+        },
+        "invalid": 21,
+        "model_calls": 66,
+        "input_tokens": 56198,
+        "output_tokens": 65251,
+        "seconds": 6.621559685574153,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 22,
+            "total": 54,
+            "low": 0.28678212001394765,
+            "high": 0.5403315075914297
+          },
+          "useful_coverage": {
+            "count": 22,
+            "total": 38,
+            "low": 0.4219234522573989,
+            "high": 0.7214749893940255
+          },
+          "unsafe_accepted": {
+            "count": 20,
+            "total": 28,
+            "low": 0.5294071141762103,
+            "high": 0.8474600402068736
+          },
+          "decisions": {
+            "count": 38,
+            "total": 66,
+            "low": 0.455606531313159,
+            "high": 0.6875748993181257
+          },
+          "invalid": 5
+        },
+        "choices": {
+          "invalid accept": 17,
+          "invalid reject": 3,
+          "invalid unreadable": 1,
+          "valid accept": 40,
+          "valid reject": 5
+        },
+        "max_tokens": 4096
+      },
+      "Guided direct": {
+        "accepted_accuracy": {
+          "count": 24,
+          "total": 46,
+          "low": 0.3813741296938485,
+          "high": 0.6587531066449446
+        },
+        "useful_coverage": {
+          "count": 24,
+          "total": 38,
+          "low": 0.4728395943392636,
+          "high": 0.7661578084131104
+        },
+        "unsafe_accepted": {
+          "count": 13,
+          "total": 28,
+          "low": 0.2953156986850779,
+          "high": 0.6418731089177414
+        },
+        "decisions": {
+          "count": 45,
+          "total": 66,
+          "low": 0.5621255001460261,
+          "high": 0.7815099333690567
+        },
+        "invalid": 2,
+        "model_calls": 66,
+        "input_tokens": 115136,
+        "output_tokens": 8503,
+        "seconds": 1.3404043308092337,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 24,
+            "total": 46,
+            "low": 0.3813741296938485,
+            "high": 0.6587531066449446
+          },
+          "useful_coverage": {
+            "count": 24,
+            "total": 38,
+            "low": 0.4728395943392636,
+            "high": 0.7661578084131104
+          },
+          "unsafe_accepted": {
+            "count": 13,
+            "total": 28,
+            "low": 0.2953156986850779,
+            "high": 0.6418731089177414
+          },
+          "decisions": {
+            "count": 45,
+            "total": 66,
+            "low": 0.5621255001460261,
+            "high": 0.7815099333690567
+          },
+          "invalid": 2
+        },
+        "choices": {
+          "invalid reject": 2,
+          "valid accept": 46,
+          "valid reject": 12,
+          "valid review": 6
+        },
+        "max_tokens": 512
+      },
+      "Staged": {
+        "accepted_accuracy": {
+          "count": 29,
+          "total": 30,
+          "low": 0.8332960885388428,
+          "high": 0.9940914096838022
+        },
+        "useful_coverage": {
+          "count": 29,
+          "total": 38,
+          "low": 0.607931875050628,
+          "high": 0.8700629304541203
+        },
+        "unsafe_accepted": {
+          "count": 0,
+          "total": 28,
+          "low": 0.0,
+          "high": 0.12064330643947074
+        },
+        "decisions": {
+          "count": 54,
+          "total": 66,
+          "low": 0.7085480722568388,
+          "high": 0.8928139363945568
+        },
+        "invalid": 4,
+        "model_calls": 122,
+        "input_tokens": 58905,
+        "output_tokens": 10246,
+        "seconds": 1.219496826380209
+      }
+    },
+    "second-test": {
+      "Direct": {
+        "accepted_accuracy": {
+          "count": 23,
+          "total": 53,
+          "low": 0.3095039647138256,
+          "high": 0.5673464867389011
+        },
+        "useful_coverage": {
+          "count": 23,
+          "total": 38,
+          "low": 0.4471786787542184,
+          "high": 0.7440192434476809
+        },
+        "unsafe_accepted": {
+          "count": 19,
+          "total": 28,
+          "low": 0.4933884303549963,
+          "high": 0.8206675316309071
+        },
+        "decisions": {
+          "count": 34,
+          "total": 66,
+          "low": 0.397105911971002,
+          "high": 0.6315303741552548
+        },
+        "invalid": 13,
+        "model_calls": 66,
+        "input_tokens": 56982,
+        "output_tokens": 8888,
+        "seconds": 1.042939273982704,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 24,
+            "total": 57,
+            "low": 0.3018759659821775,
+            "high": 0.5501985870366884
+          },
+          "useful_coverage": {
+            "count": 24,
+            "total": 38,
+            "low": 0.4728395943392636,
+            "high": 0.7661578084131104
+          },
+          "unsafe_accepted": {
+            "count": 22,
+            "total": 28,
+            "low": 0.6046141419113311,
+            "high": 0.8978753972661142
+          },
+          "decisions": {
+            "count": 37,
+            "total": 66,
+            "low": 0.44082635288151417,
+            "high": 0.6737187916235134
+          },
+          "invalid": 5
+        },
+        "choices": {
+          "invalid accept": 6,
+          "invalid reject": 7,
+          "valid accept": 53
+        },
+        "max_tokens": 512
+      },
+      "Direct with thinking": {
+        "accepted_accuracy": {
+          "count": 14,
+          "total": 34,
+          "low": 0.26365968264893114,
+          "high": 0.5777840624555781
+        },
+        "useful_coverage": {
+          "count": 14,
+          "total": 38,
+          "low": 0.23384219158688957,
+          "high": 0.5271604056607364
+        },
+        "unsafe_accepted": {
+          "count": 11,
+          "total": 28,
+          "low": 0.23565686440826125,
+          "high": 0.5759095584001968
+        },
+        "decisions": {
+          "count": 25,
+          "total": 66,
+          "low": 0.2714944691844008,
+          "high": 0.49941524180554386
+        },
+        "invalid": 28,
+        "model_calls": 66,
+        "input_tokens": 56718,
+        "output_tokens": 69500,
+        "seconds": 11.540259157155754,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 21,
+            "total": 49,
+            "low": 0.3002331898865981,
+            "high": 0.567295070153971
+          },
+          "useful_coverage": {
+            "count": 21,
+            "total": 38,
+            "low": 0.39706297006975455,
+            "high": 0.6985359910311952
+          },
+          "unsafe_accepted": {
+            "count": 19,
+            "total": 28,
+            "low": 0.4933884303549963,
+            "high": 0.8206675316309071
+          },
+          "decisions": {
+            "count": 32,
+            "total": 66,
+            "low": 0.36846962584474513,
+            "high": 0.6028940880289979
+          },
+          "invalid": 9
+        },
+        "choices": {
+          "invalid accept": 19,
+          "invalid reject": 6,
+          "invalid unreadable": 3,
+          "valid accept": 34,
+          "valid reject": 4
+        },
+        "max_tokens": 4096
+      },
+      "Guided direct": {
+        "accepted_accuracy": {
+          "count": 26,
+          "total": 51,
+          "low": 0.3768092379650704,
+          "high": 0.6414251420167695
+        },
+        "useful_coverage": {
+          "count": 26,
+          "total": 38,
+          "low": 0.5254423998209402,
+          "high": 0.8091539640323836
+        },
+        "unsafe_accepted": {
+          "count": 16,
+          "total": 28,
+          "low": 0.39070785495839777,
+          "high": 0.7349145298359636
+        },
+        "decisions": {
+          "count": 47,
+          "total": 66,
+          "low": 0.5936275049338142,
+          "high": 0.8072805008337827
+        },
+        "invalid": 1,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 8992,
+        "seconds": 1.6248649760011837,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 26,
+            "total": 51,
+            "low": 0.3768092379650704,
+            "high": 0.6414251420167695
+          },
+          "useful_coverage": {
+            "count": 26,
+            "total": 38,
+            "low": 0.5254423998209402,
+            "high": 0.8091539640323836
+          },
+          "unsafe_accepted": {
+            "count": 16,
+            "total": 28,
+            "low": 0.39070785495839777,
+            "high": 0.7349145298359636
+          },
+          "decisions": {
+            "count": 47,
+            "total": 66,
+            "low": 0.5936275049338142,
+            "high": 0.8072805008337827
+          },
+          "invalid": 1
+        },
+        "choices": {
+          "invalid accept": 1,
+          "valid accept": 51,
+          "valid reject": 9,
+          "valid review": 5
+        },
+        "max_tokens": 512
+      },
+      "Staged": {
+        "accepted_accuracy": {
+          "count": 25,
+          "total": 30,
+          "low": 0.6643564934133498,
+          "high": 0.9266345767456822
+        },
+        "useful_coverage": {
+          "count": 25,
+          "total": 38,
+          "low": 0.4989210342647263,
+          "high": 0.7878758490381226
+        },
+        "unsafe_accepted": {
+          "count": 1,
+          "total": 28,
+          "low": 0.0063325197789164955,
+          "high": 0.17712197905773489
+        },
+        "decisions": {
+          "count": 54,
+          "total": 66,
+          "low": 0.7085480722568388,
+          "high": 0.8928139363945568
+        },
+        "invalid": 5,
+        "model_calls": 121,
+        "input_tokens": 59444,
+        "output_tokens": 10585,
+        "seconds": 1.2316158138053266
+      }
+    }
+  }
+}

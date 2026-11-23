@@ -39,13 +39,21 @@ class ReplayBackend:
         return Call(saved["text"], 0, 0, 0.0, "replayed", saved.get("error"))
 
 
+def answer_after_reasoning(text: str) -> str:
+    """The answer that follows a model's reasoning block. Unfinished reasoning leaves no answer."""
+    return text.split("</think>", 1)[1].strip() if "</think>" in text else ""
+
+
 class MLXBackend:
-    def __init__(self, model: str, max_tokens: int = 512, temperature: float = 0.0):
+    def __init__(
+        self, model: str, max_tokens: int = 512, temperature: float = 0.0, thinking: bool = False
+    ):
         from mlx_lm import load
 
         self.model_name = model
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.thinking = thinking
         self.model, self.tokenizer = load(model)
 
     @property
@@ -55,7 +63,7 @@ class MLXBackend:
             "model": self.model_name,
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
-            "thinking": False,
+            "thinking": self.thinking,
             "seed": 17,
             "estimated_api_cost_usd": 0.0,
             "cost_basis": "local inference; no billed API calls; hardware and electricity excluded",
@@ -68,7 +76,7 @@ class MLXBackend:
 
         mx.random.seed(17)
         prompt = self.tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=self.thinking
         )
         start = time.perf_counter()
         text = ""
@@ -84,6 +92,8 @@ class MLXBackend:
             last = part
         if last is None:
             raise RuntimeError("The model generated no output")
+        if self.thinking:
+            text = answer_after_reasoning(text)
         return Call(
             text,
             last.prompt_tokens,

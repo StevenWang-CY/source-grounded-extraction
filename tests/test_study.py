@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from crm_study.backends import Call, ReplayBackend
+from crm_study.backends import Call, ReplayBackend, answer_after_reasoning
 from crm_study.cli import main
 from crm_study.data import validate_dataset
 from crm_study.evaluation import evaluate, score_one, summarize, validate_results
@@ -147,7 +147,7 @@ def test_wrong_record_type_cannot_receive_an_accepted_fact():
 
 
 def test_dataset_labels_and_inputs_are_separate():
-    assert validate_dataset(list(CASES.values()), list(LABELS.values()))["cases"] == 132
+    assert validate_dataset(list(CASES.values()), list(LABELS.values()))["cases"] == 198
     broken = deepcopy(CASES["scenario-01-1"])
     del broken["crm"][0]["aliases"]
     with pytest.raises(ValueError, match="required field"):
@@ -395,3 +395,38 @@ def test_network_failure_is_recorded_without_aborting_the_experiment(strategy):
     assert replayed["error"] == result["error"]
     assert replayed["prediction"] == result["prediction"]
     assert replayed["stages"][-1] == result["stages"][-1]
+
+
+def test_guided_workflow_is_one_call_and_is_scored_like_direct():
+    case, gold = CASES["scenario-07-1"], LABELS["scenario-07-1"]
+    response = {
+        "candidate": gold["candidates"][0],
+        "resolution": gold["resolution"],
+        "checks": {"source_allowed": False, "identity": "unique"},
+        "decision": "reject",
+        "reason": "The source is not allowed.",
+    }
+    backend = ScriptedBackend([response])
+    result = run_case(case, "guided", backend)
+    assert result["strategy"] == "guided" and len(result["calls"]) == 1
+    # The guided prompt carries the checks and the worked examples; the direct prompt does not.
+    assert "Example 1" in result["calls"][0]["messages"][0]["content"]
+    row = score_one({**result, "repeat": 0}, case, gold)
+    assert row["decision_correct"] and row["resolution_correct"] and not row["accepted"]
+
+
+def test_answer_follows_the_reasoning_block():
+    assert answer_after_reasoning('<think>Check the date.</think>\n{"decision": "review"}') == (
+        '{"decision": "review"}'
+    )
+    assert answer_after_reasoning("<think>The limit cut this off") == ""
+
+
+def test_workflow_version_is_recorded_and_checked():
+    case = CASES["scenario-01-1"]
+    extraction = {"candidate": LABELS[case["id"]]["candidates"][0]}
+    for version in ("3", "4"):
+        backend = ScriptedBackend([extraction, LABELS[case["id"]]["verification"]])
+        assert run_case(case, "staged", backend, version)["workflow_version"] == version
+    with pytest.raises(ValueError):
+        run_case(case, "staged", ScriptedBackend([]), "5")

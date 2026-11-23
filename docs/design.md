@@ -22,6 +22,11 @@ also read the CRM.
 Splitting a task into chained steps with visible results comes from Wu et al. [1], and Khot
 et al. [2] show that a step can be ordinary code instead of a model.
 
+Two more one-call workflows serve as stronger baselines for the direct workflow. *Direct with
+thinking* is the same prompt with the model's reasoning mode turned on, so it can reason before
+it answers. *Guided direct* adds the checks that staged runs in Python to the prompt, asks the
+model to record each check before deciding, and gives three worked examples.
+
 ## What the model extracts
 
 A candidate update has an entity type, a subject, an attribute, a value, an organization, an
@@ -34,7 +39,8 @@ date the source does not state stays null.
 Matching uses normalized names, declared aliases, and a person's organization. One match
 selects the record, and several matches go to review. A name with no match can create a new
 record. A name match also goes to review when the organization on the CRM record differs from
-the stated one or is missing.
+the stated one. Workflow 3 did the same when the record had no organization, which is one of
+the fixes described below.
 
 These outcomes (matched, ambiguous, new) mirror the link, possible link, and non-link of
 Fellegi and Sunter [3], and ambiguous cases go to a reviewer. Christophides et al. [4] survey
@@ -72,6 +78,23 @@ The writer copies the initial CRM, checks the record type, and stores an accepte
 its date, source, and quote. Other records and facts stay as they were. Every execution starts
 from the same original CRM, and an invalid response writes nothing.
 
+## Fixes after the test
+
+The staged workflow has two versions. Workflow 3 is the one I ran on the held-out test set.
+Workflow 4 adds four rules to the Python stages, which I wrote after reading the test errors.
+The prompts, the model, and the direct workflow are the same in both.
+
+| Fix | Rule |
+| --- | --- |
+| Dates | An effective date is kept only when the cited source writes it in full. Otherwise it is stored as unknown, as the extraction instructions already require |
+| Missing organization | An organization written as the string "null" counts as missing |
+| Unknown CRM organization | A CRM record without an organization does not conflict with a stated organization |
+| Longer or shorter names | A name that lengthens or shortens an existing record's name is ambiguous, not a new record |
+
+`--workflow 3` runs the original version, and saved runs record which version they used, so
+both can be replayed. The confirmed failures are regression tests in
+`tests/test_regressions.py`. Each one feeds the saved model responses through both versions.
+
 ## Running and saving
 
 The runner alternates which method goes first, saves each execution as it finishes, and can
@@ -82,11 +105,16 @@ run. The first scoring of a run saves the answers it used, and a later change to
 keys goes to a separate analysis folder.
 
 The model is Qwen3-4B [13] in 4-bit form on MLX [14], with temperature 0 (greedy decoding),
-thinking turned off, and a 512-token limit. Cases run in an order shuffled with seed 17.
+thinking turned off, and a 512-token limit. Cases run in an order shuffled with seed 17. The
+model-size runs use the 1.7B, 8B, and 14B models of the same family with the same settings, and
+the thinking runs raise the limit to 4,096 tokens so the reasoning fits.
 
-Each run records the versions it used. The numbers count the changes made during development,
-and they are now dataset 2, prompt 4, workflow 3, and scoring 4. Keeping them with the saved
-runs stops results from different versions being mixed by accident.
+Each run records the versions it used. The numbers count the changes made during the project.
+Development and test are dataset 2 and the second test set is dataset 3. The prompts are
+version 4, the workflow is 3 or 4, and the scoring is version 5. The prompt version covers the
+direct, extraction, and verification prompts, which are the same in every run. The guided
+prompt came later as its own workflow and did not change them. Keeping the versions with the
+saved runs stops results from different versions being mixed by accident.
 
 ## Measures
 
@@ -108,7 +136,7 @@ and whether unrelated records stayed the same. Main results use one execution pe
 method, and repeats only measure consistency. Local inference bills no API cost.
 
 The reports give 95% Wilson intervals [15] for rates and an exact McNemar test [16] for paired
-differences. Kapoor et al. [17] argue that agent evaluations should look beyond accuracy and
+differences. The interval for a paired difference is a normal approximation. Kapoor et al. [17] argue that agent evaluations should look beyond accuracy and
 work out where a gain comes from, which is why the analysis also scores parts of the workflow
 separately.
 
@@ -117,13 +145,14 @@ separately.
 | Module | What it does |
 | --- | --- |
 | `schema.py` | The candidate, normalization, and quotation checks |
-| `prompts.py` | The extraction instructions, the policy text, and the three model tasks |
+| `prompts.py` | The extraction instructions, the policy text, and the model tasks |
 | `pipeline.py` | The direct and staged workflows and their traces |
 | `resolution.py` | Matching a candidate to CRM records |
-| `policy.py` | The decision rules and the CRM writer |
+| `policy.py` | The contract check, the decision rules, and the CRM writer |
 | `backends.py` | Local MLX inference, an HTTP adapter, and replay of saved responses |
 | `evaluation.py`, `reporting.py` | Scoring saved runs and writing their reports |
 | `variants.py`, `stats.py` | Rescoring parts of the workflow, intervals, and paired tests |
+| `tests/test_regressions.py` | The confirmed failures, replayed through workflows 3 and 4 |
 | `data.py` | Dataset checks and the grouped split |
 | `cli.py` | The `crm-study` commands |
 

@@ -5,28 +5,203 @@
   "annotation_review": "Development trace review added two explicitly stated full headquarters phrases and permits the source's former qualifier on historical office titles. The original run's answer snapshot and scores remain unchanged; reviewed scoring uses a separate analysis directory.",
   "selection_rule": "Read the complete sentence; require the requested relation to be explicit for the labelled subject. Prefer company ownership and explicitly named headquarters. Do not infer dates from year-only, month-only, publication, or unrelated event dates.",
   "selections": {
-    "P39": [22, 23, 24, 25, 26, 30, 31, 32, 34, 35, 38, 39, 40, 42, 47, 48, 51, 53, 55, 56],
-    "P127": [26, 30, 35, 37, 59, 60, 72, 74, 85, 102, 103, 105, 114, 117, 129, 131, 135, 144, 147, 164],
-    "P159": [26, 41, 43, 64, 149, 154, 174, 219, 222, 252, 260, 284, 287, 296, 303, 317, 324, 326, 357, 448]
+    "P39": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      30,
+      31,
+      32,
+      34,
+      35,
+      38,
+      39,
+      40,
+      42,
+      47,
+      48,
+      51,
+      53,
+      55,
+      56
+    ],
+    "P127": [
+      26,
+      30,
+      35,
+      37,
+      59,
+      60,
+      72,
+      74,
+      85,
+      102,
+      103,
+      105,
+      114,
+      117,
+      129,
+      131,
+      135,
+      144,
+      147,
+      164
+    ],
+    "P159": [
+      26,
+      41,
+      43,
+      64,
+      149,
+      154,
+      174,
+      219,
+      222,
+      252,
+      260,
+      284,
+      287,
+      296,
+      303,
+      317,
+      324,
+      326,
+      357,
+      448
+    ]
+  },
+  "second_test_rule": "The second test set continues the same reading from the first row after the ones already used (P39 from 57, P127 from 165, P159 from 449) and keeps the next ten passages per relation that meet the selection rule. The alternatives below were written before any model ran on these passages.",
+  "second_test_selections": {
+    "P39": [
+      57,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      68,
+      69
+    ],
+    "P127": [
+      166,
+      172,
+      173,
+      175,
+      184,
+      186,
+      188,
+      192,
+      193,
+      198
+    ],
+    "P159": [
+      454,
+      457,
+      458,
+      494,
+      510,
+      522,
+      544,
+      558,
+      634,
+      652
+    ]
   },
   "value_alternatives": {
-    "P159:26": ["Cognac, France", "Cognac, Charente, France", "the town of Cognac, in the department of Charente, France"],
-    "P159:41": ["Beijing, China"],
-    "P159:43": ["Wellington, New Zealand"],
-    "P159:64": ["Sunnyvale"],
-    "P159:149": ["North Flying Terminal at Aalborg Airport", "the North Flying Terminal at Aalborg Airport"],
-    "P159:174": ["Lake Charles", "Chennault International Airport", "Chennault International Airport, Lake Charles, Louisiana"],
-    "P159:219": ["Cary"],
-    "P159:222": ["Chaoyang District, Beijing", "Chaoyang District, Beijing, China", "Beijing, China"],
-    "P159:252": ["Midtown West", "Midtown West in Tokyo Midtown", "Akasaka, Minato, Tokyo", "Minato, Tokyo", "Tokyo", "Midtown West in Tokyo Midtown, Akasaka, Minato, Tokyo"],
-    "P159:260": ["Seoul, Korea"],
-    "P159:284": ["Torrance"],
-    "P159:296": ["Langley"],
-    "P159:303": ["Chicago"],
-    "P159:317": ["Santa Monica"],
-    "P159:326": ["Moultrie"],
-    "P159:357": ["Austin"],
-    "P159:448": ["Glenview"]
+    "P159:26": [
+      "Cognac, France",
+      "Cognac, Charente, France",
+      "the town of Cognac, in the department of Charente, France"
+    ],
+    "P159:41": [
+      "Beijing, China"
+    ],
+    "P159:43": [
+      "Wellington, New Zealand"
+    ],
+    "P159:64": [
+      "Sunnyvale"
+    ],
+    "P159:149": [
+      "North Flying Terminal at Aalborg Airport",
+      "the North Flying Terminal at Aalborg Airport"
+    ],
+    "P159:174": [
+      "Lake Charles",
+      "Chennault International Airport",
+      "Chennault International Airport, Lake Charles, Louisiana"
+    ],
+    "P159:219": [
+      "Cary"
+    ],
+    "P159:222": [
+      "Chaoyang District, Beijing",
+      "Chaoyang District, Beijing, China",
+      "Beijing, China"
+    ],
+    "P159:252": [
+      "Midtown West",
+      "Midtown West in Tokyo Midtown",
+      "Akasaka, Minato, Tokyo",
+      "Minato, Tokyo",
+      "Tokyo",
+      "Midtown West in Tokyo Midtown, Akasaka, Minato, Tokyo"
+    ],
+    "P159:260": [
+      "Seoul, Korea"
+    ],
+    "P159:284": [
+      "Torrance"
+    ],
+    "P159:296": [
+      "Langley"
+    ],
+    "P159:303": [
+      "Chicago"
+    ],
+    "P159:317": [
+      "Santa Monica"
+    ],
+    "P159:326": [
+      "Moultrie"
+    ],
+    "P159:357": [
+      "Austin"
+    ],
+    "P159:448": [
+      "Glenview"
+    ],
+    "P159:454": [
+      "San Diego, California"
+    ],
+    "P159:494": [
+      "Oslo, Norway"
+    ],
+    "P159:522": [
+      "Cairo, Egypt",
+      "Tahrir Square",
+      "Tahrir Square, Cairo",
+      "Tahrir Square, Cairo, Egypt",
+      "Tahrir Square and near the downtown business district of Cairo, Egypt"
+    ],
+    "P159:558": [
+      "Boston"
+    ],
+    "P159:652": [
+      "Abbotsford",
+      "Abbotsford, British Columbia, Canada",
+      "Abbotsford International Airport",
+      "the Abbotsford International Airport",
+      "Abbotsford International Airport, Abbotsford, British Columbia",
+      "Abbotsford International Airport, Abbotsford, British Columbia, Canada",
+      "Abbotsford International Airport, in Abbotsford, British Columbia, Canada",
+      "the Abbotsford International Airport, in Abbotsford, British Columbia, Canada",
+      "a facility at the Abbotsford International Airport, in Abbotsford, British Columbia, Canada"
+    ]
   },
   "annotation_notes": {
     "P39": "Historical office holders; organization is null unless an employer organization is explicitly stated. Countries in office titles are not inferred employers. None of these passages states a full effective day.",
@@ -34,19 +209,180 @@
     "P159": "Require headquarters/head office wording for the target. Allow explicit city/facility granularity and optional region/country; do not count branches or unrelated locations. Historical and former headquarters are valid historical facts."
   },
   "reviewed_exclusions": [
-    {"relation": "P127", "row_index": 22, "reason": "A game at a stadium in Spokane does not state ownership."},
-    {"relation": "P127", "row_index": 24, "reason": "Being CEO does not establish ownership of Eicher Motors."},
-    {"relation": "P127", "row_index": 25, "reason": "Constructing a building is not an explicit ownership statement; outside company target scope."},
-    {"relation": "P127", "row_index": 61, "reason": "A signed deal to buy Volvo Cars does not establish completed acquisition."},
-    {"relation": "P127", "row_index": 70, "reason": "A preliminary acquisition agreement adds temporal ambiguity; omit from the positive subset."},
-    {"relation": "P127", "row_index": 138, "reason": "The acquisition in the sentence is of Altadis, not the labelled Reemtsma."},
-    {"relation": "P159", "row_index": 22, "reason": "Leverkusen modifies Covestro, not necessarily Bayer headquarters."},
-    {"relation": "P159", "row_index": 27, "reason": "A future relocation headline needs a different temporal task."},
-    {"relation": "P159", "row_index": 40, "reason": "London-based is weaker than an explicit headquarters statement."},
-    {"relation": "P159", "row_index": 113, "reason": "The headquarters refers to an unnamed subsidiary, not the labelled parent JAL."},
-    {"relation": "P159", "row_index": 128, "reason": "Ambiguous attachment of headquarters to department versus Insolvency Service."},
-    {"relation": "P159", "row_index": 268, "reason": "Would continue describes a projected merged company; avoid asserting completed state."},
-    {"relation": "P159", "row_index": 419, "reason": "Headquarters belongs to Chengdu Airlines, not labelled parent Sichuan Airlines."},
-    {"relation": "P159", "row_index": 438, "reason": "The annotated tail is the word headquarters rather than its location."}
+    {
+      "relation": "P127",
+      "row_index": 22,
+      "reason": "A game at a stadium in Spokane does not state ownership."
+    },
+    {
+      "relation": "P127",
+      "row_index": 24,
+      "reason": "Being CEO does not establish ownership of Eicher Motors."
+    },
+    {
+      "relation": "P127",
+      "row_index": 25,
+      "reason": "Constructing a building is not an explicit ownership statement; outside company target scope."
+    },
+    {
+      "relation": "P127",
+      "row_index": 61,
+      "reason": "A signed deal to buy Volvo Cars does not establish completed acquisition."
+    },
+    {
+      "relation": "P127",
+      "row_index": 70,
+      "reason": "A preliminary acquisition agreement adds temporal ambiguity; omit from the positive subset."
+    },
+    {
+      "relation": "P127",
+      "row_index": 138,
+      "reason": "The acquisition in the sentence is of Altadis, not the labelled Reemtsma."
+    },
+    {
+      "relation": "P159",
+      "row_index": 22,
+      "reason": "Leverkusen modifies Covestro, not necessarily Bayer headquarters."
+    },
+    {
+      "relation": "P159",
+      "row_index": 27,
+      "reason": "A future relocation headline needs a different temporal task."
+    },
+    {
+      "relation": "P159",
+      "row_index": 40,
+      "reason": "London-based is weaker than an explicit headquarters statement."
+    },
+    {
+      "relation": "P159",
+      "row_index": 113,
+      "reason": "The headquarters refers to an unnamed subsidiary, not the labelled parent JAL."
+    },
+    {
+      "relation": "P159",
+      "row_index": 128,
+      "reason": "Ambiguous attachment of headquarters to department versus Insolvency Service."
+    },
+    {
+      "relation": "P159",
+      "row_index": 268,
+      "reason": "Would continue describes a projected merged company; avoid asserting completed state."
+    },
+    {
+      "relation": "P159",
+      "row_index": 419,
+      "reason": "Headquarters belongs to Chengdu Airlines, not labelled parent Sichuan Airlines."
+    },
+    {
+      "relation": "P159",
+      "row_index": 438,
+      "reason": "The annotated tail is the word headquarters rather than its location."
+    },
+    {
+      "relation": "P39",
+      "row_index": 58,
+      "reason": "The election dates could be read as the start of the term, so the expected date would be arguable."
+    },
+    {
+      "relation": "P39",
+      "row_index": 59,
+      "reason": "The passage runs into unrelated headline text."
+    },
+    {
+      "relation": "P39",
+      "row_index": 67,
+      "reason": "The person appointed Guardian is someone else; the labelled subject resigned."
+    },
+    {
+      "relation": "P127",
+      "row_index": 165,
+      "reason": "A ship, and a purchase that did not happen."
+    },
+    {
+      "relation": "P127",
+      "row_index": 167,
+      "reason": "A joint venture with two named owners; the expected owner would be arbitrary."
+    },
+    {
+      "relation": "P127",
+      "row_index": 168,
+      "reason": "Running a company does not establish ownership."
+    },
+    {
+      "relation": "P127",
+      "row_index": 169,
+      "reason": "Buying shares in a partnership is not a stated ownership of the company."
+    },
+    {
+      "relation": "P127",
+      "row_index": 178,
+      "reason": "A founder's new venture; ownership is not stated."
+    },
+    {
+      "relation": "P127",
+      "row_index": 179,
+      "reason": "States the full acquisition date, and public cases keep effective dates unknown."
+    },
+    {
+      "relation": "P127",
+      "row_index": 181,
+      "reason": "Hosting a website is not ownership."
+    },
+    {
+      "relation": "P127",
+      "row_index": 189,
+      "reason": "Also owned attaches to the other brand in the sentence."
+    },
+    {
+      "relation": "P127",
+      "row_index": 191,
+      "reason": "Names a current and a former owner; the expected owner would be arbitrary."
+    },
+    {
+      "relation": "P127",
+      "row_index": 194,
+      "reason": "A 51% stake sold into a joint venture leaves two owners."
+    },
+    {
+      "relation": "P127",
+      "row_index": 197,
+      "reason": "Two named owners; the expected owner would be arbitrary."
+    },
+    {
+      "relation": "P159",
+      "row_index": 449,
+      "reason": "Based in is weaker than an explicit headquarters statement, as for row 40."
+    },
+    {
+      "relation": "P159",
+      "row_index": 464,
+      "reason": "The headquarters belongs to the parent GenCorp, not the labelled Aerojet."
+    },
+    {
+      "relation": "P159",
+      "row_index": 519,
+      "reason": "Unclear whether Allied or Tandy moved its headquarters."
+    },
+    {
+      "relation": "P159",
+      "row_index": 538,
+      "reason": "A headquarters complex in the Birmingham area is indirect."
+    },
+    {
+      "relation": "P159",
+      "row_index": 572,
+      "reason": "The headquarters belongs to Montagu Private Equity, not the labelled HSBC."
+    },
+    {
+      "relation": "P159",
+      "row_index": 586,
+      "reason": "The headquarters belongs to Lotte Card, not the labelled Lotte Capital."
+    },
+    {
+      "relation": "P159",
+      "row_index": 641,
+      "reason": "The headquarters stated is Levolor's; the labelled company only hosts it."
+    }
   ]
 }
