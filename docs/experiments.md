@@ -1,8 +1,17 @@
 # Experiments
 
 The main question is whether the staged workflow produces more reliable CRM updates than the
-direct workflow, and what it costs in useful updates and time. The later runs ask whether the
-fixes hold on new cases, and whether the answer depends on the model or on the direct prompt.
+direct workflow, and what it costs in useful updates and time. The final report answers it in
+six experiments.
+
+| Experiment | Question | Runs it uses |
+| --- | --- | --- |
+| 1 | Does staging make the updates more reliable? | `test` |
+| 2 | Which part of staging does the work? | `development`, `test`, `second-test`, and the verifier checks, rescored |
+| 3 | Do fixes made after the test hold on new cases? | `fixes-*`, `second-test`, `second-test-before-fixes` |
+| 4 | Does a better one-call prompt close the gap? | `second-test`, `variants/thinking-*`, `variants/guided-development`, `variants/guided-test`, `variants/guided-second-test` |
+| 5 | Does a larger model close the gap? | `second-test`, `models/*`, `variants/guided-second-test-qwen3-*` |
+| 6 | Which review/reject cases get through? | Both test sets together: `test`, `second-test`, `second-test-before-fixes`, `variants/guided-test`, `variants/guided-second-test` |
 
 ## Setup
 
@@ -40,7 +49,8 @@ is in each folder. All of them ran on the same M5 Max except the first developme
 | `second-test-before-fixes` | Second test | Staged with workflow 3, to see what the fixes change | `--split test2 --workflow 3 --strategy staged` |
 | `models/qwen3-1.7b`, `-8b`, `-14b` | Second test | Smaller and larger models | `--split test2 --model mlx-community/Qwen3-8B-4bit` |
 | `variants/thinking-*` | Development, second test | Direct with the model's reasoning turned on | `--strategy direct --thinking --max-tokens 4096` |
-| `variants/guided-*` | Development, second test | Guided direct, with checks and worked examples in the prompt | `--strategy guided` |
+| `variants/guided-development`, `-test`, `-second-test` | Development, test, second test | Guided direct, with checks and worked examples in the prompt | `--strategy guided` |
+| `variants/guided-second-test-qwen3-*` | Second test | Guided direct with Qwen3-1.7B, 8B, and 14B | `--split test2 --strategy guided --model mlx-community/Qwen3-8B-4bit` |
 | `verifier-check*` | All three | The verifier alone, on the answer key's candidates | `scripts/check_verifier.py --run results/test --out ...` |
 
 The test set was run once, on November 2, with the answer key as it stood before the run. The
@@ -80,15 +90,25 @@ of helping it.
 - **Guided direct** adds the checks that staged runs in Python to the prompt, asks the model to
   record each check before deciding, and gives three worked examples with made-up entities.
 
-I tuned the guided prompt on the development set only, and changed it once. Its first version
-had three examples that all stated a date and an organization, and the model started to invent
-dates and organizations for passages that state neither. The current version has one example
-with no date and no organization.
+I tuned the guided prompt on the development set only, with Qwen3-4B, and changed it once. Its
+first version had three examples that all stated a date and an organization, and the model
+started to invent dates and organizations for passages that state neither. The current version
+has one example with no date and no organization. I then ran it once on the test set and once
+on the second test set, and once on the second test set with each other model size.
+
+## Both test sets together
+
+Each test set has 66 cases, so Experiment 6 puts the two together. That gives 132 cases that
+I did not use to build or tune any of the three workflows. Staged is the workflow as tested
+(workflow 3) on both sets, which is why it uses `second-test-before-fixes`. I wrote the guided
+prompt after I had read the test results, and tuned it on the development set only. The
+[comparisons page](../results/analysis/comparisons.md) has the pooled measures, the paired
+tests against staged, and the review/reject cases split by kind.
 
 ## Model sizes
 
 The model-size runs use Qwen3-1.7B, 8B, and 14B in 4-bit form, with the same prompts and
-settings as Qwen3-4B. I also tried one model each from three other families on six development
+settings as Qwen3-4B. That includes the guided prompt, which was tuned for Qwen3-4B only. I also tried one model each from three other families on six development
 cases, which is 12 executions per model. Llama 3.2 3B returned 7 invalid responses, Phi-4-mini
 returned 11, and Gemma 3 4B returned 8. The prompts were written for Qwen3, so I left these
 models out instead of comparing workflows on mostly invalid output. That trial is not saved

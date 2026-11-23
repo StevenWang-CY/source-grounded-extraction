@@ -5,7 +5,7 @@ from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from report_figures import models_figure, results_figure, workflow_figure
+from report_figures import kinds_figure, models_figure, results_figure, workflow_figure
 from reportlab.lib.colors import black
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.pagesizes import letter
@@ -28,6 +28,28 @@ OUTPUT = ROOT / "reports/EAS_0099_Final_Report.pdf"
 REPOSITORY = "github.com/StevenWang-CY/source-grounded-extraction"
 TITLE = "Source-Grounded CRM Extraction: Final Report"
 METHODS = ("direct", "staged")
+# Tables and figures in the order they appear, so the text can refer to them by name.
+TABLES = (
+    "resources",
+    "experiments",
+    "test",
+    "fields",
+    "stages",
+    "failures",
+    "fixes",
+    "one_call",
+    "unseen",
+)
+FIGURES = ("workflows", "results", "models", "kinds")
+
+
+def tab(name):
+    return f"Table\u00a0{TABLES.index(name) + 1}"
+
+
+def fig(name):
+    return f"Figure\u00a0{FIGURES.index(name) + 1}"
+
 
 # Numbered in order of first citation. Each number links to the publisher's record.
 REFERENCES = [
@@ -160,7 +182,9 @@ def styles(normal, bold):
             spaceAfter=3,
             keepWithNext=1,
         ),
-        "body": style("Body", fontSize=10, leading=12.4, spaceAfter=5),
+        "body": style(
+            "Body", fontSize=10, leading=12.4, spaceAfter=5, allowWidows=0, allowOrphans=0
+        ),
         "caption": style("Caption", fontSize=9, leading=11, spaceBefore=4, spaceAfter=3),
         "figure_caption": style(
             "FigureCaption", fontSize=9, leading=11, spaceBefore=4, spaceAfter=8
@@ -182,7 +206,9 @@ def main():
     }
     comparisons = json.loads((ANALYSIS / "comparisons.json").read_text())
     dev, test, second = sets.values()
-    fixes, models, one_call = (comparisons[k] for k in ("fixes", "models", "one_call"))
+    fixes, models, one_call, unseen = (
+        comparisons[k] for k in ("fixes", "models", "one_call", "unseen")
+    )
     normal, bold = fonts()
     style = styles(normal, bold)
 
@@ -238,6 +264,9 @@ def main():
 
     def count(row):
         return f"{row['count']}/{row['total']}"
+
+    def with_range(row):
+        return f"{row['count']}/{row['total']} ({row['low']:.0%}–{row['high']:.0%})"
 
     def count_of(row):
         return f"{row['correct']} of {row['useful']}"
@@ -455,7 +484,10 @@ def main():
             for name, r in one.items()
         ),
     ]
-    model_rows = {name.removeprefix("Qwen3-"): m["main"] for name, m in models.items()}
+    model_rows = {
+        name.removeprefix("Qwen3-"): {**m["main"], "guided": m["guided"]}
+        for name, m in models.items()
+    }
     model_panels = [
         (
             "Review/reject cases accepted",
@@ -480,7 +512,7 @@ def main():
         ),
     ]
 
-    small, base, large = (models[f"Qwen3-{size}"] for size in ("1.7B", "4B", "14B"))
+    small, base, medium, large = (models[f"Qwen3-{size}"] for size in ("1.7B", "4B", "8B", "14B"))
     lenient = large["direct_lenient_match"]
     decisions_by_size = [m["main"]["direct"]["decisions"]["count"] for m in models.values()]
     invalid_by_size = [m["main"]["direct"]["invalid"] for m in models.values()]
@@ -490,6 +522,15 @@ def main():
         invalid_by_size == sorted(invalid_by_size) and decisions_by_size[0] > decisions_by_size[-1]
     )
     assert large["main"]["staged"]["unsafe_accepted"]["count"] == 0
+
+    def wrong_accepts(row):
+        return row["accepted_accuracy"]["total"] - row["accepted_accuracy"]["count"]
+
+    # Staged makes the fewest accept decisions without a correct write at every model size.
+    for m in models.values():
+        assert wrong_accepts(m["main"]["staged"]) < min(
+            wrong_accepts(m["main"]["direct"]), wrong_accepts(m["guided"])
+        )
     model_sentences = (
         "Staged got better as the model got larger. With Qwen3-14B it wrote "
         f"{large['main']['staged']['useful_coverage']['count']} of the 38 useful updates and accepted none of "
@@ -503,9 +544,33 @@ def main():
         "give direct the benefit of the doubt, I also rescored its responses treating every match that names "
         "a record ID as a match to that record. Direct with Qwen3-14B then returned no invalid responses, "
         f"wrote {lenient['useful_coverage']['count']} useful updates, and still accepted "
-        f"{lenient['unsafe_accepted']['count']} of the 28 review/reject cases. The smallest model shows the "
-        f"limit of staging. With Qwen3-1.7B, staged accepted {small['main']['staged']['unsafe_accepted']['count']} "
-        "review/reject cases, because the extraction and the evidence check still depend on the model."
+        f"{lenient['unsafe_accepted']['count']} review/reject cases."
+    )
+    guided_sizes = [m["guided"] for m in (small, base, medium, large)]
+    guided_unsafe = [g["unsafe_accepted"]["count"] for g in guided_sizes]
+    guided_useful = [g["useful_coverage"]["count"] for g in guided_sizes]
+    assert guided_unsafe == sorted(guided_unsafe, reverse=True) and guided_useful[2] < 10
+    assert abs(guided_useful[3] - base["main"]["staged"]["useful_coverage"]["count"]) <= 1
+    assert guided_unsafe[3] - base["main"]["staged"]["unsafe_accepted"]["count"] == 1
+    close = large["guided_against_staged"]
+    assert min(close[k]["p"] for k in close) > 0.1
+    guided_size_sentences = (
+        "Guided direct depended on the model much more than staged did. With the smallest model it accepted "
+        f"{guided_unsafe[0]} of the 28 review/reject cases. With Qwen3-8B it accepted only {guided_unsafe[2]}, "
+        f"but it wrote only {guided_useful[2]} useful updates, because it often treated a subject that was "
+        "already in the CRM as a new record or held back a valid update. With Qwen3-14B it came close to "
+        f"staged with the same model. It accepted {guided_unsafe[3]} review/reject cases and wrote "
+        f"{guided_useful[3]} useful updates, where staged accepted "
+        f"{large['main']['staged']['unsafe_accepted']['count']} and wrote "
+        f"{large['main']['staged']['useful_coverage']['count']}, and with 66 cases I cannot tell the two apart "
+        f"({p_value(close['decision']['p'])} for correct decisions and {p_value(close['useful']['p'])} for "
+        "useful updates). So a large model with a guided prompt can do most of what the Python steps do. "
+        "Staged with Qwen3-4B did about as well as guided direct with Qwen3-14B, at "
+        f"{base['cost']['staged']['seconds']:.2f} seconds per case against {large['guided']['seconds']:.2f}. I "
+        "tuned the guided prompt with Qwen3-4B only, so the other sizes ran a prompt that was not tuned for "
+        "them. The smallest model shows the limit of staging. With Qwen3-1.7B, staged accepted "
+        f"{small['main']['staged']['unsafe_accepted']['count']} review/reject cases, because the extraction "
+        "and the evidence check still depend on the model."
     )
     plain, thinking, guided, staged_one = (
         one[k] for k in ("Direct", "Direct with thinking", "Guided direct", "Staged")
@@ -513,21 +578,128 @@ def main():
     assert guided["decisions"]["count"] > max(
         plain["decisions"]["count"], thinking["decisions"]["count"]
     )
-    assert thinking["invalid"] > plain["invalid"] > guided["invalid"]
+    assert thinking["invalid"] > plain["invalid"] > guided["invalid"] == 1
+    guided_test = one_call["test"]["Guided direct"]
+    assert one_call["test"]["Staged"]["workflow_version"] == "3"
     one_call_sentences = (
-        "I also tried two stronger one-call workflows with Qwen3-4B (Table 7). Direct with thinking turns on "
-        "the model's reasoning mode and raises the token limit to 4,096 so the reasoning fits. Guided direct adds the checks that staged runs in Python to the prompt, "
-        "asks the model to record each check before it decides, and gives three worked examples. I tuned the "
-        "guided prompt on the development set only. Guided direct was the best one-call workflow. On the "
-        f"second test set it made {guided['decisions']['count']} correct decisions, wrote "
+        f"Experiments 1 to 3 use one direct prompt, so I tried two stronger one-call workflows with Qwen3-4B "
+        f"({tab('one_call')}). Direct with thinking turns on the model's reasoning mode and raises the token "
+        "limit to 4,096 so the reasoning fits. Guided direct adds the checks that staged runs in Python to "
+        "the prompt, asks the model to record each check before it decides, and gives three worked examples. "
+        "I tuned the guided prompt on the development set only. Guided direct was the best one-call "
+        f"workflow. On the second test set it made {guided['decisions']['count']} correct decisions, wrote "
         f"{guided['useful_coverage']['count']} useful updates, and returned only {guided['invalid']} invalid "
         f"response. But it still accepted {guided['unsafe_accepted']['count']} of the 28 review/reject cases, "
-        f"where staged accepted {staged_one['unsafe_accepted']['count']}. Thinking made direct reject a few "
+        f"where staged accepted {staged_one['unsafe_accepted']['count']}. The test set gave almost the same "
+        f"numbers for guided direct, with {guided_test['decisions']['count']} correct decisions and "
+        f"{guided_test['unsafe_accepted']['count']} review/reject cases accepted. Thinking made direct reject a few "
         f"cases, but it also returned {thinking['invalid']} invalid responses, and it used about "
         f"{thinking['output_tokens'] / plain['output_tokens']:.0f} times the output tokens of direct. So a "
         "better prompt narrows the gap in correct decisions, but it does not stop unsafe updates from being "
         "written the way the Python rules do."
     )
+
+    # Both test sets together.
+    pool, against, kinds = unseen["workflows"], unseen["against_staged"], unseen["kinds"]
+    pooled_direct, pooled_guided, pooled_staged = (
+        pool[name] for name in ("Direct", "Guided direct", "Staged")
+    )
+    held_back = unseen["review_reject"]
+    useful_gap = (
+        pooled_direct["useful_coverage"]["count"] - pooled_staged["useful_coverage"]["count"]
+    )
+
+    def accepts_every(workflow):
+        return [name for name, k in kinds.items() if k[workflow].get("accepted", 0) == k["cases"]]
+
+    assert all(k["Direct"].get("held", 0) == 0 for k in kinds.values())
+    assert accepts_every("Guided direct") == [
+        "Ambiguous identity",
+        "Duplicate records",
+        "Same-date conflict with the CRM",
+        "Future appointment",
+    ]
+    assert kinds["Tentative claim"]["Guided direct"] == {"held": kinds["Tentative claim"]["cases"]}
+    guided_held = {name: k["Guided direct"].get("held", 0) for name, k in kinds.items()}
+    always_accepted = sum(kinds[name]["cases"] for name in accepts_every("Guided direct"))
+    assert all(
+        kinds[name]["Staged"] == {"held": kinds[name]["cases"]}
+        for name in accepts_every("Guided direct")
+    )
+    for a in sets.values():
+        wrong = sum(len(g["wrong"]) for g in a["staged_failures"].values())
+        assert a["wrong_writes_verifier_called_supported"] == wrong
+    conflict = kinds["Sources that disagree"]
+    assert conflict["cases"] == 4 and conflict["Staged"]["accepted"] == 3
+    assert [name for name, k in kinds.items() if k["Staged"].get("accepted")] == [
+        "Sources that disagree"
+    ]
+    assert pooled_staged["unsafe_accepted"]["count"] == conflict["Staged"]["accepted"]
+    assert against["Direct"]["unsafe"]["staged_only"] == 0
+    assert against["Direct"]["useful"]["p"] > 0.2 and against["Direct"]["decision"]["p"] < 0.001
+
+    def pooled_row(title, key):
+        return [title, *(with_range(pool[name][key]) for name in pool)]
+
+    pooled_table = [
+        ["Measure", *pool],
+        pooled_row("Correct writes / accept decisions", "accepted_accuracy"),
+        pooled_row("Useful updates written", "useful_coverage"),
+        pooled_row("Review/reject cases accepted", "unsafe_accepted"),
+        pooled_row("Correct decisions", "decisions"),
+        ["Invalid responses", *(pool[name]["invalid"] for name in pool)],
+    ]
+    experiments = [
+        ["", "Question", "Cases", "Result"],
+        [
+            "1",
+            "Does staging make the updates more reliable?",
+            "Test set, 66 cases",
+            f"Yes. Staged accepted {staged['unsafe_accepted']['count']} of 28 review/reject cases and direct "
+            f"accepted {direct['unsafe_accepted']['count']}. Staged wrote "
+            f"{direct['useful_coverage']['count'] - staged['useful_coverage']['count']} fewer useful updates.",
+        ],
+        [
+            "2",
+            "Which part of staging does the work?",
+            "Test and second test sets",
+            "Matching and deciding in Python. On direct's own candidates they cut accepted review/reject "
+            f"cases from {chain[0]['unsafe_accepted']} to {chain[1]['unsafe_accepted']}.",
+        ],
+        [
+            "3",
+            "Do fixes made after the test hold on new cases?",
+            "Second test set, 66 new cases",
+            f"They helped. Staged's useful updates rose from {fix_second['before']['correct']} to "
+            f"{fix_second['after']['correct']} of 38 and none was lost, though that is too few cases to "
+            "rule out chance.",
+        ],
+        [
+            "4",
+            "Does a better one-call prompt close the gap?",
+            "Second test set",
+            f"Partly. Guided direct made {guided['decisions']['count']} of 66 correct decisions (direct "
+            f"{plain['decisions']['count']}, staged {staged_one['decisions']['count']}) but still accepted "
+            f"{guided['unsafe_accepted']['count']} of 28 review/reject cases.",
+        ],
+        [
+            "5",
+            "Does a larger model close the gap?",
+            "Second test set, four model sizes",
+            "Only with the guided prompt too. Guided direct with Qwen3-14B accepted "
+            f"{guided_unsafe[3]} of 28 review/reject cases and wrote {guided_useful[3]} useful updates "
+            f"(staged with the same model: {large['main']['staged']['unsafe_accepted']['count']} and "
+            f"{large['main']['staged']['useful_coverage']['count']}).",
+        ],
+        [
+            "6",
+            "Which review/reject cases get through?",
+            f"Both test sets, {unseen['cases']} cases",
+            f"Direct accepted {pooled_direct['unsafe_accepted']['count']} of {held_back} and guided direct "
+            f"{pooled_guided['unsafe_accepted']['count']}. Staged accepted "
+            f"{pooled_staged['unsafe_accepted']['count']}, all with sources that disagree.",
+        ],
+    ]
 
     story = [
         p(TITLE, "title"),
@@ -553,25 +725,22 @@ def main():
             f"{direct['accepted_accuracy']['total']} ({percent(direct['accepted_accuracy'])}) for direct. Staged "
             f"wrote {staged['useful_coverage']['count']} of the 38 useful updates and direct wrote "
             f"{direct['useful_coverage']['count']}. So staged made far fewer incorrect writes and gave up "
-            f"{direct['useful_coverage']['count'] - staged['useful_coverage']['count']} useful updates."
-        ),
-        p(
-            "This report covers the design, the test results, the failures I found and the fixes I made, and "
-            "three follow-up experiments. I built a second test set to check the fixes on new cases, ran the "
-            "comparison on smaller and larger models, and tried two stronger versions of the direct workflow."
+            f"{direct['useful_coverage']['count'] - staged['useful_coverage']['count']} useful updates. A second "
+            "test set gave the same picture. A better prompt narrowed the gap for the one-call workflow, and "
+            "only a better prompt together with the largest model came close to staged."
         ),
         p("Workflows", "section"),
         p(
-            "Figure 1 shows the two workflows, which I call direct and staged. They use the same small local "
-            "model and get the same sources, CRM, extraction instructions, and update policy, and both send "
-            "accepted updates to the same writer. Direct asks the model to do everything and follow the policy "
-            "in one response. Staged applies the policy in Python, so the model only extracts a candidate and "
-            "then checks the evidence, date, and source agreement."
+            f"{fig('workflows')} shows the two workflows, which I call direct and staged. They use the same small "
+            "local model and get the same sources, CRM, extraction instructions, and update policy, and both "
+            "send accepted updates to the same writer. Direct asks the model to do everything and follow the "
+            "policy in one response. Staged applies the policy in Python, so the model only extracts a "
+            "candidate and then checks the evidence, date, and source agreement."
         ),
         figure(
             workflow_figure(normal, bold),
-            "<b>Figure 1.</b> The two workflows. Gray boxes are model calls and white boxes are Python code. "
-            "Both share one CRM writer.",
+            f"<b>{fig('workflows')}.</b> The two workflows. Both carry out the same four steps on the same case, "
+            "and the CRM writer saves an update only when the decision is accept.",
         ),
         p(
             "I based the staged design on earlier work. Wu et al. [3] split a task into chained steps with "
@@ -593,12 +762,12 @@ def main():
             "workflow had never seen."
         ),
         p(
-            "Ninety cases adapt passages from FewRel [11] (Table 1), a public dataset whose Wikipedia sentences "
-            "were aligned with Wikidata [12] facts by distant supervision [13] and then filtered by "
-            "crowdworkers. These passages cover position held, ownership, and headquarters, and their CRM "
-            "records, duplicates, and permission labels were built for this project. I chose FewRel because its "
-            "short passages fit a task with one fact per case. DocRED's multi-sentence documents [14] and "
-            "CrossRE's generic relation types [15] would need more adaptation. The other 108 cases are "
+            f"Ninety cases adapt passages from FewRel [11] ({tab('resources')}), a public dataset whose "
+            "Wikipedia sentences were aligned with Wikidata [12] facts by distant supervision [13] and then "
+            "filtered by crowdworkers. These passages cover position held, ownership, and headquarters, and "
+            "their CRM records, duplicates, and permission labels were built for this project. I chose FewRel "
+            "because its short passages fit a task with one fact per case. DocRED's multi-sentence documents "
+            "[14] and CrossRE's generic relation types [15] would need more adaptation. The other 108 cases are "
             "synthetic documents written for this project. They add things the public passages do not have, "
             "such as facts that have gone stale [16], sources that disagree [17], tentative claims, and denials. "
             "Each set has its own passages, names, and document forms. For the second test set I took the next "
@@ -606,7 +775,7 @@ def main():
             "model on it."
         ),
         captioned(
-            "<b>Table 1.</b> Open resources used in this project.",
+            f"<b>{tab('resources')}.</b> Open resources used in this project.",
             table(resources, [84, 150, 50, 184], text_columns=(0, 1, 2, 3)),
         ),
         p(
@@ -624,26 +793,28 @@ def main():
             "and write nothing. I give 95% Wilson intervals [20] for rates. For paired comparisons I use an "
             "exact McNemar test [21] and a normal-approximation interval for the difference."
         ),
-        p("Results on the held-out test set", "section"),
         p(
-            "Figure 2 shows the main measures on all three sets, and Table 2 gives the numbers for the test set. "
-            "The pattern from development held up on the test cases. When I compare the workflows case by case, "
-            f"staged alone made the correct decision on {paired['decision']['staged_only']} cases and direct alone "
-            f"on {paired['decision']['direct_only']} ({p_value(paired['decision']['p'])}). Direct alone accepted "
-            f"{paired['unsafe']['direct_only']} review/reject cases and staged alone accepted none "
-            f"({p_value(paired['unsafe']['p'])}). Direct alone wrote {paired['useful']['direct_only']} useful "
-            f"updates and staged alone wrote {paired['useful']['staged_only']} ({p_value(paired['useful']['p'])}), "
-            "so the difference in useful updates could be chance. With only 38 useful cases, the 95% interval for "
-            f"direct's advantage runs from {abs(low):.0f} fewer to {high:.0f} more updates."
-        ),
-        figure(
-            results_figure(panels, normal, bold),
-            "<b>Figure 2.</b> Direct and staged on the three sets of 66 cases, with 95% Wilson intervals. "
-            "Development and test use the workflow as tested, and the second test set uses the fixed workflow.",
+            f"<b>Experiments.</b> Each experiment asks one question ({tab('experiments')}). Experiment 1 is the "
+            "comparison planned in my proposal. Experiments 2 and 3 look inside the staged workflow. "
+            "Experiments 4 and 5 give the one-call workflow a better prompt and a larger model. Experiment 6 "
+            "puts the two test sets together."
         ),
         captioned(
-            "<b>Table 2.</b> Main results on the 66 held-out test cases, with 95% Wilson intervals.",
-            table(results, [188, 140, 140]),
+            f"<b>{tab('experiments')}.</b> The six experiments, with the question each one asks and its result.",
+            table(experiments, [14, 122, 86, 246], text_columns=(1, 2, 3)),
+        ),
+        p("Experiment 1. Direct and staged on the held-out test set", "section"),
+        p(
+            f"{fig('results')} shows the main measures on all three sets, and {tab('test')} gives the numbers "
+            "for the test set. The pattern from development held up on the test cases. When I compare the "
+            f"workflows case by case, staged alone made the correct decision on {paired['decision']['staged_only']} "
+            f"cases and direct alone on {paired['decision']['direct_only']} ({p_value(paired['decision']['p'])}). "
+            f"Direct alone accepted {paired['unsafe']['direct_only']} review/reject cases and staged alone "
+            f"accepted none ({p_value(paired['unsafe']['p'])}). Direct alone wrote "
+            f"{paired['useful']['direct_only']} useful updates and staged alone wrote "
+            f"{paired['useful']['staged_only']} ({p_value(paired['useful']['p'])}), so the difference in useful "
+            "updates could be chance. With only 38 useful cases, the 95% interval for direct's advantage runs "
+            f"from {abs(low):.0f} fewer to {high:.0f} more updates."
         ),
         p(
             "Every valid direct response was an acceptance. The prompt gives direct the same decision policy "
@@ -653,6 +824,16 @@ def main():
             f"{direct['invalid']} responses were invalid because the match was impossible, such as a record ID "
             f"for a new person, and all {direct['invalid']} were on review/reject cases. Two of them did choose "
             "reject, on the two denial cases, but they wrote reject as the match status as well."
+        ),
+        figure(
+            results_figure(panels, normal, bold),
+            f"<b>{fig('results')}.</b> Direct and staged on the three sets of 66 cases, with 95% Wilson "
+            "intervals. Development and test use the workflow as tested, and the second test set uses the "
+            "fixed workflow.",
+        ),
+        captioned(
+            f"<b>{tab('test')}.</b> Main results on the 66 held-out test cases, with 95% Wilson intervals.",
+            table(results, [188, 140, 140]),
         ),
         p(
             "Staged lost its useful updates on the public passages. It wrote "
@@ -671,12 +852,12 @@ def main():
             f"with {of(test['stages']['direct']['allowed'])} for direct. The verifier's flags were right on "
             f"{of(test['stages']['staged']['verification'])} correctly extracted candidates. Staged stopped "
             f"{28 - staged['unsafe_accepted']['count']} of the 28 review/reject cases, and {stopped_as_intended} "
-            "of them stopped at the rule written for that kind of case. The others stopped for another reason, "
-            "such as a missing organization. Table 3 gives the extracted fields."
+            f"of them stopped at the rule written for that kind of case. {tab('fields')} gives the "
+            "extracted fields."
         ),
         captioned(
-            "<b>Table 3.</b> Extracted fields on the test cases. Precision is correct over returned, and recall "
-            "is correct over expected.",
+            f"<b>{tab('fields')}.</b> Extracted fields on the test cases. Precision is correct over returned, "
+            "and recall is correct over expected.",
             table(
                 field_table,
                 [148, 80, 80, 80, 80],
@@ -685,21 +866,12 @@ def main():
                 rules=[((1, 0), (2, 0)), ((3, 0), (4, 0))],
             ),
         ),
-        p("What each stage contributes", "section"),
+        p("Experiment 2. What each stage contributes", "section"),
         p(
             "An overall accuracy number can hide where a gain comes from [22], so I rescored parts of the "
-            "workflow separately (Table 4). “Python steps” means matching and the decision rules. The first four "
-            "rows use only the saved responses. The last row uses the answer key's candidate, so I can see how the later steps do without extraction errors."
-        ),
-        captioned(
-            "<b>Table 4.</b> Results as parts of the workflow change. Rows 1 to 4 go from direct to full staged. Row 5 uses the answer key.",
-            table(
-                contribution,
-                [136, 66, 42, 50, 66, 42, 50],
-                header_rows=2,
-                spans=[((1, 0), (3, 0)), ((4, 0), (6, 0))],
-                rules=[((1, 0), (3, 0)), ((4, 0), (6, 0))],
-            ),
+            f"workflow separately ({tab('stages')}). “Python steps” means matching and the decision rules. The "
+            "first four rows use only the saved responses. The last row uses the answer key's candidate, so I "
+            "can see how the later steps do without extraction errors."
         ),
         p(
             "On the test set, moving the match and the decision into Python, using direct's own candidates and no "
@@ -711,6 +883,17 @@ def main():
             "So the Python matching and rules do most of the work in all three sets, which makes sense because "
             "direct does not apply the policy it is given."
         ),
+        captioned(
+            f"<b>{tab('stages')}.</b> Results as parts of the workflow change. Rows 1 to 4 go from direct to "
+            "full staged. Row 5 uses the answer key.",
+            table(
+                contribution,
+                [136, 66, 42, 50, 66, 42, 50],
+                header_rows=2,
+                spans=[((1, 0), (3, 0)), ((4, 0), (6, 0))],
+                rules=[((1, 0), (3, 0)), ((4, 0), (6, 0))],
+            ),
+        ),
         p(
             "When the later steps get the answer key's candidate, they make "
             f"{test['verifier_check']['decisions']} of 66 correct decisions on the test set and "
@@ -719,14 +902,15 @@ def main():
             "remaining staged errors come from extraction. The verifier does not catch these errors. On the "
             f"test set it called the candidate supported in all {test_wrong} accept decisions that went wrong."
         ),
-        p("Failures on the test set and four fixes", "section"),
+        p("Experiment 3. Four fixes and a second test set", "section"),
         p(
             f"On the test set, staged made {test_wrong} accept decisions that did not produce a correct write "
-            f"and missed {test_missed} other useful updates. The saved traces sort into five groups (Table 5)."
+            f"and missed {test_missed} other useful updates. The saved traces sort into five groups "
+            f"({tab('failures')})."
         ),
         captioned(
-            f"<b>Table 5.</b> All {test_wrong + test_missed} staged failures on the test set, grouped by cause. "
-            "Wrong writes are accept decisions without a correct write.",
+            f"<b>{tab('failures')}.</b> All {test_wrong + test_missed} staged failures on the test set, grouped "
+            "by cause. Wrong writes are accept decisions without a correct write.",
             table(failures, [128, 36, 42, 196, 66], text_columns=(0, 3, 4)),
         ),
         p(
@@ -740,28 +924,21 @@ def main():
         p(
             "Twelve confirmed failures from development and test became regression tests. Each test replays the "
             "saved model responses through both versions. With the fixes, eight of them write the expected "
-            "fact, two longer names now go to review, and two are still open. In one open case the owner is "
-            "written with extra words, and in the other the quotation is shortened with an ellipsis."
-        ),
-        captioned(
-            "<b>Table 6.</b> The staged workflow before and after the four fixes, on the same machine. "
-            "Development before the fixes is the rerun on that machine, so it differs slightly from Figure 2.",
-            table(fix_table, [150, 78, 62, 70, 58, 50]),
+            "fact, two longer names now go to review, and two are still open."
         ),
         p(
-            "Table 6 shows staged before and after the fixes. The fixes were written from the development and "
-            "test cases, so those rows only show that the fixes do what they were meant to do. The second test "
-            f"set is the fair check. There the fixes raised correct writes from {fix_second['before']['correct']} "
+            f"{tab('fixes')} shows staged before and after the fixes. They were written from the development "
+            "and test cases, so those rows only show that the fixes do what they were meant to do. The second test set is the fair check. "
+            f"There the fixes raised correct writes from {fix_second['before']['correct']} "
             f"to {fix_second['after']['correct']} of 38 and cut accept decisions without a correct write from "
             f"{fix_second['before']['accepted'] - fix_second['before']['correct']} to "
             f"{fix_second['after']['accepted'] - fix_second['after']['correct']}. "
             f"{number_word(fix_second['correct_writes_gained'])} cases gained a correct write and none lost "
             f"one, which is still too few to rule out chance ({p_value(fix_second['p'])})."
         ),
-        p("Results on the second test set", "section"),
         p(
-            "The second test set gave the same picture as the test set (Figure 2). Staged with the fixes made "
-            f"{second_staged['accepted_accuracy']['count']} correct writes out of "
+            f"The second test set also repeated the comparison of Experiment 1 on new cases ({fig('results')}). "
+            f"Staged with the fixes made {second_staged['accepted_accuracy']['count']} correct writes out of "
             f"{second_staged['accepted_accuracy']['total']} accept decisions and accepted "
             f"{second_staged['unsafe_accepted']['count']} of the 28 review/reject cases. Direct made "
             f"{second_direct['accepted_accuracy']['count']} correct writes out of "
@@ -770,34 +947,92 @@ def main():
             f"{second_staged['decisions']['count']} correct decisions and direct made "
             f"{second_direct['decisions']['count']} ({p_value(second['paired']['decision']['p'])})."
         ),
+        captioned(
+            f"<b>{tab('fixes')}.</b> The staged workflow before and after the four fixes, on the same machine. "
+            f"Development before the fixes is the rerun on that machine, so it differs slightly from "
+            f"{fig('results')}.",
+            table(fix_table, [150, 78, 62, 70, 58, 50]),
+        ),
         p(
             f"Staged still failed on {second_wrong + second_missed} cases, with {second_wrong} accept decisions "
             f"that did not produce a correct write and {second_missed} missed updates. The largest group had "
-            "already appeared in development and was not one of the four fixes. In 5 cases the extractor gave "
-            "an organization that is not a company, such as a society or a university channel, the entity "
-            "type “organization”. The schema has no such type, so the response was "
-            "invalid and nothing was written. One group is new. In 3 cases the extractor picked the wrong "
+            "already appeared in development and was not one of the four fixes. In 5 cases the extractor "
+            "labelled a non-company organization, such as a society or a university channel, with the entity "
+            "type “organization”. The schema has no such type, so the response was invalid and nothing was "
+            "written. One group is new. In 3 cases the extractor picked the wrong "
             "person as the subject. The other groups were known. They are values with extra words (2 cases), "
             "no candidate returned (2), a source conflict the verifier missed (1), and an organization left "
             "out (1). I left these unfixed, so the second test set stays an unseen check. Accepting "
             "“organization” as a company would be my next fix."
         ),
-        p("Model size and stronger direct workflows", "section"),
-        p(
-            "The results above use one model and one direct prompt, so I checked both. First I ran the two "
-            "workflows on the second test set with Qwen3-1.7B, 8B, and 14B (Figure 3). "
-            + model_sentences
-        ),
-        figure(
-            models_figure(model_rows, model_panels, normal, bold),
-            "<b>Figure 3.</b> Direct and staged on the second test set for four sizes of Qwen3. An invalid "
-            "response writes nothing, so it lowers both accepted review/reject cases and useful updates.",
-        ),
+        p("Experiment 4. A stronger one-call prompt", "section"),
         p(one_call_sentences),
         captioned(
-            "<b>Table 7.</b> One-call workflows and staged on the second test set with Qwen3-4B. Tokens are "
-            "totals for the 66 cases.",
+            f"<b>{tab('one_call')}.</b> One-call workflows and staged on the second test set with Qwen3-4B. "
+            "Tokens are totals for the 66 cases.",
             table(one_call_table, [86, 76, 46, 62, 46, 50, 54, 48]),
+        ),
+        p("Experiment 5. Model size", "section"),
+        p(
+            "The results above use one model, so I ran direct, guided direct, and staged on the second test "
+            f"set with Qwen3-1.7B, 8B, and 14B as well ({fig('models')})."
+        ),
+        p(model_sentences),
+        figure(
+            models_figure(model_rows, model_panels, normal, bold),
+            f"<b>{fig('models')}.</b> The three workflows on the second test set for four sizes of Qwen3. An "
+            "invalid response writes nothing, so it lowers both accepted review/reject cases and useful updates.",
+        ),
+        p(guided_size_sentences),
+        p("Experiment 6. Both test sets together", "section"),
+        p(
+            "Each test set has only 66 cases, so I also put the two together. That gives "
+            f"{unseen['cases']} cases that I did not use to build or tune any of the three workflows, "
+            f"{unseen['useful']} with a useful update and {held_back} that should go to review or be rejected. "
+            "Staged here is the workflow as first tested, without the fixes. I wrote the guided prompt after I "
+            "had read the test results, and tuned it on the development set only. "
+            f"{fig('kinds')} shows what happened to each of the {held_back} review/reject cases."
+        ),
+        figure(
+            kinds_figure(kinds, list(pool), normal, bold),
+            f"<b>{fig('kinds')}.</b> Every review/reject case in the two test sets, one square per case, by "
+            "kind of case and workflow.",
+        ),
+        p(
+            "Direct never "
+            "held one back, that is, sent it to review or rejected it, with a valid response. It accepted "
+            f"{pooled_direct['unsafe_accepted']['count']} and returned an invalid response on the other "
+            f"{held_back - pooled_direct['unsafe_accepted']['count']}. Guided direct held back all "
+            f"{guided_held['Tentative claim']} tentative claims, {guided_held['Disallowed source']} of the "
+            f"{kinds['Disallowed source']['cases']} disallowed sources, and "
+            f"{guided_held['Irrelevant document']} of the {kinds['Irrelevant document']['cases']} irrelevant "
+            "documents. It still accepted every ambiguous identity, duplicate record, same-date conflict, and "
+            f"future appointment, and {conflict['Guided direct']['accepted']} of the {conflict['cases']} cases "
+            "with sources that disagree. Most of what it let through needs a comparison with the CRM records "
+            f"or the as-of date, though it did hold back {guided_held['Undated conflict with the CRM']} of the "
+            f"{kinds['Undated conflict with the CRM']['cases']} undated conflicts. Staged makes those "
+            f"comparisons in Python and held back all {always_accepted} cases of the four kinds that guided "
+            f"direct always accepted. The only cases it accepted were {conflict['Staged']['accepted']} of the "
+            f"{conflict['cases']} with sources that disagree, where the verifier reported no conflict."
+        ),
+        p(
+            f"{tab('unseen')} gives the main measures for all {unseen['cases']} cases. The larger sample gives "
+            "the same answer as Experiment 1 with narrower intervals. Staged alone made the correct decision "
+            f"on {against['Direct']['decision']['staged_only']} cases and direct alone on "
+            f"{against['Direct']['decision']['direct_only']} ({p_value(against['Direct']['decision']['p'])}). "
+            "Guided direct sat between them. Staged alone was right on "
+            f"{against['Guided direct']['decision']['staged_only']} cases and guided direct alone on "
+            f"{against['Guided direct']['decision']['direct_only']} "
+            f"({p_value(against['Guided direct']['decision']['p'])}). The cost in useful updates is still small "
+            f"and uncertain. Direct alone wrote {against['Direct']['useful']['direct_only']} useful updates and "
+            f"staged alone wrote {against['Direct']['useful']['staged_only']} "
+            f"({p_value(against['Direct']['useful']['p'])}), so even with twice as many cases I cannot tell "
+            "that difference from chance."
+        ),
+        captioned(
+            f"<b>{tab('unseen')}.</b> The two test sets together, {unseen['cases']} cases, with 95% Wilson "
+            "intervals. Staged is the workflow as first tested.",
+            table(pooled_table, [156, 104, 104, 104]),
         ),
         p("Consistency and cost", "section"),
         p(
@@ -812,30 +1047,37 @@ def main():
             f"On the second test set, staged used {more(one['Staged']['input_tokens'], one['Direct']['input_tokens'])} "
             f"more input tokens and {more(one['Staged']['output_tokens'], one['Direct']['output_tokens'])} more "
             f"output tokens than direct, and took {one['Staged']['seconds']:.2f} seconds per case instead of "
-            f"{one['Direct']['seconds']:.2f} (Table 7). Everything ran locally, so there was no API cost."
+            f"{one['Direct']['seconds']:.2f} ({tab('one_call')}). Everything ran locally, so there was no API "
+            "cost."
         ),
         p("Limits", "section"),
         p(
-            "Each set has only 66 cases, so the intervals are wide, and a difference of three useful updates "
-            "cannot be told apart from chance. The synthetic documents, CRM records, and answer keys were "
-            "written for this project and were not checked by an independent annotator. The synthetic cases "
-            "come from templates and are simpler than real documents. The answer keys were written to agree "
-            "with the decision rules, and a test keeps them in agreement, so the correct-decisions measure "
-            "favors a workflow that follows those rules exactly. The keys also accept only the listed value "
-            "forms, so a value such as “The Milton Hershey School Trust” counts as wrong. Counting values that "
-            "differ only in form would add two correct writes to each workflow on the test set and two to "
-            "direct on the second test set. All models are 4-bit Qwen3 models, and the prompts were written "
-            "for them. I tried one model from each of three other families on six cases, and more than half "
-            "of their responses were invalid, so I left them out."
+            "Each set has only 66 cases, so the intervals are wide, and even with both test sets together a "
+            f"difference of {number_word(useful_gap).lower()} useful updates cannot be told apart from chance. The synthetic documents, CRM "
+            "records, and answer keys were written for this project and were not checked by an independent "
+            "annotator. The synthetic cases come from templates and are simpler than real documents. Each "
+            "kind of synthetic review/reject case comes from one template, so the cases of a kind are alike, "
+            "and the paired tests treat them as independent. The answer keys were written to agree with "
+            "the decision rules, and a test keeps them in agreement, so the correct-decisions measure favors a "
+            "workflow that follows those rules exactly. The keys also accept only the listed value forms, so a "
+            "value such as “The Milton Hershey School Trust” counts as wrong. Counting values that differ only "
+            "in form would add two correct writes to direct and to staged on the test set, two to direct on "
+            "the second test set, and about three to guided direct over both. All models are 4-bit Qwen3 models, and the prompts were written for Qwen3-4B. I "
+            "tried one model from each of three other families on six cases, and more than half of their "
+            "responses were invalid, so I left them out."
         ),
         p("Conclusion", "section"),
         p(
             "Splitting the work into steps led to fewer incorrect writes in every comparison I ran. The model "
             "extracted most facts correctly but did not apply the written policy, so the biggest gain came from "
-            "moving the match and the decision into code. A second model call that checks the evidence stopped "
-            "a few more unsafe cases, but it missed three of the four source conflicts in the two test sets "
-            "and never questioned a wrong extraction. Most of the errors that remain start in extraction, and "
-            "that is where I would work next."
+            "moving the match and the decision into code. A better prompt helped the one-call workflow on some "
+            "kinds of cases, mostly disallowed sources, but not on ambiguous identities, duplicate records, "
+            "same-date conflicts, or future appointments. It came close to staged only with the largest "
+            f"model, which took about {large['guided']['seconds'] / base['cost']['staged']['seconds']:.0f} times "
+            "as long per case as staged with Qwen3-4B. The evidence check stopped a few more unsafe cases, but "
+            "it reported no conflict on the three source conflicts it saw in the two test sets, and it called "
+            "the candidate supported in every accept decision that went wrong. Most of the remaining errors "
+            "start in extraction, so I would work there next."
         ),
         p(
             "The code, data, saved runs, regression tests, and detailed tables are in my repository at "

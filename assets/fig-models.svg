@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 470" width="1120" height="470" role="img">
-<desc>Direct and staged by Qwen3 model size on the 66 second-test cases: Qwen3-1.7B, review/reject cases accepted 28 direct and 7 staged, useful updates written 23 direct and 20 staged, invalid responses 2 direct and 2 staged; Qwen3-4B, review/reject cases accepted 19 direct and 1 staged, useful updates written 23 direct and 25 staged, invalid responses 13 direct and 5 staged; Qwen3-8B, review/reject cases accepted 9 direct and 1 staged, useful updates written 19 direct and 25 staged, invalid responses 19 direct and 0 staged; Qwen3-14B, review/reject cases accepted 6 direct and 0 staged, useful updates written 18 direct and 31 staged, invalid responses 31 direct and 5 staged</desc>
-<style>@font-face{font-family:'STIX Two Text';src:url(data:font/woff;base64,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) format('woff')}
+<desc>Direct, guided direct, and staged by Qwen3 model size on the 66 second-test cases, in that order: Qwen3-1.7B, review/reject cases accepted 28, 26, 7, useful updates written 23, 14, 20, invalid responses 2, 3, 2; Qwen3-4B, review/reject cases accepted 19, 16, 1, useful updates written 23, 26, 25, invalid responses 13, 1, 5; Qwen3-8B, review/reject cases accepted 9, 3, 1, useful updates written 19, 6, 25, invalid responses 19, 10, 0; Qwen3-14B, review/reject cases accepted 6, 2, 0, useful updates written 18, 26, 31, invalid responses 31, 2, 5</desc>
+<style>@font-face{font-family:'STIX Two Text';src:url(data:font/woff;base64,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) format('woff')}
 svg{font-family:'STIX Two Text',serif;font-size:21px}
 text{fill:#1f2328}
 .soft{fill:#3d444d}
@@ -11,8 +11,12 @@ text{fill:#1f2328}
 .bar{stroke:#2b3138;stroke-width:1.1}
 .whisker{stroke:#1f2328;stroke-width:1.5}
 .direct{fill:#b7bdc8}
+.guided{fill:#e4e7ed}
 .partial{fill:#c5d9f4}
 .staged{fill:#3a7bd5}
+.accepted{fill:#1f2328}
+.invalid{fill:#9aa1ab}
+.held{fill:#ffffff}
 .answer-key{fill:url(#hatch)}
 .hatch-page{fill:#ffffff}
 .hatch-line{stroke:#656d76;stroke-width:1.6}
@@ -26,112 +30,142 @@ text{fill:#e6edf3}
 .bar{stroke:#d0d7de}
 .whisker{stroke:#e6edf3}
 .direct{fill:#68717d}
+.guided{fill:#343b44}
 .partial{fill:#24405f}
 .staged{fill:#5b9bf0}
+.accepted{fill:#e6edf3}
+.invalid{fill:#6e7681}
+.held{fill:#0d1117}
 .hatch-page{fill:#0d1117}
 .hatch-line{stroke:#9198a1}
 }
 </style>
 <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="hatch-page" width="7" height="7"/><line class="hatch-line" x1="0" y1="0" x2="0" y2="7"/></pattern></defs>
 <rect class="page" width="1120" height="470"/>
-<text x="560.0" y="34.0" font-size="23" text-anchor="middle">Direct and staged workflows by model size</text>
+<text x="560.0" y="34.0" font-size="23" text-anchor="middle">One-call and staged workflows by model size</text>
 <text x="560.0" y="62.0" font-size="18" text-anchor="middle" class="soft">Qwen3 models on the 66 cases of the second test set</text>
-<rect x="464.0" y="80.0" width="17" height="17" rx="2" class="bar direct"/>
-<text x="488.0" y="94.0" font-size="18" text-anchor="start" class="soft">Direct</text>
-<rect x="578.0" y="80.0" width="17" height="17" rx="2" class="bar staged"/>
-<text x="602.0" y="94.0" font-size="18" text-anchor="start" class="soft">Staged</text>
-<text x="204.0" y="132.0" font-size="21" text-anchor="middle">Review/reject cases accepted</text>
-<text x="204.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 28 cases • Lower is better</text>
-<line x1="48.0" y1="396.0" x2="360.0" y2="396.0" class="axis"/>
+<rect x="397.3" y="80.0" width="17" height="17" rx="2" class="bar direct"/>
+<text x="421.3" y="94.0" font-size="18" text-anchor="start" class="soft">Direct</text>
+<rect x="494.5" y="80.0" width="17" height="17" rx="2" class="bar guided"/>
+<text x="518.5" y="94.0" font-size="18" text-anchor="start" class="soft">Guided direct</text>
+<rect x="648.5" y="80.0" width="17" height="17" rx="2" class="bar staged"/>
+<text x="672.5" y="94.0" font-size="18" text-anchor="start" class="soft">Staged</text>
+<text x="212.0" y="132.0" font-size="21" text-anchor="middle">Review/reject cases accepted</text>
+<text x="212.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 28 cases • Lower is better</text>
+<line x1="48.0" y1="396.0" x2="376.0" y2="396.0" class="axis"/>
 <text x="39.0" y="402.0" font-size="18" text-anchor="end" class="mute">0</text>
-<line x1="48.0" y1="346.0" x2="360.0" y2="346.0" class="grid"/>
+<line x1="48.0" y1="346.0" x2="376.0" y2="346.0" class="grid"/>
 <text x="39.0" y="352.0" font-size="18" text-anchor="end" class="mute">7</text>
-<line x1="48.0" y1="296.0" x2="360.0" y2="296.0" class="grid"/>
+<line x1="48.0" y1="296.0" x2="376.0" y2="296.0" class="grid"/>
 <text x="39.0" y="302.0" font-size="18" text-anchor="end" class="mute">14</text>
-<line x1="48.0" y1="246.0" x2="360.0" y2="246.0" class="grid"/>
+<line x1="48.0" y1="246.0" x2="376.0" y2="246.0" class="grid"/>
 <text x="39.0" y="252.0" font-size="18" text-anchor="end" class="mute">21</text>
-<line x1="48.0" y1="196.0" x2="360.0" y2="196.0" class="grid"/>
+<line x1="48.0" y1="196.0" x2="376.0" y2="196.0" class="grid"/>
 <text x="39.0" y="202.0" font-size="18" text-anchor="end" class="mute">28</text>
 <line x1="48.0" y1="196.0" x2="48.0" y2="396.0" class="axis"/>
-<path class="bar direct" d="M53.5 396.0V199.0Q53.5 196.0 56.5 196.0H82.5Q85.5 196.0 85.5 199.0V396.0Z"/>
-<text x="69.5" y="188.0" font-size="18" text-anchor="middle">28</text>
-<path class="bar staged" d="M88.5 396.0V349.0Q88.5 346.0 91.5 346.0H117.5Q120.5 346.0 120.5 349.0V396.0Z"/>
-<text x="104.5" y="338.0" font-size="18" text-anchor="middle">7</text>
-<text x="87.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
-<path class="bar direct" d="M131.5 396.0V263.3Q131.5 260.3 134.5 260.3H160.5Q163.5 260.3 163.5 263.3V396.0Z"/>
-<text x="147.5" y="252.3" font-size="18" text-anchor="middle">19</text>
-<path class="bar staged" d="M166.5 396.0V391.9Q166.5 388.9 169.5 388.9H195.5Q198.5 388.9 198.5 391.9V396.0Z"/>
-<text x="182.5" y="380.9" font-size="18" text-anchor="middle">1</text>
-<text x="165.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
-<path class="bar direct" d="M209.5 396.0V334.7Q209.5 331.7 212.5 331.7H238.5Q241.5 331.7 241.5 334.7V396.0Z"/>
-<text x="225.5" y="323.7" font-size="18" text-anchor="middle">9</text>
-<path class="bar staged" d="M244.5 396.0V391.9Q244.5 388.9 247.5 388.9H273.5Q276.5 388.9 276.5 391.9V396.0Z"/>
-<text x="260.5" y="380.9" font-size="18" text-anchor="middle">1</text>
-<text x="243.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
-<path class="bar direct" d="M287.5 396.0V356.1Q287.5 353.1 290.5 353.1H316.5Q319.5 353.1 319.5 356.1V396.0Z"/>
-<text x="303.5" y="345.1" font-size="18" text-anchor="middle">6</text>
-<text x="338.5" y="388.0" font-size="18" text-anchor="middle">0</text>
-<text x="321.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
-<text x="204.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
-<text x="576.0" y="132.0" font-size="21" text-anchor="middle">Useful updates written</text>
-<text x="576.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 38 cases • Higher is better</text>
-<line x1="420.0" y1="396.0" x2="732.0" y2="396.0" class="axis"/>
+<path class="bar direct" d="M51.0 396.0V199.0Q51.0 196.0 54.0 196.0H72.0Q75.0 196.0 75.0 199.0V396.0Z"/>
+<text x="63.0" y="188.0" font-size="18" text-anchor="middle">28</text>
+<path class="bar guided" d="M77.0 396.0V213.3Q77.0 210.3 80.0 210.3H98.0Q101.0 210.3 101.0 213.3V396.0Z"/>
+<text x="89.0" y="202.3" font-size="18" text-anchor="middle">26</text>
+<path class="bar staged" d="M103.0 396.0V349.0Q103.0 346.0 106.0 346.0H124.0Q127.0 346.0 127.0 349.0V396.0Z"/>
+<text x="115.0" y="338.0" font-size="18" text-anchor="middle">7</text>
+<text x="89.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
+<path class="bar direct" d="M133.0 396.0V263.3Q133.0 260.3 136.0 260.3H154.0Q157.0 260.3 157.0 263.3V396.0Z"/>
+<text x="145.0" y="252.3" font-size="18" text-anchor="middle">19</text>
+<path class="bar guided" d="M159.0 396.0V284.7Q159.0 281.7 162.0 281.7H180.0Q183.0 281.7 183.0 284.7V396.0Z"/>
+<text x="171.0" y="273.7" font-size="18" text-anchor="middle">16</text>
+<path class="bar staged" d="M185.0 396.0V391.9Q185.0 388.9 188.0 388.9H206.0Q209.0 388.9 209.0 391.9V396.0Z"/>
+<text x="197.0" y="380.9" font-size="18" text-anchor="middle">1</text>
+<text x="171.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
+<path class="bar direct" d="M215.0 396.0V334.7Q215.0 331.7 218.0 331.7H236.0Q239.0 331.7 239.0 334.7V396.0Z"/>
+<text x="227.0" y="323.7" font-size="18" text-anchor="middle">9</text>
+<path class="bar guided" d="M241.0 396.0V377.6Q241.0 374.6 244.0 374.6H262.0Q265.0 374.6 265.0 377.6V396.0Z"/>
+<text x="253.0" y="366.6" font-size="18" text-anchor="middle">3</text>
+<path class="bar staged" d="M267.0 396.0V391.9Q267.0 388.9 270.0 388.9H288.0Q291.0 388.9 291.0 391.9V396.0Z"/>
+<text x="279.0" y="380.9" font-size="18" text-anchor="middle">1</text>
+<text x="253.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
+<path class="bar direct" d="M297.0 396.0V356.1Q297.0 353.1 300.0 353.1H318.0Q321.0 353.1 321.0 356.1V396.0Z"/>
+<text x="309.0" y="345.1" font-size="18" text-anchor="middle">6</text>
+<path class="bar guided" d="M323.0 396.0V384.7Q323.0 381.7 326.0 381.7H344.0Q347.0 381.7 347.0 384.7V396.0Z"/>
+<text x="335.0" y="373.7" font-size="18" text-anchor="middle">2</text>
+<text x="361.0" y="388.0" font-size="18" text-anchor="middle">0</text>
+<text x="335.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
+<text x="212.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
+<text x="584.0" y="132.0" font-size="21" text-anchor="middle">Useful updates written</text>
+<text x="584.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 38 cases • Higher is better</text>
+<line x1="420.0" y1="396.0" x2="748.0" y2="396.0" class="axis"/>
 <text x="411.0" y="402.0" font-size="18" text-anchor="end" class="mute">0</text>
-<line x1="420.0" y1="296.0" x2="732.0" y2="296.0" class="grid"/>
+<line x1="420.0" y1="296.0" x2="748.0" y2="296.0" class="grid"/>
 <text x="411.0" y="302.0" font-size="18" text-anchor="end" class="mute">19</text>
-<line x1="420.0" y1="196.0" x2="732.0" y2="196.0" class="grid"/>
+<line x1="420.0" y1="196.0" x2="748.0" y2="196.0" class="grid"/>
 <text x="411.0" y="202.0" font-size="18" text-anchor="end" class="mute">38</text>
 <line x1="420.0" y1="196.0" x2="420.0" y2="396.0" class="axis"/>
-<path class="bar direct" d="M425.5 396.0V277.9Q425.5 274.9 428.5 274.9H454.5Q457.5 274.9 457.5 277.9V396.0Z"/>
-<text x="441.5" y="266.9" font-size="18" text-anchor="middle">23</text>
-<path class="bar staged" d="M460.5 396.0V293.7Q460.5 290.7 463.5 290.7H489.5Q492.5 290.7 492.5 293.7V396.0Z"/>
-<text x="476.5" y="282.7" font-size="18" text-anchor="middle">20</text>
-<text x="459.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
-<path class="bar direct" d="M503.5 396.0V277.9Q503.5 274.9 506.5 274.9H532.5Q535.5 274.9 535.5 277.9V396.0Z"/>
-<text x="519.5" y="266.9" font-size="18" text-anchor="middle">23</text>
-<path class="bar staged" d="M538.5 396.0V267.4Q538.5 264.4 541.5 264.4H567.5Q570.5 264.4 570.5 267.4V396.0Z"/>
-<text x="554.5" y="256.4" font-size="18" text-anchor="middle">25</text>
-<text x="537.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
-<path class="bar direct" d="M581.5 396.0V299.0Q581.5 296.0 584.5 296.0H610.5Q613.5 296.0 613.5 299.0V396.0Z"/>
-<text x="597.5" y="288.0" font-size="18" text-anchor="middle">19</text>
-<path class="bar staged" d="M616.5 396.0V267.4Q616.5 264.4 619.5 264.4H645.5Q648.5 264.4 648.5 267.4V396.0Z"/>
-<text x="632.5" y="256.4" font-size="18" text-anchor="middle">25</text>
-<text x="615.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
-<path class="bar direct" d="M659.5 396.0V304.3Q659.5 301.3 662.5 301.3H688.5Q691.5 301.3 691.5 304.3V396.0Z"/>
-<text x="675.5" y="293.3" font-size="18" text-anchor="middle">18</text>
-<path class="bar staged" d="M694.5 396.0V235.8Q694.5 232.8 697.5 232.8H723.5Q726.5 232.8 726.5 235.8V396.0Z"/>
-<text x="710.5" y="224.8" font-size="18" text-anchor="middle">31</text>
-<text x="693.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
-<text x="576.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
-<text x="948.0" y="132.0" font-size="21" text-anchor="middle">Invalid responses</text>
-<text x="948.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 66 cases • Lower is better</text>
-<line x1="792.0" y1="396.0" x2="1104.0" y2="396.0" class="axis"/>
+<path class="bar direct" d="M423.0 396.0V277.9Q423.0 274.9 426.0 274.9H444.0Q447.0 274.9 447.0 277.9V396.0Z"/>
+<text x="435.0" y="266.9" font-size="18" text-anchor="middle">23</text>
+<path class="bar guided" d="M449.0 396.0V325.3Q449.0 322.3 452.0 322.3H470.0Q473.0 322.3 473.0 325.3V396.0Z"/>
+<text x="461.0" y="314.3" font-size="18" text-anchor="middle">14</text>
+<path class="bar staged" d="M475.0 396.0V293.7Q475.0 290.7 478.0 290.7H496.0Q499.0 290.7 499.0 293.7V396.0Z"/>
+<text x="487.0" y="282.7" font-size="18" text-anchor="middle">20</text>
+<text x="461.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
+<path class="bar direct" d="M505.0 396.0V277.9Q505.0 274.9 508.0 274.9H526.0Q529.0 274.9 529.0 277.9V396.0Z"/>
+<text x="517.0" y="266.9" font-size="18" text-anchor="middle">23</text>
+<path class="bar guided" d="M531.0 396.0V262.2Q531.0 259.2 534.0 259.2H552.0Q555.0 259.2 555.0 262.2V396.0Z"/>
+<text x="543.0" y="251.2" font-size="18" text-anchor="middle">26</text>
+<path class="bar staged" d="M557.0 396.0V267.4Q557.0 264.4 560.0 264.4H578.0Q581.0 264.4 581.0 267.4V396.0Z"/>
+<text x="569.0" y="256.4" font-size="18" text-anchor="middle">25</text>
+<text x="543.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
+<path class="bar direct" d="M587.0 396.0V299.0Q587.0 296.0 590.0 296.0H608.0Q611.0 296.0 611.0 299.0V396.0Z"/>
+<text x="599.0" y="288.0" font-size="18" text-anchor="middle">19</text>
+<path class="bar guided" d="M613.0 396.0V367.4Q613.0 364.4 616.0 364.4H634.0Q637.0 364.4 637.0 367.4V396.0Z"/>
+<text x="625.0" y="356.4" font-size="18" text-anchor="middle">6</text>
+<path class="bar staged" d="M639.0 396.0V267.4Q639.0 264.4 642.0 264.4H660.0Q663.0 264.4 663.0 267.4V396.0Z"/>
+<text x="651.0" y="256.4" font-size="18" text-anchor="middle">25</text>
+<text x="625.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
+<path class="bar direct" d="M669.0 396.0V304.3Q669.0 301.3 672.0 301.3H690.0Q693.0 301.3 693.0 304.3V396.0Z"/>
+<text x="681.0" y="293.3" font-size="18" text-anchor="middle">18</text>
+<path class="bar guided" d="M695.0 396.0V262.2Q695.0 259.2 698.0 259.2H716.0Q719.0 259.2 719.0 262.2V396.0Z"/>
+<text x="707.0" y="251.2" font-size="18" text-anchor="middle">26</text>
+<path class="bar staged" d="M721.0 396.0V235.8Q721.0 232.8 724.0 232.8H742.0Q745.0 232.8 745.0 235.8V396.0Z"/>
+<text x="733.0" y="224.8" font-size="18" text-anchor="middle">31</text>
+<text x="707.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
+<text x="584.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
+<text x="956.0" y="132.0" font-size="21" text-anchor="middle">Invalid responses</text>
+<text x="956.0" y="156.0" font-size="18" text-anchor="middle" class="soft">Of 66 cases • Lower is better</text>
+<line x1="792.0" y1="396.0" x2="1120.0" y2="396.0" class="axis"/>
 <text x="783.0" y="402.0" font-size="18" text-anchor="end" class="mute">0</text>
-<line x1="792.0" y1="329.3" x2="1104.0" y2="329.3" class="grid"/>
+<line x1="792.0" y1="329.3" x2="1120.0" y2="329.3" class="grid"/>
 <text x="783.0" y="335.3" font-size="18" text-anchor="end" class="mute">22</text>
-<line x1="792.0" y1="262.7" x2="1104.0" y2="262.7" class="grid"/>
+<line x1="792.0" y1="262.7" x2="1120.0" y2="262.7" class="grid"/>
 <text x="783.0" y="268.7" font-size="18" text-anchor="end" class="mute">44</text>
-<line x1="792.0" y1="196.0" x2="1104.0" y2="196.0" class="grid"/>
+<line x1="792.0" y1="196.0" x2="1120.0" y2="196.0" class="grid"/>
 <text x="783.0" y="202.0" font-size="18" text-anchor="end" class="mute">66</text>
 <line x1="792.0" y1="196.0" x2="792.0" y2="396.0" class="axis"/>
-<path class="bar direct" d="M797.5 396.0V392.9Q797.5 389.9 800.5 389.9H826.5Q829.5 389.9 829.5 392.9V396.0Z"/>
-<text x="813.5" y="381.9" font-size="18" text-anchor="middle">2</text>
-<path class="bar staged" d="M832.5 396.0V392.9Q832.5 389.9 835.5 389.9H861.5Q864.5 389.9 864.5 392.9V396.0Z"/>
-<text x="848.5" y="381.9" font-size="18" text-anchor="middle">2</text>
-<text x="831.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
-<path class="bar direct" d="M875.5 396.0V359.6Q875.5 356.6 878.5 356.6H904.5Q907.5 356.6 907.5 359.6V396.0Z"/>
-<text x="891.5" y="348.6" font-size="18" text-anchor="middle">13</text>
-<path class="bar staged" d="M910.5 396.0V383.8Q910.5 380.8 913.5 380.8H939.5Q942.5 380.8 942.5 383.8V396.0Z"/>
-<text x="926.5" y="372.8" font-size="18" text-anchor="middle">5</text>
-<text x="909.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
-<path class="bar direct" d="M953.5 396.0V341.4Q953.5 338.4 956.5 338.4H982.5Q985.5 338.4 985.5 341.4V396.0Z"/>
-<text x="969.5" y="330.4" font-size="18" text-anchor="middle">19</text>
-<text x="1004.5" y="388.0" font-size="18" text-anchor="middle">0</text>
-<text x="987.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
-<path class="bar direct" d="M1031.5 396.0V305.1Q1031.5 302.1 1034.5 302.1H1060.5Q1063.5 302.1 1063.5 305.1V396.0Z"/>
-<text x="1047.5" y="294.1" font-size="18" text-anchor="middle">31</text>
-<path class="bar staged" d="M1066.5 396.0V383.8Q1066.5 380.8 1069.5 380.8H1095.5Q1098.5 380.8 1098.5 383.8V396.0Z"/>
-<text x="1082.5" y="372.8" font-size="18" text-anchor="middle">5</text>
-<text x="1065.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
-<text x="948.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
+<path class="bar direct" d="M795.0 396.0V392.9Q795.0 389.9 798.0 389.9H816.0Q819.0 389.9 819.0 392.9V396.0Z"/>
+<text x="807.0" y="381.9" font-size="18" text-anchor="middle">2</text>
+<path class="bar guided" d="M821.0 396.0V389.9Q821.0 386.9 824.0 386.9H842.0Q845.0 386.9 845.0 389.9V396.0Z"/>
+<text x="833.0" y="378.9" font-size="18" text-anchor="middle">3</text>
+<path class="bar staged" d="M847.0 396.0V392.9Q847.0 389.9 850.0 389.9H868.0Q871.0 389.9 871.0 392.9V396.0Z"/>
+<text x="859.0" y="381.9" font-size="18" text-anchor="middle">2</text>
+<text x="833.0" y="423.0" font-size="20" text-anchor="middle">1.7B</text>
+<path class="bar direct" d="M877.0 396.0V359.6Q877.0 356.6 880.0 356.6H898.0Q901.0 356.6 901.0 359.6V396.0Z"/>
+<text x="889.0" y="348.6" font-size="18" text-anchor="middle">13</text>
+<path class="bar guided" d="M903.0 396.0V396.0Q903.0 393.0 906.0 393.0H924.0Q927.0 393.0 927.0 396.0V396.0Z"/>
+<text x="915.0" y="385.0" font-size="18" text-anchor="middle">1</text>
+<path class="bar staged" d="M929.0 396.0V383.8Q929.0 380.8 932.0 380.8H950.0Q953.0 380.8 953.0 383.8V396.0Z"/>
+<text x="941.0" y="372.8" font-size="18" text-anchor="middle">5</text>
+<text x="915.0" y="423.0" font-size="20" text-anchor="middle">4B</text>
+<path class="bar direct" d="M959.0 396.0V341.4Q959.0 338.4 962.0 338.4H980.0Q983.0 338.4 983.0 341.4V396.0Z"/>
+<text x="971.0" y="330.4" font-size="18" text-anchor="middle">19</text>
+<path class="bar guided" d="M985.0 396.0V368.7Q985.0 365.7 988.0 365.7H1006.0Q1009.0 365.7 1009.0 368.7V396.0Z"/>
+<text x="997.0" y="357.7" font-size="18" text-anchor="middle">10</text>
+<text x="1023.0" y="388.0" font-size="18" text-anchor="middle">0</text>
+<text x="997.0" y="423.0" font-size="20" text-anchor="middle">8B</text>
+<path class="bar direct" d="M1041.0 396.0V305.1Q1041.0 302.1 1044.0 302.1H1062.0Q1065.0 302.1 1065.0 305.1V396.0Z"/>
+<text x="1053.0" y="294.1" font-size="18" text-anchor="middle">31</text>
+<path class="bar guided" d="M1067.0 396.0V392.9Q1067.0 389.9 1070.0 389.9H1088.0Q1091.0 389.9 1091.0 392.9V396.0Z"/>
+<text x="1079.0" y="381.9" font-size="18" text-anchor="middle">2</text>
+<path class="bar staged" d="M1093.0 396.0V383.8Q1093.0 380.8 1096.0 380.8H1114.0Q1117.0 380.8 1117.0 383.8V396.0Z"/>
+<text x="1105.0" y="372.8" font-size="18" text-anchor="middle">5</text>
+<text x="1079.0" y="423.0" font-size="20" text-anchor="middle">14B</text>
+<text x="956.0" y="452.0" font-size="18" text-anchor="middle" class="mute">Qwen3 model size</text>
 </svg>

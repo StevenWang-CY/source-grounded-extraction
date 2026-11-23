@@ -9,7 +9,7 @@
 | `second-test/` | The second test set with workflow 4 |
 | `second-test-before-fixes/` | The staged workflow on the second test set with workflow 3 |
 | `models/` | Both workflows on the second test set with Qwen3-1.7B, 8B, and 14B |
-| `variants/` | The stronger one-call workflows, direct with thinking and guided direct, on development and the second test set |
+| `variants/` | The stronger one-call workflows. Direct with thinking ran on development and the second test set. Guided direct ran on all three sets, and on the second test set with each model size |
 | `verifier-check/`, `verifier-check-test/`, `verifier-check-second-test/` | The verifier alone on the answer key's candidates, for each set |
 | `analysis/` | Tables built from the runs above by `scripts/analyze.py` |
 

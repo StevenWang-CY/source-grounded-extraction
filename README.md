@@ -42,16 +42,30 @@ After the test I fixed four problems in the Python steps and built a second test
 cases to check the fixes. On those cases the fixes raised correct writes from 21 to 25 of 38.
 
 <picture>
-  <source media="(max-width: 767px)" srcset="assets/fig-models-narrow.svg">
-  <img src="assets/fig-models.svg" width="100%" alt="Bar charts of direct and staged for four Qwen3 model sizes on the second test set, direct first. Review/reject cases accepted, of 28: 1.7B 28 and 7, 4B 19 and 1, 8B 9 and 1, 14B 6 and 0. Useful updates written, of 38: 1.7B 23 and 20, 4B 23 and 25, 8B 19 and 25, 14B 18 and 31. Invalid responses, of 66: 1.7B 2 and 2, 4B 13 and 5, 8B 19 and 0, 14B 31 and 5.">
+  <source media="(max-width: 767px)" srcset="assets/fig-kinds-narrow.svg">
+  <img src="assets/fig-kinds.svg" width="100%" alt="One square for each of the 56 review/reject cases in the two test sets, by kind of case, for direct, guided direct, and staged. Direct accepted 40 and returned an invalid response on the other 16. Guided direct accepted 32, including every ambiguous identity, duplicate record, same-date conflict, and future appointment. Staged accepted 3, all with sources that disagree, and held back the other 53.">
 </picture>
 
-Staged gets better as the model gets larger. Direct accepts fewer review/reject cases with
-larger models, but mostly because more of its responses are invalid, usually a match that
-contradicts itself. An invalid response writes nothing, so direct also writes fewer useful
-updates. On the same cases with Qwen3-4B, a guided version of the one-call prompt, with explicit
-checks and worked examples, made 47 correct decisions where plain direct made 34. It still
-accepted 16 of the 28 review/reject cases, where staged accepted 1.
+The two test sets together have 132 cases that I did not use to build or tune the workflows,
+56 of them review/reject cases. Direct never sent one of those to review or rejected it with a
+valid response. Guided direct is a stronger one-call prompt with explicit checks and worked
+examples. It held back all 4 tentative claims, 7 of the 10 disallowed sources, and 3 of the 4
+irrelevant documents, but it still accepted every ambiguous identity, duplicate record,
+same-date conflict, and future appointment. Most of what it let through needs a comparison
+with the CRM records or the as-of date. Staged makes that comparison in Python, and the only
+cases it accepted were three with sources that disagree.
+
+<picture>
+  <source media="(max-width: 767px)" srcset="assets/fig-models-narrow.svg">
+  <img src="assets/fig-models.svg" width="100%" alt="Bar charts of direct, guided direct, and staged for four Qwen3 model sizes on the second test set, in that order. Review/reject cases accepted, of 28: 1.7B 28, 26, 7; 4B 19, 16, 1; 8B 9, 3, 1; 14B 6, 2, 0. Useful updates written, of 38: 1.7B 23, 14, 20; 4B 23, 26, 25; 8B 19, 6, 25; 14B 18, 26, 31. Invalid responses, of 66: 1.7B 2, 3, 2; 4B 13, 1, 5; 8B 19, 10, 0; 14B 31, 2, 5.">
+</picture>
+
+Staged gets better as the model gets larger. Direct returns more invalid responses with larger
+models, usually a match that contradicts itself, and an invalid response writes nothing. Guided
+direct depends a lot on the model. With Qwen3-8B it wrote only 6 useful updates, and with
+Qwen3-14B it came close to staged with the same model, with 2 review/reject cases accepted and
+26 useful updates where staged had 0 and 31. Staged with Qwen3-4B does about as well as guided
+direct with Qwen3-14B, in about a quarter of the time per case.
 
 The tables behind these figures are in [results/analysis](results/analysis/), with one page per
 set of cases and one for the [comparisons across runs](results/analysis/comparisons.md).

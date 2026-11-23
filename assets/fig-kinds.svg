@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 622" width="1120" height="622" role="img">
+<desc>Review/reject cases of the two test sets by kind, as accepted, invalid, and held back for Direct, Guided direct, Staged: Ambiguous identity (4 cases) 4/0/0, 4/0/0, 0/0/4; Duplicate records (10 cases) 10/0/0, 10/0/0, 0/0/10; Sources that disagree (4 cases) 3/1/0, 3/0/1, 3/0/1; Same-date conflict with the CRM (4 cases) 4/0/0, 4/0/0, 0/0/4; Undated conflict with the CRM (4 cases) 0/4/0, 1/0/3, 0/0/4; Future appointment (4 cases) 3/1/0, 4/0/0, 0/0/4; Tentative claim (4 cases) 0/4/0, 0/0/4, 0/0/4; Older than the CRM fact (4 cases) 4/0/0, 2/0/2, 0/0/4; Denied claim (4 cases) 0/4/0, 0/2/2, 0/0/4; Disallowed source (10 cases) 10/0/0, 3/0/7, 0/0/10; Irrelevant document (4 cases) 2/2/0, 1/0/3, 0/0/4</desc>
+<style>@font-face{font-family:'STIX Two Text';src:url(data:font/woff;base64,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) format('woff')}
+svg{font-family:'STIX Two Text',serif;font-size:21px}
+text{fill:#1f2328}
+.soft{fill:#3d444d}
+.mute{fill:#656d76}
+.page{fill:#ffffff}
+.grid{stroke:#e3e7ee;stroke-width:1}
+.axis{stroke:#2b3138;stroke-width:1.2}
+.bar{stroke:#2b3138;stroke-width:1.1}
+.whisker{stroke:#1f2328;stroke-width:1.5}
+.direct{fill:#b7bdc8}
+.guided{fill:#e4e7ed}
+.partial{fill:#c5d9f4}
+.staged{fill:#3a7bd5}
+.accepted{fill:#1f2328}
+.invalid{fill:#9aa1ab}
+.held{fill:#ffffff}
+.answer-key{fill:url(#hatch)}
+.hatch-page{fill:#ffffff}
+.hatch-line{stroke:#656d76;stroke-width:1.6}
+@media (prefers-color-scheme:dark){
+text{fill:#e6edf3}
+.soft{fill:#c9d1d9}
+.mute{fill:#9198a1}
+.page{fill:#0d1117}
+.grid{stroke:#2a3038}
+.axis{stroke:#d0d7de}
+.bar{stroke:#d0d7de}
+.whisker{stroke:#e6edf3}
+.direct{fill:#68717d}
+.guided{fill:#343b44}
+.partial{fill:#24405f}
+.staged{fill:#5b9bf0}
+.accepted{fill:#e6edf3}
+.invalid{fill:#6e7681}
+.held{fill:#0d1117}
+.hatch-page{fill:#0d1117}
+.hatch-line{stroke:#9198a1}
+}
+</style>
+<defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="hatch-page" width="7" height="7"/><line class="hatch-line" x1="0" y1="0" x2="0" y2="7"/></pattern></defs>
+<rect class="page" width="1120" height="622"/>
+<text x="560.0" y="34.0" font-size="23" text-anchor="middle">Which review/reject cases each workflow accepts</text>
+<text x="560.0" y="62.0" font-size="18" text-anchor="middle" class="soft">One square per case • The 56 review/reject cases of the two test sets</text>
+<rect x="239.7" y="80.0" width="17" height="17" rx="2" class="bar accepted"/>
+<text x="263.7" y="94.0" font-size="18" text-anchor="start" class="soft">Accepted</text>
+<rect x="360.5" y="80.0" width="17" height="17" rx="2" class="bar invalid"/>
+<text x="384.5" y="94.0" font-size="18" text-anchor="start" class="soft">Invalid response, nothing written</text>
+<rect x="664.0" y="80.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="688.0" y="94.0" font-size="18" text-anchor="start" class="soft">Sent to review or rejected</text>
+<text x="410.0" y="144.0" font-size="21" text-anchor="start">Direct</text>
+<text x="652.0" y="144.0" font-size="21" text-anchor="start">Guided direct</text>
+<text x="894.0" y="144.0" font-size="21" text-anchor="start">Staged</text>
+<line x1="20.0" y1="156.0" x2="1100.0" y2="156.0" class="axis"/>
+<text x="20.0" y="192.0" font-size="20" text-anchor="start">Should go to review</text>
+<text x="44.0" y="222.0" font-size="18" text-anchor="start" class="soft">Ambiguous identity</text>
+<rect x="410.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="652.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="208.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="894.0" y="208.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="208.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="208.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="208.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="252.0" font-size="18" text-anchor="start" class="soft">Duplicate records</text>
+<rect x="410.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="498.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="520.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="542.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="564.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="586.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="608.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="652.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="740.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="762.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="784.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="806.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="828.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="850.0" y="238.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="894.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="982.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1004.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1026.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1048.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1070.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1092.0" y="238.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="282.0" font-size="18" text-anchor="start" class="soft">Sources that disagree</text>
+<rect x="410.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="268.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="268.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="916.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="938.0" y="268.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="960.0" y="268.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="312.0" font-size="18" text-anchor="start" class="soft">Same-date conflict with the CRM</text>
+<rect x="410.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="652.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="298.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="894.0" y="298.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="298.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="298.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="298.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="342.0" font-size="18" text-anchor="start" class="soft">Undated conflict with the CRM</text>
+<rect x="410.0" y="328.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="432.0" y="328.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="454.0" y="328.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="476.0" y="328.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="328.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="696.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="718.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="328.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="372.0" font-size="18" text-anchor="start" class="soft">Future appointment</text>
+<rect x="410.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="358.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="358.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="894.0" y="358.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="358.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="358.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="358.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="402.0" font-size="18" text-anchor="start" class="soft">Tentative claim</text>
+<rect x="410.0" y="388.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="432.0" y="388.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="454.0" y="388.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="476.0" y="388.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="674.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="696.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="718.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="388.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="20.0" y="436.0" font-size="20" text-anchor="start">Should be rejected</text>
+<text x="44.0" y="466.0" font-size="18" text-anchor="start" class="soft">Older than the CRM fact</text>
+<rect x="410.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="652.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="452.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="718.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="452.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="496.0" font-size="18" text-anchor="start" class="soft">Denied claim</text>
+<rect x="410.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="432.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="454.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="476.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="674.0" y="482.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="696.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="718.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="482.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="526.0" font-size="18" text-anchor="start" class="soft">Disallowed source</text>
+<rect x="410.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="476.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="498.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="520.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="542.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="564.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="586.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="608.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="652.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="696.0" y="512.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="718.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="740.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="762.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="784.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="806.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="828.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="850.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="982.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1004.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1026.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1048.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1070.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="1092.0" y="512.0" width="17" height="17" rx="2" class="bar held"/>
+<text x="44.0" y="556.0" font-size="18" text-anchor="start" class="soft">Irrelevant document</text>
+<rect x="410.0" y="542.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="432.0" y="542.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="454.0" y="542.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="476.0" y="542.0" width="17" height="17" rx="2" class="bar invalid"/>
+<rect x="652.0" y="542.0" width="17" height="17" rx="2" class="bar accepted"/>
+<rect x="674.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="696.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="718.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="894.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="916.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="938.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<rect x="960.0" y="542.0" width="17" height="17" rx="2" class="bar held"/>
+<line x1="20.0" y1="574.0" x2="1100.0" y2="574.0" class="axis"/>
+<text x="20.0" y="602.0" font-size="20" text-anchor="start">Accepted, of all 56 cases</text>
+<text x="410.0" y="602.0" font-size="20" text-anchor="start">40 of 56</text>
+<text x="652.0" y="602.0" font-size="20" text-anchor="start">32 of 56</text>
+<text x="894.0" y="602.0" font-size="20" text-anchor="start">3 of 56</text>
+</svg>

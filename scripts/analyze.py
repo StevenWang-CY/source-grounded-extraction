@@ -2,7 +2,8 @@
 
 Nothing here calls the model. It writes one JSON file and one page of tables per split in
 results/analysis (development, test, second-test), and comparisons.json with the runs that
-cut across splits: the fixes, the model sizes, and the one-call variants.
+cut across splits: the fixes, the model sizes, the one-call variants, and both test sets
+taken together.
 """
 
 import json
@@ -175,15 +176,56 @@ MODELS = {
     "Qwen3-8B": "models/qwen3-8b",
     "Qwen3-14B": "models/qwen3-14b",
 }
-# One-call workflows with Qwen3-4B, as (strategy, development run, second-test run).
+# One-call workflows with Qwen3-4B, as (strategy, the run for each split). The staged rows
+# beside them come from the run that holds direct, so staged is workflow 3 on the test set.
 ONE_CALL = {
-    "Direct": ("direct", "fixes-development", "second-test"),
+    "Direct": (
+        "direct",
+        {"development": "fixes-development", "test": "test", "second-test": "second-test"},
+    ),
     "Direct with thinking": (
         "direct",
-        "variants/thinking-development",
-        "variants/thinking-second-test",
+        {
+            "development": "variants/thinking-development",
+            "second-test": "variants/thinking-second-test",
+        },
     ),
-    "Guided direct": ("guided", "variants/guided-development", "variants/guided-second-test"),
+    "Guided direct": (
+        "guided",
+        {
+            "development": "variants/guided-development",
+            "test": "variants/guided-test",
+            "second-test": "variants/guided-second-test",
+        },
+    ),
+}
+# Guided direct on the second test set for each model size.
+GUIDED_MODELS = {
+    "Qwen3-1.7B": "variants/guided-second-test-qwen3-1.7b",
+    "Qwen3-4B": "variants/guided-second-test",
+    "Qwen3-8B": "variants/guided-second-test-qwen3-8b",
+    "Qwen3-14B": "variants/guided-second-test-qwen3-14b",
+}
+# Both test sets, 132 cases that were not used to build or tune any of the workflows. Staged
+# is the workflow as tested (workflow 3) on both. Each entry is (strategy, test run, second-test run).
+UNSEEN = {
+    "Direct": ("direct", "test", "second-test"),
+    "Guided direct": ("guided", "variants/guided-test", "variants/guided-second-test"),
+    "Staged": ("staged", "test", "second-test-before-fixes"),
+}
+# The kinds of review/reject cases, in the order the report lists them.
+KINDS = {
+    "ambiguous_identity": "Ambiguous identity",
+    "duplicate_records": "Duplicate records",
+    "conflicting_sources": "Sources that disagree",
+    "same_date_conflict": "Same-date conflict with the CRM",
+    "undated_conflict": "Undated conflict with the CRM",
+    "future_update": "Future appointment",
+    "tentative_claim": "Tentative claim",
+    "stale_update": "Older than the CRM fact",
+    "explicit_denial": "Denied claim",
+    "disallowed_source": "Disallowed source",
+    "irrelevant_document": "Irrelevant document",
 }
 
 
@@ -615,17 +657,22 @@ def fixes_comparison() -> dict:
 
 
 def model_comparison() -> dict:
-    """Direct and staged on the second test set for each model size."""
+    """Direct, guided direct, and staged on the second test set for each model size."""
     answers = read_jsonl(RESULTS / SPLITS["second-test"]["answers"])
     table = {}
     for name, directory in MODELS.items():
-        if not (RESULTS / directory / "predictions.jsonl").exists():
-            continue
         run = Run(RESULTS / directory, answers)
+        guided = Run(RESULTS / GUIDED_MODELS[name], answers)
+        model = run.saved[0]["model_settings"]["model"]
+        assert guided.saved[0]["model_settings"]["model"] == model
         rows = {m: run.rows(m) for m in METHODS}
         table[name] = {
-            "model": run.saved[0]["model_settings"]["model"],
+            "model": model,
             "main": {m: measures(rows[m]) for m in METHODS},
+            "guided": {**measures(guided.rows("guided")), **cost(guided.rows("guided"))},
+            "guided_choices": one_call_choices(guided, "guided"),
+            # "direct_only" counts guided direct here.
+            "guided_against_staged": paired_measures(guided.rows("guided"), rows["staged"]),
             "direct_lenient_match": measures(lenient_rows(run)),
             "cost": {m: cost(rows[m]) for m in METHODS},
             "paired": paired_measures(rows["direct"], rows["staged"]),
@@ -640,27 +687,78 @@ def model_comparison() -> dict:
 
 
 def one_call_comparison() -> dict:
-    """The one-call workflows with Qwen3-4B, next to staged, on development and the second test."""
+    """The one-call workflows with Qwen3-4B, next to staged, on each split."""
     table = {}
-    for index, split in ((1, "development"), (2, "second-test")):
+    for split in SPLITS:
         answers = read_jsonl(RESULTS / SPLITS[split]["answers"])
         rows = {}
-        for name, spec in ONE_CALL.items():
-            if not (RESULTS / spec[index] / "predictions.jsonl").exists():
+        for name, (strategy, runs) in ONE_CALL.items():
+            if split not in runs:
                 continue
-            run = Run(RESULTS / spec[index], answers)
-            scored = run.rows(spec[0])
+            run = Run(RESULTS / runs[split], answers)
+            scored = run.rows(strategy)
             rows[name] = {
                 **measures(scored),
                 **cost(scored),
-                "lenient_match": measures(lenient_rows(run, spec[0])),
-                "choices": one_call_choices(run, spec[0]),
+                "lenient_match": measures(lenient_rows(run, strategy)),
+                "choices": one_call_choices(run, strategy),
                 "max_tokens": run.saved[0]["model_settings"]["max_tokens"],
             }
-        staged = Run(RESULTS / ONE_CALL["Direct"][index], answers).rows("staged")
-        rows["Staged"] = {**measures(staged), **cost(staged)}
+        staged = Run(RESULTS / ONE_CALL["Direct"][1][split], answers)
+        rows["Staged"] = {
+            **measures(staged.rows("staged")),
+            **cost(staged.rows("staged")),
+            "workflow_version": staged.workflow,
+        }
         table[split] = rows
     return table
+
+
+def outcome(row: dict) -> str:
+    """What happened to a review/reject case: accepted, invalid response, or held back."""
+    return "accepted" if row["accepted"] else "held" if row["pipeline_ok"] else "invalid"
+
+
+def unseen_comparison() -> dict:
+    """Both test sets together, with the review/reject cases split by kind."""
+    rows, cases = {}, {}
+    for name, (strategy, *runs) in UNSEEN.items():
+        rows[name] = []
+        for split, directory in zip(("test", "second-test"), runs):
+            run = Run(RESULTS / directory, read_jsonl(RESULTS / SPLITS[split]["answers"]))
+            assert name != "Staged" or run.workflow == "3"
+            rows[name] += run.rows(strategy)
+            cases |= {c["id"]: c for c in run.cases}
+    assert all(
+        [r["case_id"] for r in rows[n]] == [r["case_id"] for r in rows["Direct"]] for n in rows
+    )
+    kinds = {}
+    for key, title in KINDS.items():
+        selected = {
+            name: [r for r in scored if condition(cases[r["case_id"]]) == key]
+            for name, scored in rows.items()
+        }
+        expected = {r["expected_decision"] for r in selected["Direct"]}
+        assert len(expected) == 1 and expected < {"review", "reject"}, (key, expected)
+        kinds[title] = {
+            "expected": expected.pop(),
+            "cases": len(selected["Direct"]),
+            **{name: dict(Counter(map(outcome, scored))) for name, scored in selected.items()},
+        }
+    held_back = sum(r["expected_decision"] != "accept" for r in rows["Direct"])
+    assert sum(k["cases"] for k in kinds.values()) == held_back
+    return {
+        "cases": len(rows["Direct"]),
+        "useful": len(rows["Direct"]) - held_back,
+        "review_reject": held_back,
+        "workflows": {name: measures(scored) for name, scored in rows.items()},
+        # In each comparison with staged, "direct_only" counts the one-call workflow named here.
+        "against_staged": {
+            name: paired_measures(rows[name], rows["Staged"])
+            for name in ("Direct", "Guided direct")
+        },
+        "kinds": kinds,
+    }
 
 
 def table(header: list[str], rows: list[list]) -> list[str]:
@@ -893,8 +991,11 @@ def comparisons_markdown(c: dict) -> str:
     lines += ["", "## Model size, on the second test set", ""]
     model_rows = []
     for name, m in c["models"].items():
-        for method in METHODS:
-            main = m["main"][method]
+        for method, main, seconds in (
+            ("direct", m["main"]["direct"], m["cost"]["direct"]["seconds"]),
+            ("guided direct", m["guided"], m["guided"]["seconds"]),
+            ("staged", m["main"]["staged"], m["cost"]["staged"]["seconds"]),
+        ):
             model_rows.append(
                 [
                     f"{name}, {method}",
@@ -903,7 +1004,7 @@ def comparisons_markdown(c: dict) -> str:
                     with_range(main["unsafe_accepted"]),
                     with_range(main["decisions"]),
                     main["invalid"],
-                    f"{m['cost'][method]['seconds']:.2f}",
+                    f"{seconds:.2f}",
                 ]
             )
     lines += table([*VARIANT_HEADER[:1], *VARIANT_HEADER[1:], "Mean seconds per case"], model_rows)
@@ -931,10 +1032,40 @@ def comparisons_markdown(c: dict) -> str:
         f"- {name}: " + ", ".join(f"{k} ({v})" for k, v in m["direct_choices"].items())
         for name, m in c["models"].items()
     ]
-    lines += ["", "The steps from direct to staged, for each model:", ""]
+    lines += ["", "What the guided direct responses chose:", ""]
+    lines += [
+        f"- {name}: " + ", ".join(f"{k} ({v})" for k, v in m["guided_choices"].items())
+        for name, m in c["models"].items()
+    ]
+    lines += [
+        "",
+        "Guided direct against staged with the same model, paired by case (exact McNemar test):",
+        "",
+        *table(
+            ["Model and outcome", "Guided direct only", "Staged only", "p"],
+            [
+                [f"{name}: {title}", row["direct_only"], row["staged_only"], f"{row['p']:.4f}"]
+                for name, m in c["models"].items()
+                for title, row in (
+                    ("correct decision", m["guided_against_staged"]["decision"]),
+                    ("accepted a review/reject case", m["guided_against_staged"]["unsafe"]),
+                    ("wrote a useful update", m["guided_against_staged"]["useful"]),
+                )
+            ],
+        ),
+        "The steps from direct to staged, for each model:",
+        "",
+    ]
     for name, m in c["models"].items():
         lines += [f"{name}", "", *table(VARIANT_HEADER, list(map(variant_cells, m["variants"])))]
-    lines += ["## One-call workflows with Qwen3-4B", ""]
+    lines += [
+        "## One-call workflows with Qwen3-4B",
+        "",
+        "Staged is the fixed workflow (workflow 4) on development and the second test set, and the "
+        "workflow as tested (workflow 3) on the test set. Direct with thinking was not run on the "
+        "test set.",
+        "",
+    ]
     for split, rows in c["one_call"].items():
         lines += [
             SPLITS[split]["title"],
@@ -968,6 +1099,60 @@ def comparisons_markdown(c: dict) -> str:
             for name, r in rows.items()
             if "choices" in r
         ] + [""]
+    u = c["unseen"]
+    lines += [
+        "## Both test sets together",
+        "",
+        f"The test set and the second test set, {u['cases']} cases that were not used to build or "
+        "tune any of the workflows. Staged is the workflow as tested (workflow 3) on both sets, "
+        "and guided direct was tuned on the development set only.",
+        "",
+        *table(
+            ["Workflow", *VARIANT_HEADER[1:]],
+            [
+                [
+                    name,
+                    with_range(w["accepted_accuracy"]),
+                    with_range(w["useful_coverage"]),
+                    with_range(w["unsafe_accepted"]),
+                    with_range(w["decisions"]),
+                    w["invalid"],
+                ]
+                for name, w in u["workflows"].items()
+            ],
+        ),
+        "Paired by case against staged, exact McNemar test:",
+        "",
+        *table(
+            ["Outcome", "One-call only", "Staged only", "p"],
+            [
+                [f"{name}: {title}", row["direct_only"], row["staged_only"], f"{row['p']:.4f}"]
+                for name, pairs in u["against_staged"].items()
+                for title, row in (
+                    ("correct decision", pairs["decision"]),
+                    ("accepted a review/reject case", pairs["unsafe"]),
+                    ("wrote a useful update", pairs["useful"]),
+                )
+            ],
+        ),
+        "Review/reject cases by kind. Each cell gives accepted / invalid response / held back:",
+        "",
+        *table(
+            ["Kind of case", "Should be", "Cases", *u["workflows"]],
+            [
+                [
+                    title,
+                    k["expected"],
+                    k["cases"],
+                    *(
+                        " / ".join(str(k[name].get(o, 0)) for o in ("accepted", "invalid", "held"))
+                        for name in u["workflows"]
+                    ),
+                ]
+                for title, k in u["kinds"].items()
+            ],
+        ),
+    ]
     return "\n".join(lines)
 
 
@@ -981,6 +1166,7 @@ def main():
         "fixes": fixes_comparison(),
         "models": model_comparison(),
         "one_call": one_call_comparison(),
+        "unseen": unseen_comparison(),
     }
     (OUTPUT / "comparisons.json").write_text(json.dumps(comparisons, indent=2) + "\n")
     (OUTPUT / "comparisons.md").write_text(comparisons_markdown(comparisons))

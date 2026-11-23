@@ -1,16 +1,31 @@
 """Black and white figures for the final report, drawn with ReportLab shapes.
 
-Open markers are the direct workflow and filled markers are the staged workflow in every
-figure, so the figures also read in a grayscale print.
+Open circles are the direct workflow, open squares are guided direct, and filled circles are
+the staged workflow in every chart, so the figures also read in a grayscale print.
 """
 
 from reportlab.graphics.shapes import Circle, Drawing, Line, Polygon, PolyLine, Rect, String
 from reportlab.lib.colors import HexColor, black, white
+from reportlab.pdfbase.pdfmetrics import stringWidth
 
 TEXT_WIDTH = 468
 MODEL_GRAY = HexColor("#D9D9D9")
 GRID = HexColor("#BFBFBF")
+DIVIDER = HexColor("#7F7F7F")
 SMALL = 8
+STEPS = ("Extract the fact", "Match the record", "Check the evidence", "Make the decision")
+# Each workflow's key, name, marker (filled, square), and line dash in the charts.
+SERIES = (
+    ("direct", "Direct", (False, False), [2.5, 2]),
+    ("guided", "Guided direct", (False, True), [0.8, 1.8]),
+    ("staged", "Staged", (True, False), None),
+)
+# What happened to a review/reject case, with its fill and its name in the key.
+OUTCOMES = (
+    ("accepted", black, "Accepted"),
+    ("invalid", MODEL_GRAY, "Invalid response, nothing written"),
+    ("held", white, "Sent to review or rejected"),
+)
 
 
 class Canvas:
@@ -31,75 +46,110 @@ class Canvas:
             Line(x0, y0, x1, y1, strokeColor=color, strokeWidth=width, strokeDashArray=dash)
         )
 
-    def marker(self, x, y, filled: bool, radius=2.6):
-        fill = black if filled else white
-        self.drawing.add(Circle(x, y, radius, fillColor=fill, strokeColor=black, strokeWidth=0.8))
+    def marker(self, x, y, filled: bool, square=False, radius=2.6):
+        look = {"fillColor": black if filled else white, "strokeColor": black, "strokeWidth": 0.8}
+        if square:
+            side = radius * 1.8
+            self.drawing.add(Rect(x - side / 2, y - side / 2, side, side, **look))
+        else:
+            self.drawing.add(Circle(x, y, radius, **look))
 
-    def legend(self, x, y, entries=(("Direct", False), ("Staged", True))):
-        for label, filled in entries:
-            self.marker(x, y + 2.6, filled)
-            self.text(x + 7, y, label, anchor="start")
-            x += 52
+    def legend(self, x, y, keys=("direct", "staged")):
+        for key, label, look, _ in SERIES:
+            if key in keys:
+                self.marker(x, y + 2.6, *look)
+                self.text(x + 7, y, label, anchor="start")
+                x += 7 + stringWidth(label, self.normal, SMALL) + 16
 
 
 def workflow_figure(normal, bold):
-    """The two workflows. Gray boxes are model calls and white boxes are Python code."""
-    canvas = Canvas(84, normal, bold)
-    drawing = canvas.drawing
-    box_height, lanes = 30, {"Direct": 50, "Staged": 4}
-    left, gap, writer_x = 94, 14, 410
-    right = writer_x - gap
+    """The two workflows as the same four steps, between the case and the shared CRM writer.
 
-    def label(x, y, lines, bold=False, size=SMALL, anchor="middle"):
+    Direct is one gray box that holds all four steps. Staged has one box per step, gray for a
+    model call and white for Python code.
+    """
+    box_height, gap, side, head = 26, 16, 44, 4.5
+    staged_y = 20
+    direct_y = staged_y + box_height + 24
+    canvas = Canvas(direct_y + box_height + 13, normal, bold)
+    drawing = canvas.drawing
+    left, right = side + 18, TEXT_WIDTH - side - 32
+    width = (right - left - gap * 3) / 4
+    centers = [left + index * (width + gap) + width / 2 for index in range(len(STEPS))]
+
+    def box(x, y, w, h, fill, dash=None):
+        drawing.add(
+            Rect(
+                x,
+                y,
+                w,
+                h,
+                rx=3,
+                ry=3,
+                fillColor=fill,
+                strokeColor=black,
+                strokeWidth=0.6,
+                strokeDashArray=dash,
+            )
+        )
+
+    def label(x, y, lines):
         top = y + (len(lines) - 1) * 4.6 - 2.7
         for index, line in enumerate(lines):
-            canvas.text(x, top - index * 9.2, line, size, anchor, bold)
-
-    def box(x, y, w, h, lines, model):
-        fill = MODEL_GRAY if model else white
-        drawing.add(
-            Rect(x, y, w, h, rx=2.5, ry=2.5, fillColor=fill, strokeColor=black, strokeWidth=0.6)
-        )
-        label(x + w / 2, y + h / 2, lines)
+            canvas.text(x, top - index * 9.2, line)
 
     def arrow(start, end, y):
-        canvas.line(start, y, end - 4, y, 0.8)
+        canvas.line(start, y, end - head + 0.5, y, 0.8)
         drawing.add(
             Polygon(
-                [end, y, end - 4.5, y + 2, end - 4.5, y - 2],
+                [end, y, end - head, y + 2, end - head, y - 2],
                 fillColor=black,
                 strokeColor=black,
                 strokeWidth=0,
             )
         )
 
-    for name, y in lanes.items():
-        label(0, y + box_height / 2, [name], True, 8.5, "start")
+    def title(y, name, note):
+        canvas.text(left, y, name, 8.5, "start", True)
+        canvas.text(left + stringWidth(name, bold, 8.5) + 6, y, note, anchor="start")
 
-    y = lanes["Direct"]
-    label(62, y + box_height / 2, ["Sources", "and CRM"])
-    one_call = ["One model call returns the fact, the matched record, and the decision"]
-    box(left, y, right - left, box_height, one_call, True)
-    arrow(80, left - 1, y + box_height / 2)
-    arrow(right + 1, writer_x - 1, y + box_height / 2)
+    # The case on the left and the writer on the right are shared by both workflows.
+    bottom, top = staged_y, direct_y + box_height
+    box(0, bottom, side, top - bottom, white, [2.5, 2])
+    label(side / 2, (bottom + top) / 2, ["Sources", "and CRM"])
+    box(TEXT_WIDTH - side, bottom, side, top - bottom, white)
+    label(TEXT_WIDTH - side / 2, (bottom + top) / 2, ["CRM", "writer"])
+    for y in (direct_y + box_height / 2, staged_y + box_height / 2):
+        arrow(side + 1, left - 1, y)
+        arrow(right + 1, TEXT_WIDTH - side - 1, y)
+        canvas.text((right + TEXT_WIDTH - side) / 2 - 1, y + 3.5, "accept", 7.5)
 
-    y = lanes["Staged"]
-    label(62, y + box_height / 2, ["Sources"])
-    steps = (
-        (["Model", "extraction"], True),
-        (["Python matching", "against the CRM"], False),
-        (["Model evidence", "check"], True),
-        (["Python decision", "rules"], False),
+    title(direct_y + box_height + 5, "Direct", "one model call does all four steps")
+    box(left, direct_y, right - left, box_height, MODEL_GRAY)
+    for x in centers[:-1]:
+        divider = x + (width + gap) / 2
+        canvas.line(divider, direct_y + 6, divider, direct_y + box_height - 6, 0.5, DIVIDER)
+    for x, step in zip(centers, STEPS):
+        label(x, direct_y + box_height / 2, [step])
+
+    title(
+        staged_y + box_height + 5,
+        "Staged",
+        "the model does two steps and Python code does the other two",
     )
-    width = (right - left - gap * 3) / 4
-    arrow(80, left - 1, y + box_height / 2)
-    for index, (lines, model) in enumerate(steps):
-        x = left + index * (width + gap)
-        box(x, y, width, box_height, lines, model)
-        arrow(x + width + 1, x + width + gap - 1, y + box_height / 2)
+    for index, (x, step) in enumerate(zip(centers, STEPS)):
+        box(x - width / 2, staged_y, width, box_height, white if index % 2 else MODEL_GRAY)
+        label(x, staged_y + box_height / 2, [step])
+        if x != centers[-1]:
+            arrow(x + width / 2 + 1, x + width / 2 + gap - 1, staged_y + box_height / 2)
 
-    bottom, top = lanes["Staged"], lanes["Direct"] + box_height
-    box(writer_x, bottom, TEXT_WIDTH - writer_x, top - bottom, ["CRM", "writer"], False)
+    x = left
+    for name, fill in (("Model call", MODEL_GRAY), ("Python code", white)):
+        drawing.add(
+            Rect(x, 1.5, 14, 8, rx=1.5, ry=1.5, fillColor=fill, strokeColor=black, strokeWidth=0.6)
+        )
+        canvas.text(x + 19, 3, name, anchor="start")
+        x += 19 + stringWidth(name, normal, SMALL) + 18
     return drawing
 
 
@@ -151,10 +201,10 @@ def results_figure(panels, normal, bold):
 
 
 def models_figure(models, panels, normal, bold):
-    """Direct and staged for each model size, one small panel per measure.
+    """The workflows for each model size, one small panel per measure.
 
-    `models` maps a model label to {"direct": row, "staged": row}. `panels` lists
-    (title, note, function from a row to its value, axis maximum, ticks).
+    `models` maps a model label to {"direct": row, "guided": row, "staged": row}. `panels`
+    lists (title, note, function from a row to its value, axis maximum, ticks).
     """
     height = 148
     canvas = Canvas(height, normal, bold)
@@ -173,7 +223,7 @@ def models_figure(models, panels, normal, bold):
         canvas.line(left, bottom, left + width, bottom, 0.6)
         canvas.line(left, bottom, left, top, 0.6)
         step = width / len(names)
-        for method, filled, dash in (("direct", False, [2.5, 2]), ("staged", True, None)):
+        for method, _, look, dash in SERIES:
             points = []
             for index, name in enumerate(names):
                 x = left + step * (index + 0.5)
@@ -183,9 +233,64 @@ def models_figure(models, panels, normal, bold):
                 PolyLine(points, strokeColor=black, strokeWidth=0.8, strokeDashArray=dash)
             )
             for x, y in zip(points[::2], points[1::2]):
-                canvas.marker(x, y, filled)
+                canvas.marker(x, y, *look)
         for index, name in enumerate(names):
             canvas.text(left + step * (index + 0.5), bottom - 10, name)
     canvas.text(left_pad + (TEXT_WIDTH - left_pad) / 2, 10, "Qwen3 model size")
-    canvas.legend(left_pad, 8)
+    canvas.legend(left_pad, 8, [key for key, *_ in SERIES])
     return canvas.drawing
+
+
+def kinds_figure(kinds, workflows, normal, bold):
+    """Every review/reject case as one square, by kind of case and workflow.
+
+    `kinds` maps a kind's name to {"expected": "review" or "reject", "cases": n, and for each
+    workflow {"accepted": a, "invalid": i, "held": h}}.
+    """
+    row, size, pitch, label_width = 10.2, 6.2, 7.8, 176
+    groups = (
+        ("review", "Cases that should go to review"),
+        ("reject", "Cases that should be rejected"),
+    )
+    lines = sum(1 + sum(k["expected"] == group for k in kinds.values()) for group, _ in groups)
+    total_y = 19
+    bottom = total_y + 12
+    top = bottom + lines * row + 3 * (len(groups) - 1)
+    canvas = Canvas(top + 14, normal, bold)
+    drawing = canvas.drawing
+    column = (TEXT_WIDTH - label_width) / len(workflows)
+    starts = [label_width + index * column for index in range(len(workflows))]
+
+    def square(x, y, fill):
+        drawing.add(Rect(x, y, size, size, fillColor=fill, strokeColor=black, strokeWidth=0.5))
+
+    for x, name in zip(starts, workflows):
+        canvas.text(x, top + 5, name, 8.5, "start", True)
+    canvas.line(0, top + 1, TEXT_WIDTH, top + 1, 0.5)
+    y = top
+    for group, title in groups:
+        y -= row if group == groups[0][0] else row + 3
+        canvas.text(0, y + 2, title, anchor="start", bold=True)
+        for name, kind in kinds.items():
+            if kind["expected"] != group:
+                continue
+            y -= row
+            canvas.text(8, y + 2, name, anchor="start")
+            for start, workflow in zip(starts, workflows):
+                x = start
+                for outcome, fill, _ in OUTCOMES:
+                    for _ in range(kind[workflow].get(outcome, 0)):
+                        square(x, y + 1.2, fill)
+                        x += pitch
+    canvas.line(0, bottom - 2, TEXT_WIDTH, bottom - 2, 0.5)
+    cases = sum(kind["cases"] for kind in kinds.values())
+    canvas.text(0, total_y, f"Accepted, of all {cases} cases", anchor="start")
+    for start, workflow in zip(starts, workflows):
+        accepted = sum(kind[workflow].get("accepted", 0) for kind in kinds.values())
+        canvas.text(start, total_y, f"{accepted} of {cases}", anchor="start")
+    x = label_width
+    for _, fill, name in OUTCOMES:
+        square(x, 2, fill)
+        canvas.text(x + size + 4, 2.6, name, anchor="start")
+        x += size + 4 + stringWidth(name, normal, SMALL) + 14
+    return drawing

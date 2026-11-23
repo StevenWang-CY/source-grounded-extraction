@@ -32,8 +32,12 @@ text{fill:#1f2328}
 .bar{stroke:#2b3138;stroke-width:1.1}
 .whisker{stroke:#1f2328;stroke-width:1.5}
 .direct{fill:#b7bdc8}
+.guided{fill:#e4e7ed}
 .partial{fill:#c5d9f4}
 .staged{fill:#3a7bd5}
+.accepted{fill:#1f2328}
+.invalid{fill:#9aa1ab}
+.held{fill:#ffffff}
 .answer-key{fill:url(#hatch)}
 .hatch-page{fill:#ffffff}
 .hatch-line{stroke:#656d76;stroke-width:1.6}
@@ -47,8 +51,12 @@ text{fill:#e6edf3}
 .bar{stroke:#d0d7de}
 .whisker{stroke:#e6edf3}
 .direct{fill:#68717d}
+.guided{fill:#343b44}
 .partial{fill:#24405f}
 .staged{fill:#5b9bf0}
+.accepted{fill:#e6edf3}
+.invalid{fill:#6e7681}
+.held{fill:#0d1117}
 .hatch-page{fill:#0d1117}
 .hatch-line{stroke:#9198a1}
 }
@@ -112,10 +120,19 @@ class Figure:
             f'{x + width - r:.1f} {y + height:.1f}H{x:.1f}Z"/>'
         )
 
-    def swatch(self, x, y, kind):
+    def swatch(self, x, y, kind, size=17):
         self.parts.append(
-            f'<rect x="{x:.1f}" y="{y:.1f}" width="17" height="17" rx="2" class="bar {kind}"/>'
+            f'<rect x="{x:.1f}" y="{y:.1f}" width="{size}" height="{size}" rx="2" class="bar {kind}"/>'
         )
+
+    def key(self, y, entries, center=None, left=None):
+        """A row of swatches with their names, centered on `center` or starting at `left`."""
+        widths = [24 + self.measure(name, NOTE) for _, name in entries]
+        x = left if center is None else center - (sum(widths) + 26 * (len(entries) - 1)) / 2
+        for (kind, name), width in zip(entries, widths):
+            self.swatch(x, y, kind)
+            self.text(x + 24, y + 14, name, NOTE, "start", "soft")
+            x += width + 26
 
     def font_face(self):
         options = subset.Options()
@@ -347,28 +364,33 @@ def model_value(row: dict, key: str) -> int:
     return value["count"] if isinstance(value, dict) else value
 
 
+WORKFLOWS = (("direct", "Direct"), ("guided", "Guided direct"), ("staged", "Staged"))
+
+
 def models_figure(models):
-    """Direct and staged for each model size, on the second test set."""
-    description = "Direct and staged by Qwen3 model size on the 66 second-test cases: " + "; ".join(
-        f"{name}, review/reject cases accepted {model_value(m['direct'], 'unsafe_accepted')} direct "
-        f"and {model_value(m['staged'], 'unsafe_accepted')} staged, useful updates written "
-        f"{model_value(m['direct'], 'useful_coverage')} direct and "
-        f"{model_value(m['staged'], 'useful_coverage')} staged, invalid responses "
-        f"{m['direct']['invalid']} direct and {m['staged']['invalid']} staged"
-        for name, m in models.items()
+    """Direct, guided direct, and staged for each model size, on the second test set."""
+    description = (
+        "Direct, guided direct, and staged by Qwen3 model size on the 66 second-test cases, in that "
+        "order: "
+        + "; ".join(
+            f"{name}, review/reject cases accepted "
+            + ", ".join(str(model_value(m[kind], "unsafe_accepted")) for kind, _ in WORKFLOWS)
+            + ", useful updates written "
+            + ", ".join(str(model_value(m[kind], "useful_coverage")) for kind, _ in WORKFLOWS)
+            + ", invalid responses "
+            + ", ".join(str(m[kind]["invalid"]) for kind, _ in WORKFLOWS)
+            for name, m in models.items()
+        )
     )
     figure = Figure(WIDE, 470, description)
-    figure.text(WIDE / 2, 34, "Direct and staged workflows by model size", TITLE)
+    figure.text(WIDE / 2, 34, "One-call and staged workflows by model size", TITLE)
     figure.text(
         WIDE / 2, 62, "Qwen3 models on the 66 cases of the second test set", NOTE, kind="soft"
     )
-    figure.swatch(WIDE / 2 - 96, 80, "direct")
-    figure.text(WIDE / 2 - 72, 94, "Direct", NOTE, "start", "soft")
-    figure.swatch(WIDE / 2 + 18, 80, "staged")
-    figure.text(WIDE / 2 + 42, 94, "Staged", NOTE, "start", "soft")
+    figure.key(80, WORKFLOWS, center=WIDE / 2)
 
     top, bottom = 196, 396
-    slot, width = 78, 32
+    slot, width = 82, 24
     for left, (title, subtitle, key, total) in zip((48, 420, 792), MODEL_PANELS):
         right = left + slot * len(models)
         middle = (left + right) / 2
@@ -381,7 +403,8 @@ def models_figure(models):
         figure.line(left, top, left, bottom, "axis")
         for index, (name, m) in enumerate(models.items()):
             center = left + slot * index + slot / 2
-            for kind, x in (("direct", center - width - 1.5), ("staged", center + 1.5)):
+            for offset, (kind, _) in zip((-1, 0, 1), WORKFLOWS):
+                x = center + offset * (width + 2) - width / 2
                 value = model_value(m[kind], key)
                 bar_top = bottom - (bottom - top) * value / total
                 figure.column(x, width, bar_top, bottom, kind)
@@ -392,30 +415,143 @@ def models_figure(models):
 
 
 def models_narrow(models):
-    description = "Direct and staged by Qwen3 model size, one group of rows per measure."
+    description = (
+        "Direct, guided direct, and staged by Qwen3 model size, one group of rows per measure."
+    )
     figure = Figure(NARROW, 0, description)
-    figure.text(NARROW / 2, 30, "Direct and staged workflows", TITLE)
+    figure.text(NARROW / 2, 30, "One-call and staged workflows", TITLE)
     figure.text(NARROW / 2, 57, "by Qwen3 model size", TITLE)
     figure.text(NARROW / 2, 84, "66 cases of the second test set", NOTE, kind="soft")
     y = 124
-    left, length, height = 70, 250, 15
+    left, length, height = 70, 230, 15
     for title, subtitle, key, total in MODEL_PANELS:
         figure.text(14, y, title, LABEL, "start")
         figure.text(14, y + 23, subtitle, NOTE, "start", "soft")
         y += 40
         for name, m in models.items():
-            figure.text(14, y + 24, name.removeprefix("Qwen3-"), NOTE, "start")
-            for kind in ("direct", "staged"):
+            figure.text(14, y + 33, name.removeprefix("Qwen3-"), NOTE, "start")
+            for kind, _ in WORKFLOWS:
                 value = model_value(m[kind], key)
                 figure.row(left, length * value / total, y, height, kind)
                 x = left + length * value / total + 7
                 figure.text(x, y + 13, f"{value} {kind}", NOTE, "start", "soft")
                 y += 19
-            figure.line(left, y - 40, left, y - 2, "axis")
+            figure.line(left, y - 59, left, y - 2, "axis")
             y += 10
         y += 22
     figure.height = y - 24
     figure.save("fig-models-narrow.svg")
+
+
+OUTCOMES = (
+    ("accepted", "Accepted"),
+    ("invalid", "Invalid response, nothing written"),
+    ("held", "Sent to review or rejected"),
+)
+GROUPS = (("review", "Should go to review"), ("reject", "Should be rejected"))
+
+
+def kinds_description(kinds, workflows):
+    return (
+        "Review/reject cases of the two test sets by kind, as accepted, invalid, and held back "
+        f"for {', '.join(workflows)}: "
+        + "; ".join(
+            f"{name} ({kind['cases']} cases) "
+            + ", ".join(
+                "/".join(str(kind[w].get(outcome, 0)) for outcome, _ in OUTCOMES) for w in workflows
+            )
+            for name, kind in kinds.items()
+        )
+    )
+
+
+def kinds_figure(kinds, workflows):
+    """Every review/reject case of the two test sets as one square, by kind and workflow."""
+    cases = sum(kind["cases"] for kind in kinds.values())
+    figure = Figure(WIDE, 0, kinds_description(kinds, workflows))
+    figure.text(WIDE / 2, 34, "Which review/reject cases each workflow accepts", TITLE)
+    figure.text(
+        WIDE / 2,
+        62,
+        f"One square per case • The {cases} review/reject cases of the two test sets",
+        NOTE,
+        kind="soft",
+    )
+    figure.key(80, OUTCOMES, center=WIDE / 2)
+    starts, size, pitch, row = (410, 652, 894), 17, 22, 30
+    y = 144
+    for x, name in zip(starts, workflows):
+        figure.text(x, y, name, LABEL, "start")
+    figure.line(20, y + 12, WIDE - 20, y + 12, "axis")
+    y += 14
+    for group, title in GROUPS:
+        y += row + 4
+        figure.text(20, y, title, NAME, "start")
+        for name, kind in kinds.items():
+            if kind["expected"] != group:
+                continue
+            y += row
+            figure.text(44, y, name, NOTE, "start", "soft")
+            for start, workflow in zip(starts, workflows):
+                x = start
+                for outcome, _ in OUTCOMES:
+                    for _ in range(kind[workflow].get(outcome, 0)):
+                        figure.swatch(x, y - 14, outcome, size)
+                        x += pitch
+    y += 18
+    figure.line(20, y, WIDE - 20, y, "axis")
+    y += 28
+    figure.text(20, y, f"Accepted, of all {cases} cases", NAME, "start")
+    for start, workflow in zip(starts, workflows):
+        accepted = sum(kind[workflow].get("accepted", 0) for kind in kinds.values())
+        figure.text(start, y, f"{accepted} of {cases}", NAME, "start")
+    figure.height = y + 20
+    figure.save("fig-kinds.svg")
+
+
+def kinds_narrow(kinds, workflows):
+    cases = sum(kind["cases"] for kind in kinds.values())
+    figure = Figure(NARROW, 0, kinds_description(kinds, workflows))
+    figure.text(NARROW / 2, 30, "Which review/reject cases", TITLE)
+    figure.text(NARROW / 2, 57, "each workflow accepts", TITLE)
+    figure.text(NARROW / 2, 84, f"One square per case • {cases} cases", NOTE, kind="soft")
+    y = 100
+    for entry in OUTCOMES:
+        figure.key(y, (entry,), left=14)
+        y += 24
+    starts, size, pitch = (14, 150, 286), 11, 13
+    y += 26
+    for x, name in zip(starts, workflows):
+        figure.text(x, y, name.removesuffix(" direct"), NAME, "start")
+    figure.line(14, y + 10, NARROW - 14, y + 10, "axis")
+    y += 12
+    for group, title in GROUPS:
+        y += 30
+        figure.text(14, y, title, NAME, "start")
+        y += 4
+        for name, kind in kinds.items():
+            if kind["expected"] != group:
+                continue
+            y += 26
+            figure.text(14, y, name, NOTE, "start", "soft")
+            y += 8
+            for start, workflow in zip(starts, workflows):
+                x = start
+                for outcome, _ in OUTCOMES:
+                    for _ in range(kind[workflow].get(outcome, 0)):
+                        figure.swatch(x, y, outcome, size)
+                        x += pitch
+            y += size
+    y += 16
+    figure.line(14, y, NARROW - 14, y, "axis")
+    y += 26
+    figure.text(14, y, f"Accepted, of all {cases} cases", NOTE, "start")
+    y += 24
+    for start, workflow in zip(starts, workflows):
+        accepted = sum(kind[workflow].get("accepted", 0) for kind in kinds.values())
+        figure.text(start, y, f"{accepted} of {cases}", NOTE, "start")
+    figure.height = y + 16
+    figure.save("fig-kinds-narrow.svg")
 
 
 def main():
@@ -462,9 +598,15 @@ def main():
     stages_narrow(rows)
 
     comparisons = json.loads((ANALYSIS / "comparisons.json").read_text())
-    models = {name: m["main"] for name, m in comparisons["models"].items()}
+    models = {
+        name: {**m["main"], "guided": m["guided"]} for name, m in comparisons["models"].items()
+    }
     models_figure(models)
     models_narrow(models)
+
+    unseen = comparisons["unseen"]
+    kinds_figure(unseen["kinds"], list(unseen["workflows"]))
+    kinds_narrow(unseen["kinds"], list(unseen["workflows"]))
 
 
 if __name__ == "__main__":

@@ -11,8 +11,12 @@ text{fill:#1f2328}
 .bar{stroke:#2b3138;stroke-width:1.1}
 .whisker{stroke:#1f2328;stroke-width:1.5}
 .direct{fill:#b7bdc8}
+.guided{fill:#e4e7ed}
 .partial{fill:#c5d9f4}
 .staged{fill:#3a7bd5}
+.accepted{fill:#1f2328}
+.invalid{fill:#9aa1ab}
+.held{fill:#ffffff}
 .answer-key{fill:url(#hatch)}
 .hatch-page{fill:#ffffff}
 .hatch-line{stroke:#656d76;stroke-width:1.6}
@@ -26,8 +30,12 @@ text{fill:#e6edf3}
 .bar{stroke:#d0d7de}
 .whisker{stroke:#e6edf3}
 .direct{fill:#68717d}
+.guided{fill:#343b44}
 .partial{fill:#24405f}
 .staged{fill:#5b9bf0}
+.accepted{fill:#e6edf3}
+.invalid{fill:#6e7681}
+.held{fill:#0d1117}
 .hatch-page{fill:#0d1117}
 .hatch-line{stroke:#9198a1}
 }

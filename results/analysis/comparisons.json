@@ -184,6 +184,71 @@
           "invalid": 2
         }
       },
+      "guided": {
+        "accepted_accuracy": {
+          "count": 14,
+          "total": 61,
+          "low": 0.14193230297937104,
+          "high": 0.34913405226083943
+        },
+        "useful_coverage": {
+          "count": 14,
+          "total": 38,
+          "low": 0.23384219158688957,
+          "high": 0.5271604056607364
+        },
+        "unsafe_accepted": {
+          "count": 26,
+          "total": 28,
+          "low": 0.7735463727026133,
+          "high": 0.9801879360635548
+        },
+        "decisions": {
+          "count": 37,
+          "total": 66,
+          "low": 0.44082635288151417,
+          "high": 0.6737187916235134
+        },
+        "invalid": 3,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 14380,
+        "seconds": 0.9119771869207564
+      },
+      "guided_choices": {
+        "invalid accept": 3,
+        "valid accept": 61,
+        "valid reject": 2
+      },
+      "guided_against_staged": {
+        "decision": {
+          "direct_only": 5,
+          "staged_only": 22,
+          "p": 0.0015137195587158203,
+          "difference_interval": [
+            -26.32193414526787,
+            -7.678065854732129
+          ]
+        },
+        "unsafe": {
+          "direct_only": 19,
+          "staged_only": 0,
+          "p": 3.814697265625e-06,
+          "difference_interval": [
+            14.156412675721139,
+            23.84358732427886
+          ]
+        },
+        "useful": {
+          "direct_only": 5,
+          "staged_only": 11,
+          "p": 0.210113525390625,
+          "difference_interval": [
+            -13.604213652036876,
+            1.6042136520368757
+          ]
+        }
+      },
       "direct_lenient_match": {
         "accepted_accuracy": {
           "count": 23,
@@ -375,6 +440,72 @@
             "high": 0.8928139363945568
           },
           "invalid": 5
+        }
+      },
+      "guided": {
+        "accepted_accuracy": {
+          "count": 26,
+          "total": 51,
+          "low": 0.3768092379650704,
+          "high": 0.6414251420167695
+        },
+        "useful_coverage": {
+          "count": 26,
+          "total": 38,
+          "low": 0.5254423998209402,
+          "high": 0.8091539640323836
+        },
+        "unsafe_accepted": {
+          "count": 16,
+          "total": 28,
+          "low": 0.39070785495839777,
+          "high": 0.7349145298359636
+        },
+        "decisions": {
+          "count": 47,
+          "total": 66,
+          "low": 0.5936275049338142,
+          "high": 0.8072805008337827
+        },
+        "invalid": 1,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 8992,
+        "seconds": 1.6248649760011837
+      },
+      "guided_choices": {
+        "invalid accept": 1,
+        "valid accept": 51,
+        "valid reject": 9,
+        "valid review": 5
+      },
+      "guided_against_staged": {
+        "decision": {
+          "direct_only": 9,
+          "staged_only": 16,
+          "p": 0.2295229434967041,
+          "difference_interval": [
+            -16.653210856116733,
+            2.6532108561167327
+          ]
+        },
+        "unsafe": {
+          "direct_only": 15,
+          "staged_only": 0,
+          "p": 6.103515625e-05,
+          "difference_interval": [
+            9.827668107224198,
+            20.1723318927758
+          ]
+        },
+        "useful": {
+          "direct_only": 6,
+          "staged_only": 5,
+          "p": 1.0,
+          "difference_interval": [
+            -5.492684858443693,
+            7.492684858443693
+          ]
         }
       },
       "direct_lenient_match": {
@@ -569,6 +700,73 @@
             "high": 0.9672079626445873
           },
           "invalid": 0
+        }
+      },
+      "guided": {
+        "accepted_accuracy": {
+          "count": 6,
+          "total": 26,
+          "low": 0.11033849341513308,
+          "high": 0.4205155423848758
+        },
+        "useful_coverage": {
+          "count": 6,
+          "total": 38,
+          "low": 0.07443863371721297,
+          "high": 0.3041681191266144
+        },
+        "unsafe_accepted": {
+          "count": 3,
+          "total": 28,
+          "low": 0.037118366539643996,
+          "high": 0.2719585170913687
+        },
+        "decisions": {
+          "count": 41,
+          "total": 66,
+          "low": 0.5005847581944561,
+          "high": 0.7285055308155993
+        },
+        "invalid": 10,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 11915,
+        "seconds": 2.8668691167435045
+      },
+      "guided_choices": {
+        "invalid accept": 3,
+        "invalid review": 7,
+        "valid accept": 26,
+        "valid reject": 14,
+        "valid review": 16
+      },
+      "guided_against_staged": {
+        "decision": {
+          "direct_only": 1,
+          "staged_only": 21,
+          "p": 1.0967254638671875e-05,
+          "difference_interval": [
+            -27.824993700378325,
+            -12.175006299621675
+          ]
+        },
+        "unsafe": {
+          "direct_only": 2,
+          "staged_only": 0,
+          "p": 0.5,
+          "difference_interval": [
+            -0.6709807042370892,
+            4.670980704237089
+          ]
+        },
+        "useful": {
+          "direct_only": 1,
+          "staged_only": 20,
+          "p": 2.09808349609375e-05,
+          "difference_interval": [
+            -25.646561301523064,
+            -12.353438698476934
+          ]
         }
       },
       "direct_lenient_match": {
@@ -766,6 +964,73 @@
             "high": 0.9672079626445873
           },
           "invalid": 5
+        }
+      },
+      "guided": {
+        "accepted_accuracy": {
+          "count": 26,
+          "total": 35,
+          "low": 0.5793069301990262,
+          "high": 0.8583697299890983
+        },
+        "useful_coverage": {
+          "count": 26,
+          "total": 38,
+          "low": 0.5254423998209402,
+          "high": 0.8091539640323836
+        },
+        "unsafe_accepted": {
+          "count": 2,
+          "total": 28,
+          "low": 0.019812063936445176,
+          "high": 0.22645362729738683
+        },
+        "decisions": {
+          "count": 56,
+          "total": 66,
+          "low": 0.7430709503417379,
+          "high": 0.9155636305621713
+        },
+        "invalid": 2,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 10575,
+        "seconds": 4.9794514343745755
+      },
+      "guided_choices": {
+        "invalid accept": 1,
+        "invalid reject": 1,
+        "valid accept": 35,
+        "valid reject": 11,
+        "valid review": 18
+      },
+      "guided_against_staged": {
+        "decision": {
+          "direct_only": 3,
+          "staged_only": 8,
+          "p": 0.2265625,
+          "difference_interval": [
+            -11.387562104054961,
+            1.3875621040549602
+          ]
+        },
+        "unsafe": {
+          "direct_only": 2,
+          "staged_only": 0,
+          "p": 0.5,
+          "difference_interval": [
+            -0.6709807042370892,
+            4.670980704237089
+          ]
+        },
+        "useful": {
+          "direct_only": 2,
+          "staged_only": 7,
+          "p": 0.1796875,
+          "difference_interval": [
+            -10.660905788993844,
+            0.6609057889938432
+          ]
         }
       },
       "direct_lenient_match": {
@@ -1134,7 +1399,172 @@
         "model_calls": 122,
         "input_tokens": 58905,
         "output_tokens": 10246,
-        "seconds": 1.219496826380209
+        "seconds": 1.219496826380209,
+        "workflow_version": "4"
+      }
+    },
+    "test": {
+      "Direct": {
+        "accepted_accuracy": {
+          "count": 27,
+          "total": 59,
+          "low": 0.3370130576441076,
+          "high": 0.5834216348501464
+        },
+        "useful_coverage": {
+          "count": 27,
+          "total": 38,
+          "low": 0.5524286219521687,
+          "high": 0.8299672224516298
+        },
+        "unsafe_accepted": {
+          "count": 21,
+          "total": 28,
+          "low": 0.5664432952864777,
+          "high": 0.873235051493787
+        },
+        "decisions": {
+          "count": 38,
+          "total": 66,
+          "low": 0.455606531313159,
+          "high": 0.6875748993181257
+        },
+        "invalid": 7,
+        "model_calls": 66,
+        "input_tokens": 56869,
+        "output_tokens": 8778,
+        "seconds": 1.2336523794228649,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 27,
+            "total": 62,
+            "low": 0.3194258881899315,
+            "high": 0.5590701212253062
+          },
+          "useful_coverage": {
+            "count": 27,
+            "total": 38,
+            "low": 0.5524286219521687,
+            "high": 0.8299672224516298
+          },
+          "unsafe_accepted": {
+            "count": 24,
+            "total": 28,
+            "low": 0.6851019767727087,
+            "high": 0.9430099471990978
+          },
+          "decisions": {
+            "count": 39,
+            "total": 66,
+            "low": 0.47049189606355396,
+            "high": 0.7013258206939876
+          },
+          "invalid": 3
+        },
+        "choices": {
+          "invalid accept": 5,
+          "invalid reject": 2,
+          "valid accept": 59
+        },
+        "max_tokens": 512
+      },
+      "Guided direct": {
+        "accepted_accuracy": {
+          "count": 24,
+          "total": 51,
+          "low": 0.34052990115584864,
+          "high": 0.6047669588986317
+        },
+        "useful_coverage": {
+          "count": 24,
+          "total": 38,
+          "low": 0.4728395943392636,
+          "high": 0.7661578084131104
+        },
+        "unsafe_accepted": {
+          "count": 16,
+          "total": 28,
+          "low": 0.39070785495839777,
+          "high": 0.7349145298359636
+        },
+        "decisions": {
+          "count": 45,
+          "total": 66,
+          "low": 0.5621255001460261,
+          "high": 0.7815099333690567
+        },
+        "invalid": 5,
+        "model_calls": 66,
+        "input_tokens": 115543,
+        "output_tokens": 9049,
+        "seconds": 1.2972069356015488,
+        "lenient_match": {
+          "accepted_accuracy": {
+            "count": 24,
+            "total": 51,
+            "low": 0.34052990115584864,
+            "high": 0.6047669588986317
+          },
+          "useful_coverage": {
+            "count": 24,
+            "total": 38,
+            "low": 0.4728395943392636,
+            "high": 0.7661578084131104
+          },
+          "unsafe_accepted": {
+            "count": 16,
+            "total": 28,
+            "low": 0.39070785495839777,
+            "high": 0.7349145298359636
+          },
+          "decisions": {
+            "count": 45,
+            "total": 66,
+            "low": 0.5621255001460261,
+            "high": 0.7815099333690567
+          },
+          "invalid": 5
+        },
+        "choices": {
+          "invalid accept": 3,
+          "invalid reject": 2,
+          "valid accept": 51,
+          "valid reject": 6,
+          "valid review": 4
+        },
+        "max_tokens": 512
+      },
+      "Staged": {
+        "accepted_accuracy": {
+          "count": 24,
+          "total": 33,
+          "low": 0.5578244085793955,
+          "high": 0.8493255918679357
+        },
+        "useful_coverage": {
+          "count": 24,
+          "total": 38,
+          "low": 0.4728395943392636,
+          "high": 0.7661578084131104
+        },
+        "unsafe_accepted": {
+          "count": 2,
+          "total": 28,
+          "low": 0.019812063936445176,
+          "high": 0.22645362729738683
+        },
+        "decisions": {
+          "count": 55,
+          "total": 66,
+          "low": 0.7256941278334147,
+          "high": 0.9043041669442377
+        },
+        "invalid": 3,
+        "model_calls": 126,
+        "input_tokens": 61615,
+        "output_tokens": 11326,
+        "seconds": 1.5550204236051561,
+        "workflow_version": "3"
       }
     },
     "second-test": {
@@ -1362,7 +1792,311 @@
         "model_calls": 121,
         "input_tokens": 59444,
         "output_tokens": 10585,
-        "seconds": 1.2316158138053266
+        "seconds": 1.2316158138053266,
+        "workflow_version": "4"
+      }
+    }
+  },
+  "unseen": {
+    "cases": 132,
+    "useful": 76,
+    "review_reject": 56,
+    "workflows": {
+      "Direct": {
+        "accepted_accuracy": {
+          "count": 50,
+          "total": 112,
+          "low": 0.35766048005899664,
+          "high": 0.5387496643237969
+        },
+        "useful_coverage": {
+          "count": 50,
+          "total": 76,
+          "low": 0.5459589772527303,
+          "high": 0.7546367324985396
+        },
+        "unsafe_accepted": {
+          "count": 40,
+          "total": 56,
+          "low": 0.5852474917786803,
+          "high": 0.8158122492214079
+        },
+        "decisions": {
+          "count": 72,
+          "total": 132,
+          "low": 0.4604256510869015,
+          "high": 0.627912622801088
+        },
+        "invalid": 20
+      },
+      "Guided direct": {
+        "accepted_accuracy": {
+          "count": 50,
+          "total": 102,
+          "low": 0.3953140265451648,
+          "high": 0.5857897864489187
+        },
+        "useful_coverage": {
+          "count": 50,
+          "total": 76,
+          "low": 0.5459589772527303,
+          "high": 0.7546367324985396
+        },
+        "unsafe_accepted": {
+          "count": 32,
+          "total": 56,
+          "low": 0.44137620631306307,
+          "high": 0.6923103740202996
+        },
+        "decisions": {
+          "count": 92,
+          "total": 132,
+          "low": 0.6139164904011346,
+          "high": 0.7688826964468204
+        },
+        "invalid": 6
+      },
+      "Staged": {
+        "accepted_accuracy": {
+          "count": 45,
+          "total": 62,
+          "low": 0.604074602566196,
+          "high": 0.8211893644804718
+        },
+        "useful_coverage": {
+          "count": 45,
+          "total": 76,
+          "low": 0.4797855242964182,
+          "high": 0.6955619730584892
+        },
+        "unsafe_accepted": {
+          "count": 3,
+          "total": 56,
+          "low": 0.018385781238969764,
+          "high": 0.1460730916775132
+        },
+        "decisions": {
+          "count": 108,
+          "total": 132,
+          "low": 0.7437030227106681,
+          "high": 0.874664894505259
+        },
+        "invalid": 9
+      }
+    },
+    "against_staged": {
+      "Direct": {
+        "decision": {
+          "direct_only": 14,
+          "staged_only": 50,
+          "p": 7.069487542545679e-06,
+          "difference_interval": [
+            -50.42696179586369,
+            -21.57303820413631
+          ]
+        },
+        "unsafe": {
+          "direct_only": 37,
+          "staged_only": 0,
+          "p": 1.4551915228366852e-11,
+          "difference_interval": [
+            30.055647729538094,
+            43.944352270461906
+          ]
+        },
+        "useful": {
+          "direct_only": 16,
+          "staged_only": 11,
+          "p": 0.44206833839416504,
+          "difference_interval": [
+            -5.1220428770625155,
+            15.122042877062515
+          ]
+        }
+      },
+      "Guided direct": {
+        "decision": {
+          "direct_only": 14,
+          "staged_only": 30,
+          "p": 0.022628841205914796,
+          "difference_interval": [
+            -28.711179673980205,
+            -3.2888203260197955
+          ]
+        },
+        "unsafe": {
+          "direct_only": 29,
+          "staged_only": 0,
+          "p": 3.725290298461914e-09,
+          "difference_interval": [
+            21.67116469975475,
+            36.328835300245245
+          ]
+        },
+        "useful": {
+          "direct_only": 13,
+          "staged_only": 8,
+          "p": 0.38331031799316406,
+          "difference_interval": [
+            -3.911060470971792,
+            13.911060470971792
+          ]
+        }
+      }
+    },
+    "kinds": {
+      "Ambiguous identity": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "accepted": 4
+        },
+        "Guided direct": {
+          "accepted": 4
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Duplicate records": {
+        "expected": "review",
+        "cases": 10,
+        "Direct": {
+          "accepted": 10
+        },
+        "Guided direct": {
+          "accepted": 10
+        },
+        "Staged": {
+          "held": 10
+        }
+      },
+      "Sources that disagree": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "accepted": 3,
+          "invalid": 1
+        },
+        "Guided direct": {
+          "accepted": 3,
+          "held": 1
+        },
+        "Staged": {
+          "accepted": 3,
+          "held": 1
+        }
+      },
+      "Same-date conflict with the CRM": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "accepted": 4
+        },
+        "Guided direct": {
+          "accepted": 4
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Undated conflict with the CRM": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "invalid": 4
+        },
+        "Guided direct": {
+          "held": 3,
+          "accepted": 1
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Future appointment": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "invalid": 1,
+          "accepted": 3
+        },
+        "Guided direct": {
+          "accepted": 4
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Tentative claim": {
+        "expected": "review",
+        "cases": 4,
+        "Direct": {
+          "invalid": 4
+        },
+        "Guided direct": {
+          "held": 4
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Older than the CRM fact": {
+        "expected": "reject",
+        "cases": 4,
+        "Direct": {
+          "accepted": 4
+        },
+        "Guided direct": {
+          "accepted": 2,
+          "held": 2
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Denied claim": {
+        "expected": "reject",
+        "cases": 4,
+        "Direct": {
+          "invalid": 4
+        },
+        "Guided direct": {
+          "invalid": 2,
+          "held": 2
+        },
+        "Staged": {
+          "held": 4
+        }
+      },
+      "Disallowed source": {
+        "expected": "reject",
+        "cases": 10,
+        "Direct": {
+          "accepted": 10
+        },
+        "Guided direct": {
+          "held": 7,
+          "accepted": 3
+        },
+        "Staged": {
+          "held": 10
+        }
+      },
+      "Irrelevant document": {
+        "expected": "reject",
+        "cases": 4,
+        "Direct": {
+          "accepted": 2,
+          "invalid": 2
+        },
+        "Guided direct": {
+          "held": 3,
+          "accepted": 1
+        },
+        "Staged": {
+          "held": 4
+        }
       }
     }
   }

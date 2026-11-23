@@ -1,0 +1,5475 @@
+{
+  "scoring_version": "5",
+  "dataset_version": "3",
+  "annotation_revisions": [
+    "2"
+  ],
+  "prompt_version": "4",
+  "workflow_version": "4",
+  "execution_counts": {
+    "primary": 66,
+    "repeated": 6,
+    "total": 72
+  },
+  "all_execution_overhead": {
+    "guided": {
+      "executions": 72,
+      "model_calls": 72,
+      "input_tokens": 126112,
+      "output_tokens": 12897,
+      "estimated_api_cost_usd": 0.0,
+      "latency_seconds": 206.67520628788043
+    }
+  },
+  "overall": {
+    "guided": {
+      "cases": 66,
+      "decision_accuracy": {
+        "numerator": 41,
+        "denominator": 66,
+        "rate": 0.6212121212121212
+      },
+      "accepted_update_accuracy": {
+        "numerator": 6,
+        "denominator": 26,
+        "rate": 0.23076923076923078
+      },
+      "useful_update_coverage": {
+        "numerator": 6,
+        "denominator": 38,
+        "rate": 0.15789473684210525
+      },
+      "accepted_candidate_accuracy": {
+        "numerator": 6,
+        "denominator": 26,
+        "rate": 0.23076923076923078
+      },
+      "exact_candidate_coverage": {
+        "numerator": 6,
+        "denominator": 38,
+        "rate": 0.15789473684210525
+      },
+      "unsafe_case_withholding": {
+        "numerator": 19,
+        "denominator": 28,
+        "rate": 0.6785714285714286
+      },
+      "entity_resolution_accuracy": {
+        "numerator": 23,
+        "denominator": 66,
+        "rate": 0.3484848484848485
+      },
+      "candidate_exact_match": {
+        "numerator": 44,
+        "denominator": 66,
+        "rate": 0.6666666666666666
+      },
+      "verification_accuracy_on_correct_candidates": {
+        "numerator": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "quote_match_rate": {
+        "numerator": 53,
+        "denominator": 53,
+        "rate": 1.0
+      },
+      "accepted_source_permission": {
+        "numerator": 24,
+        "denominator": 26,
+        "rate": 0.9230769230769231
+      },
+      "field_precision": {
+        "numerator": 312,
+        "denominator": 324,
+        "rate": 0.9629629629629629
+      },
+      "field_recall": {
+        "numerator": 312,
+        "denominator": 376,
+        "rate": 0.8297872340425532
+      },
+      "field_f1": 0.8914285714285713,
+      "field_counts": {
+        "entity_type": {
+          "tp": 53,
+          "fp": 0,
+          "fn": 11
+        },
+        "subject": {
+          "tp": 52,
+          "fp": 1,
+          "fn": 12
+        },
+        "attribute": {
+          "tp": 53,
+          "fp": 0,
+          "fn": 11
+        },
+        "value": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 17
+        },
+        "organization": {
+          "tp": 28,
+          "fp": 4,
+          "fn": 2
+        },
+        "effective_date": {
+          "tp": 26,
+          "fp": 1,
+          "fn": 0
+        },
+        "source_id": {
+          "tp": 53,
+          "fp": 0,
+          "fn": 11
+        }
+      },
+      "pipeline_errors": 10,
+      "write_errors": 1,
+      "accepted_updates": 26,
+      "correct_accepted_updates": 6,
+      "correct_accepted_candidates": 6,
+      "latency_mean_seconds": 2.8668691167435045,
+      "latency_median_seconds": 2.9794011664926074,
+      "model_calls": 66,
+      "input_tokens": 115656,
+      "output_tokens": 11915,
+      "estimated_api_cost_usd": 0.0,
+      "failure_counts": {
+        "extraction": 22,
+        "entity_resolution": 43,
+        "permission": 2,
+        "incorrect_acceptance": 20,
+        "response_error": 10,
+        "decision": 25,
+        "write_error": 1
+      },
+      "decision_confusion": {
+        "accept -> accept": 23,
+        "reject -> pipeline_error": 2,
+        "review -> review": 9,
+        "accept -> review": 7,
+        "review -> pipeline_error": 4,
+        "accept -> pipeline_error": 4,
+        "reject -> reject": 9,
+        "accept -> reject": 4,
+        "review -> accept": 3,
+        "review -> reject": 1
+      }
+    }
+  },
+  "by_split": {
+    "guided": {
+      "test2": {
+        "cases": 66,
+        "decision_accuracy": {
+          "numerator": 41,
+          "denominator": 66,
+          "rate": 0.6212121212121212
+        },
+        "accepted_update_accuracy": {
+          "numerator": 6,
+          "denominator": 26,
+          "rate": 0.23076923076923078
+        },
+        "useful_update_coverage": {
+          "numerator": 6,
+          "denominator": 38,
+          "rate": 0.15789473684210525
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 6,
+          "denominator": 26,
+          "rate": 0.23076923076923078
+        },
+        "exact_candidate_coverage": {
+          "numerator": 6,
+          "denominator": 38,
+          "rate": 0.15789473684210525
+        },
+        "unsafe_case_withholding": {
+          "numerator": 19,
+          "denominator": 28,
+          "rate": 0.6785714285714286
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 23,
+          "denominator": 66,
+          "rate": 0.3484848484848485
+        },
+        "candidate_exact_match": {
+          "numerator": 44,
+          "denominator": 66,
+          "rate": 0.6666666666666666
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 53,
+          "denominator": 53,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 24,
+          "denominator": 26,
+          "rate": 0.9230769230769231
+        },
+        "field_precision": {
+          "numerator": 312,
+          "denominator": 324,
+          "rate": 0.9629629629629629
+        },
+        "field_recall": {
+          "numerator": 312,
+          "denominator": 376,
+          "rate": 0.8297872340425532
+        },
+        "field_f1": 0.8914285714285713,
+        "field_counts": {
+          "entity_type": {
+            "tp": 53,
+            "fp": 0,
+            "fn": 11
+          },
+          "subject": {
+            "tp": 52,
+            "fp": 1,
+            "fn": 12
+          },
+          "attribute": {
+            "tp": 53,
+            "fp": 0,
+            "fn": 11
+          },
+          "value": {
+            "tp": 47,
+            "fp": 6,
+            "fn": 17
+          },
+          "organization": {
+            "tp": 28,
+            "fp": 4,
+            "fn": 2
+          },
+          "effective_date": {
+            "tp": 26,
+            "fp": 1,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 53,
+            "fp": 0,
+            "fn": 11
+          }
+        },
+        "pipeline_errors": 10,
+        "write_errors": 1,
+        "accepted_updates": 26,
+        "correct_accepted_updates": 6,
+        "correct_accepted_candidates": 6,
+        "latency_mean_seconds": 2.8668691167435045,
+        "latency_median_seconds": 2.9794011664926074,
+        "model_calls": 66,
+        "input_tokens": 115656,
+        "output_tokens": 11915,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 22,
+          "entity_resolution": 43,
+          "permission": 2,
+          "incorrect_acceptance": 20,
+          "response_error": 10,
+          "decision": 25,
+          "write_error": 1
+        },
+        "decision_confusion": {
+          "accept -> accept": 23,
+          "reject -> pipeline_error": 2,
+          "review -> review": 9,
+          "accept -> review": 7,
+          "review -> pipeline_error": 4,
+          "accept -> pipeline_error": 4,
+          "reject -> reject": 9,
+          "accept -> reject": 4,
+          "review -> accept": 3,
+          "review -> reject": 1
+        }
+      }
+    }
+  },
+  "by_origin": {
+    "guided": {
+      "fewrel_adapted": {
+        "cases": 30,
+        "decision_accuracy": {
+          "numerator": 22,
+          "denominator": 30,
+          "rate": 0.7333333333333333
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 18,
+          "rate": 0.05555555555555555
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 24,
+          "rate": 0.041666666666666664
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 18,
+          "rate": 0.05555555555555555
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 24,
+          "rate": 0.041666666666666664
+        },
+        "unsafe_case_withholding": {
+          "numerator": 5,
+          "denominator": 6,
+          "rate": 0.8333333333333334
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 5,
+          "denominator": 30,
+          "rate": 0.16666666666666666
+        },
+        "candidate_exact_match": {
+          "numerator": 10,
+          "denominator": 30,
+          "rate": 0.3333333333333333
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 21,
+          "denominator": 21,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 16,
+          "denominator": 18,
+          "rate": 0.8888888888888888
+        },
+        "field_precision": {
+          "numerator": 98,
+          "denominator": 110,
+          "rate": 0.8909090909090909
+        },
+        "field_recall": {
+          "numerator": 98,
+          "denominator": 150,
+          "rate": 0.6533333333333333
+        },
+        "field_f1": 0.7538461538461538,
+        "field_counts": {
+          "entity_type": {
+            "tp": 21,
+            "fp": 0,
+            "fn": 9
+          },
+          "subject": {
+            "tp": 20,
+            "fp": 1,
+            "fn": 10
+          },
+          "attribute": {
+            "tp": 21,
+            "fp": 0,
+            "fn": 9
+          },
+          "value": {
+            "tp": 15,
+            "fp": 6,
+            "fn": 15
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 21,
+            "fp": 0,
+            "fn": 9
+          }
+        },
+        "pipeline_errors": 3,
+        "write_errors": 0,
+        "accepted_updates": 18,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 2.7792256013761896,
+        "latency_median_seconds": 2.9424758960376494,
+        "model_calls": 30,
+        "input_tokens": 51720,
+        "output_tokens": 5067,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 20,
+          "entity_resolution": 25,
+          "permission": 2,
+          "incorrect_acceptance": 17,
+          "response_error": 3,
+          "decision": 8
+        },
+        "decision_confusion": {
+          "accept -> accept": 17,
+          "review -> review": 2,
+          "accept -> pipeline_error": 3,
+          "reject -> reject": 3,
+          "accept -> reject": 4,
+          "review -> accept": 1
+        }
+      },
+      "synthetic": {
+        "cases": 36,
+        "decision_accuracy": {
+          "numerator": 19,
+          "denominator": 36,
+          "rate": 0.5277777777777778
+        },
+        "accepted_update_accuracy": {
+          "numerator": 5,
+          "denominator": 8,
+          "rate": 0.625
+        },
+        "useful_update_coverage": {
+          "numerator": 5,
+          "denominator": 14,
+          "rate": 0.35714285714285715
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 5,
+          "denominator": 8,
+          "rate": 0.625
+        },
+        "exact_candidate_coverage": {
+          "numerator": 5,
+          "denominator": 14,
+          "rate": 0.35714285714285715
+        },
+        "unsafe_case_withholding": {
+          "numerator": 14,
+          "denominator": 22,
+          "rate": 0.6363636363636364
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 18,
+          "denominator": 36,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 34,
+          "denominator": 36,
+          "rate": 0.9444444444444444
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 32,
+          "denominator": 32,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 8,
+          "denominator": 8,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 214,
+          "denominator": 214,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 214,
+          "denominator": 226,
+          "rate": 0.9469026548672567
+        },
+        "field_f1": 0.9727272727272728,
+        "field_counts": {
+          "entity_type": {
+            "tp": 32,
+            "fp": 0,
+            "fn": 2
+          },
+          "subject": {
+            "tp": 32,
+            "fp": 0,
+            "fn": 2
+          },
+          "attribute": {
+            "tp": 32,
+            "fp": 0,
+            "fn": 2
+          },
+          "value": {
+            "tp": 32,
+            "fp": 0,
+            "fn": 2
+          },
+          "organization": {
+            "tp": 28,
+            "fp": 0,
+            "fn": 2
+          },
+          "effective_date": {
+            "tp": 26,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 32,
+            "fp": 0,
+            "fn": 2
+          }
+        },
+        "pipeline_errors": 7,
+        "write_errors": 1,
+        "accepted_updates": 8,
+        "correct_accepted_updates": 5,
+        "correct_accepted_candidates": 5,
+        "latency_mean_seconds": 2.9399053795496,
+        "latency_median_seconds": 3.0178683124831878,
+        "model_calls": 36,
+        "input_tokens": 63936,
+        "output_tokens": 6848,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 7,
+          "entity_resolution": 18,
+          "decision": 17,
+          "write_error": 1,
+          "incorrect_acceptance": 3,
+          "extraction": 2
+        },
+        "decision_confusion": {
+          "reject -> pipeline_error": 2,
+          "accept -> review": 7,
+          "review -> pipeline_error": 4,
+          "accept -> accept": 6,
+          "review -> review": 7,
+          "reject -> reject": 6,
+          "accept -> pipeline_error": 1,
+          "review -> accept": 2,
+          "review -> reject": 1
+        }
+      }
+    }
+  },
+  "by_category": {
+    "guided": {
+      "ambiguous_identity": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.1240503959706984,
+        "latency_median_seconds": 3.1240503959706984,
+        "model_calls": 2,
+        "input_tokens": 3606,
+        "output_tokens": 385,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {},
+        "decision_confusion": {
+          "review -> review": 2
+        }
+      },
+      "conflicting_sources": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2587114790221676,
+        "latency_median_seconds": 3.2587114790221676,
+        "model_calls": 2,
+        "input_tokens": 3662,
+        "output_tokens": 418,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 1,
+          "entity_resolution": 1,
+          "decision": 2,
+          "incorrect_acceptance": 1
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 1,
+          "review -> accept": 1
+        }
+      },
+      "context_resolution": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2695946249878034,
+        "latency_median_seconds": 3.2695946249878034,
+        "model_calls": 2,
+        "input_tokens": 3615,
+        "output_tokens": 399,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "accept -> review": 2
+        }
+      },
+      "deal_relationship": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 2,
+        "correct_accepted_updates": 2,
+        "correct_accepted_candidates": 2,
+        "latency_mean_seconds": 2.953410249960143,
+        "latency_median_seconds": 2.953410249960143,
+        "model_calls": 2,
+        "input_tokens": 3478,
+        "output_tokens": 357,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {},
+        "decision_confusion": {
+          "accept -> accept": 2
+        }
+      },
+      "disallowed_source": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.0851806250284426,
+        "latency_median_seconds": 3.0851806250284426,
+        "model_calls": 2,
+        "input_tokens": 3523,
+        "output_tokens": 400,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {},
+        "decision_confusion": {
+          "reject -> reject": 2
+        }
+      },
+      "duplicate_records": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.0306575415306725,
+        "latency_median_seconds": 3.0306575415306725,
+        "model_calls": 2,
+        "input_tokens": 3615,
+        "output_tokens": 402,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 1,
+          "incorrect_acceptance": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "review -> review": 1,
+          "review -> accept": 1
+        }
+      },
+      "employer": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 2.9209388330345973,
+        "latency_median_seconds": 2.9209388330345973,
+        "model_calls": 2,
+        "input_tokens": 3508,
+        "output_tokens": 403,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> review": 1,
+          "accept -> accept": 1
+        }
+      },
+      "explicit_correction": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2167017080355436,
+        "latency_median_seconds": 3.2167017080355436,
+        "model_calls": 2,
+        "input_tokens": 3709,
+        "output_tokens": 461,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 2,
+          "response_error": 1,
+          "entity_resolution": 1
+        },
+        "decision_confusion": {
+          "accept -> review": 1,
+          "accept -> pipeline_error": 1
+        }
+      },
+      "explicit_denial": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 6,
+          "denominator": 12,
+          "rate": 0.5
+        },
+        "field_f1": 0.6666666666666666,
+        "field_counts": {
+          "entity_type": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "subject": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "attribute": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "value": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "organization": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.606915416487027,
+        "latency_median_seconds": 2.606915416487027,
+        "model_calls": 2,
+        "input_tokens": 3507,
+        "output_tokens": 280,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "extraction": 1
+        },
+        "decision_confusion": {
+          "reject -> reject": 2
+        }
+      },
+      "future_update": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2564562295447104,
+        "latency_median_seconds": 3.2564562295447104,
+        "model_calls": 2,
+        "input_tokens": 3502,
+        "output_tokens": 407,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 1
+        },
+        "decision_confusion": {
+          "review -> review": 2
+        }
+      },
+      "headquarters": {
+        "cases": 10,
+        "decision_accuracy": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 8,
+          "rate": 0.125
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 8,
+          "rate": 0.125
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 8,
+          "rate": 0.125
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 8,
+          "rate": 0.125
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 10,
+          "rate": 0.2
+        },
+        "candidate_exact_match": {
+          "numerator": 6,
+          "denominator": 10,
+          "rate": 0.6
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 8,
+          "denominator": 8,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 49,
+          "denominator": 54,
+          "rate": 0.9074074074074074
+        },
+        "field_recall": {
+          "numerator": 49,
+          "denominator": 50,
+          "rate": 0.98
+        },
+        "field_f1": 0.9423076923076924,
+        "field_counts": {
+          "entity_type": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 9,
+            "fp": 1,
+            "fn": 1
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 8,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 2.8941706498968416,
+        "latency_median_seconds": 2.9424758960376494,
+        "model_calls": 10,
+        "input_tokens": 17240,
+        "output_tokens": 1801,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 8,
+          "incorrect_acceptance": 7,
+          "extraction": 4
+        },
+        "decision_confusion": {
+          "accept -> accept": 8,
+          "reject -> reject": 1,
+          "review -> review": 1
+        }
+      },
+      "irrelevant_document": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_recall": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_f1": 0.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 1.8710418954724446,
+        "latency_median_seconds": 1.8710418954724446,
+        "model_calls": 2,
+        "input_tokens": 3498,
+        "output_tokens": 199,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2
+        },
+        "decision_confusion": {
+          "reject -> reject": 2
+        }
+      },
+      "new_entity": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 1,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.7937023959239013,
+        "latency_median_seconds": 2.7937023959239013,
+        "model_calls": 2,
+        "input_tokens": 3443,
+        "output_tokens": 404,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 1,
+          "write_error": 1,
+          "incorrect_acceptance": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> accept": 1,
+          "accept -> review": 1
+        }
+      },
+      "organization_alias": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 3.0827670414582826,
+        "latency_median_seconds": 3.0827670414582826,
+        "model_calls": 2,
+        "input_tokens": 3519,
+        "output_tokens": 395,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> accept": 1,
+          "accept -> review": 1
+        }
+      },
+      "owned_by": {
+        "cases": 10,
+        "decision_accuracy": {
+          "numerator": 6,
+          "denominator": 10,
+          "rate": 0.6
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 6,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 8,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 6,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 8,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 10,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 4,
+          "denominator": 10,
+          "rate": 0.4
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 7,
+          "denominator": 7,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 33,
+          "denominator": 36,
+          "rate": 0.9166666666666666
+        },
+        "field_recall": {
+          "numerator": 33,
+          "denominator": 50,
+          "rate": 0.66
+        },
+        "field_f1": 0.7674418604651163,
+        "field_counts": {
+          "entity_type": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 3
+          },
+          "subject": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 4
+          },
+          "attribute": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 3
+          },
+          "value": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 4
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 3
+          }
+        },
+        "pipeline_errors": 3,
+        "write_errors": 0,
+        "accepted_updates": 6,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.928951541823335,
+        "latency_median_seconds": 3.015948770509567,
+        "model_calls": 10,
+        "input_tokens": 17134,
+        "output_tokens": 1844,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 10,
+          "incorrect_acceptance": 6,
+          "response_error": 3,
+          "extraction": 6,
+          "decision": 4
+        },
+        "decision_confusion": {
+          "accept -> accept": 5,
+          "accept -> pipeline_error": 3,
+          "reject -> reject": 1,
+          "review -> accept": 1
+        }
+      },
+      "role": {
+        "cases": 10,
+        "decision_accuracy": {
+          "numerator": 6,
+          "denominator": 10,
+          "rate": 0.6
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 4,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 8,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 4,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 8,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 3,
+          "denominator": 10,
+          "rate": 0.3
+        },
+        "candidate_exact_match": {
+          "numerator": 0,
+          "denominator": 10,
+          "rate": 0.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 4,
+          "denominator": 4,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 2,
+          "denominator": 4,
+          "rate": 0.5
+        },
+        "field_precision": {
+          "numerator": 16,
+          "denominator": 20,
+          "rate": 0.8
+        },
+        "field_recall": {
+          "numerator": 16,
+          "denominator": 50,
+          "rate": 0.32
+        },
+        "field_f1": 0.45714285714285713,
+        "field_counts": {
+          "entity_type": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 6
+          },
+          "subject": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 6
+          },
+          "attribute": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 6
+          },
+          "value": {
+            "tp": 0,
+            "fp": 4,
+            "fn": 10
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 6
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 4,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.514554612408392,
+        "latency_median_seconds": 2.244398791459389,
+        "model_calls": 10,
+        "input_tokens": 17346,
+        "output_tokens": 1422,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 10,
+          "entity_resolution": 7,
+          "permission": 2,
+          "incorrect_acceptance": 4,
+          "decision": 4
+        },
+        "decision_confusion": {
+          "accept -> accept": 4,
+          "review -> review": 1,
+          "reject -> reject": 1,
+          "accept -> reject": 4
+        }
+      },
+      "same_date_conflict": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.1803407709812745,
+        "latency_median_seconds": 3.1803407709812745,
+        "model_calls": 2,
+        "input_tokens": 3578,
+        "output_tokens": 429,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 1,
+          "entity_resolution": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 1,
+          "review -> review": 1
+        }
+      },
+      "stale_update": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 2,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.9602496454608627,
+        "latency_median_seconds": 2.9602496454608627,
+        "model_calls": 2,
+        "input_tokens": 3578,
+        "output_tokens": 414,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 2,
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "reject -> pipeline_error": 2
+        }
+      },
+      "supported": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 2.895889042003546,
+        "latency_median_seconds": 2.895889042003546,
+        "model_calls": 2,
+        "input_tokens": 3531,
+        "output_tokens": 409,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> review": 1,
+          "accept -> accept": 1
+        }
+      },
+      "tentative_claim": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 6,
+          "denominator": 12,
+          "rate": 0.5
+        },
+        "field_f1": 0.6666666666666666,
+        "field_counts": {
+          "entity_type": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "subject": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "attribute": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "value": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "organization": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.419602208014112,
+        "latency_median_seconds": 2.419602208014112,
+        "model_calls": 2,
+        "input_tokens": 3509,
+        "output_tokens": 291,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "extraction": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "review -> review": 1,
+          "review -> reject": 1
+        }
+      },
+      "undated_conflict": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 2,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.992086728976574,
+        "latency_median_seconds": 2.992086728976574,
+        "model_calls": 2,
+        "input_tokens": 3555,
+        "output_tokens": 395,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 2,
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 2
+        }
+      }
+    }
+  },
+  "by_condition": {
+    "guided": {
+      "ambiguous_identity": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.1240503959706984,
+        "latency_median_seconds": 3.1240503959706984,
+        "model_calls": 2,
+        "input_tokens": 3606,
+        "output_tokens": 385,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {},
+        "decision_confusion": {
+          "review -> review": 2
+        }
+      },
+      "conflicting_sources": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2587114790221676,
+        "latency_median_seconds": 3.2587114790221676,
+        "model_calls": 2,
+        "input_tokens": 3662,
+        "output_tokens": 418,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 1,
+          "entity_resolution": 1,
+          "decision": 2,
+          "incorrect_acceptance": 1
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 1,
+          "review -> accept": 1
+        }
+      },
+      "context_resolution": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2695946249878034,
+        "latency_median_seconds": 3.2695946249878034,
+        "model_calls": 2,
+        "input_tokens": 3615,
+        "output_tokens": 399,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "accept -> review": 2
+        }
+      },
+      "deal_relationship": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 10,
+          "denominator": 10,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 2,
+        "correct_accepted_updates": 2,
+        "correct_accepted_candidates": 2,
+        "latency_mean_seconds": 2.953410249960143,
+        "latency_median_seconds": 2.953410249960143,
+        "model_calls": 2,
+        "input_tokens": 3478,
+        "output_tokens": 357,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {},
+        "decision_confusion": {
+          "accept -> accept": 2
+        }
+      },
+      "disallowed_source": {
+        "cases": 5,
+        "decision_accuracy": {
+          "numerator": 5,
+          "denominator": 5,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 5,
+          "denominator": 5,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "candidate_exact_match": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 5,
+          "denominator": 5,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 27,
+          "denominator": 30,
+          "rate": 0.9
+        },
+        "field_recall": {
+          "numerator": 27,
+          "denominator": 29,
+          "rate": 0.9310344827586207
+        },
+        "field_f1": 0.9152542372881356,
+        "field_counts": {
+          "entity_type": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 3,
+            "fp": 2,
+            "fn": 2
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.022389975027181,
+        "latency_median_seconds": 2.953249542042613,
+        "model_calls": 5,
+        "input_tokens": 8683,
+        "output_tokens": 966,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 2,
+          "entity_resolution": 2
+        },
+        "decision_confusion": {
+          "reject -> reject": 5
+        }
+      },
+      "duplicate_records": {
+        "cases": 5,
+        "decision_accuracy": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "candidate_exact_match": {
+          "numerator": 3,
+          "denominator": 5,
+          "rate": 0.6
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 5,
+          "denominator": 5,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 27,
+          "denominator": 29,
+          "rate": 0.9310344827586207
+        },
+        "field_recall": {
+          "numerator": 27,
+          "denominator": 29,
+          "rate": 0.9310344827586207
+        },
+        "field_f1": 0.9310344827586207,
+        "field_counts": {
+          "entity_type": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 3,
+            "fp": 2,
+            "fn": 2
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 2,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.9620952581986786,
+        "latency_median_seconds": 3.0025291659403592,
+        "model_calls": 5,
+        "input_tokens": 8906,
+        "output_tokens": 987,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 2,
+          "entity_resolution": 2,
+          "incorrect_acceptance": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "review -> review": 3,
+          "review -> accept": 2
+        }
+      },
+      "employer": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 2.9209388330345973,
+        "latency_median_seconds": 2.9209388330345973,
+        "model_calls": 2,
+        "input_tokens": 3508,
+        "output_tokens": 403,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> review": 1,
+          "accept -> accept": 1
+        }
+      },
+      "explicit_correction": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2167017080355436,
+        "latency_median_seconds": 3.2167017080355436,
+        "model_calls": 2,
+        "input_tokens": 3709,
+        "output_tokens": 461,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 2,
+          "response_error": 1,
+          "entity_resolution": 1
+        },
+        "decision_confusion": {
+          "accept -> review": 1,
+          "accept -> pipeline_error": 1
+        }
+      },
+      "explicit_denial": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 6,
+          "denominator": 12,
+          "rate": 0.5
+        },
+        "field_f1": 0.6666666666666666,
+        "field_counts": {
+          "entity_type": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "subject": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "attribute": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "value": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "organization": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.606915416487027,
+        "latency_median_seconds": 2.606915416487027,
+        "model_calls": 2,
+        "input_tokens": 3507,
+        "output_tokens": 280,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "extraction": 1
+        },
+        "decision_confusion": {
+          "reject -> reject": 2
+        }
+      },
+      "future_update": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.2564562295447104,
+        "latency_median_seconds": 3.2564562295447104,
+        "model_calls": 2,
+        "input_tokens": 3502,
+        "output_tokens": 407,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 1
+        },
+        "decision_confusion": {
+          "review -> review": 2
+        }
+      },
+      "irrelevant_document": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_recall": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_f1": 0.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 1.8710418954724446,
+        "latency_median_seconds": 1.8710418954724446,
+        "model_calls": 2,
+        "input_tokens": 3498,
+        "output_tokens": 199,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2
+        },
+        "decision_confusion": {
+          "reject -> reject": 2
+        }
+      },
+      "new_entity": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 1,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.7937023959239013,
+        "latency_median_seconds": 2.7937023959239013,
+        "model_calls": 2,
+        "input_tokens": 3443,
+        "output_tokens": 404,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 1,
+          "write_error": 1,
+          "incorrect_acceptance": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> accept": 1,
+          "accept -> review": 1
+        }
+      },
+      "organization_alias": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "useful_update_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "exact_candidate_coverage": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 1,
+        "correct_accepted_updates": 1,
+        "correct_accepted_candidates": 1,
+        "latency_mean_seconds": 3.0827670414582826,
+        "latency_median_seconds": 3.0827670414582826,
+        "model_calls": 2,
+        "input_tokens": 3519,
+        "output_tokens": 395,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "decision": 1
+        },
+        "decision_confusion": {
+          "accept -> accept": 1,
+          "accept -> review": 1
+        }
+      },
+      "same_date_conflict": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 1,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 3.1803407709812745,
+        "latency_median_seconds": 3.1803407709812745,
+        "model_calls": 2,
+        "input_tokens": 3578,
+        "output_tokens": 429,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 1,
+          "entity_resolution": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 1,
+          "review -> review": 1
+        }
+      },
+      "stale_update": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 14,
+          "denominator": 14,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 2,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.9602496454608627,
+        "latency_median_seconds": 2.9602496454608627,
+        "model_calls": 2,
+        "input_tokens": 3578,
+        "output_tokens": 414,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 2,
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "reject -> pipeline_error": 2
+        }
+      },
+      "supported": {
+        "cases": 26,
+        "decision_accuracy": {
+          "numerator": 18,
+          "denominator": 26,
+          "rate": 0.6923076923076923
+        },
+        "accepted_update_accuracy": {
+          "numerator": 2,
+          "denominator": 18,
+          "rate": 0.1111111111111111
+        },
+        "useful_update_coverage": {
+          "numerator": 2,
+          "denominator": 26,
+          "rate": 0.07692307692307693
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 2,
+          "denominator": 18,
+          "rate": 0.1111111111111111
+        },
+        "exact_candidate_coverage": {
+          "numerator": 2,
+          "denominator": 26,
+          "rate": 0.07692307692307693
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 4,
+          "denominator": 26,
+          "rate": 0.15384615384615385
+        },
+        "candidate_exact_match": {
+          "numerator": 10,
+          "denominator": 26,
+          "rate": 0.38461538461538464
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 17,
+          "denominator": 17,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 16,
+          "denominator": 18,
+          "rate": 0.8888888888888888
+        },
+        "field_precision": {
+          "numerator": 86,
+          "denominator": 93,
+          "rate": 0.9247311827956989
+        },
+        "field_recall": {
+          "numerator": 86,
+          "denominator": 134,
+          "rate": 0.6417910447761194
+        },
+        "field_f1": 0.7577092511013216,
+        "field_counts": {
+          "entity_type": {
+            "tp": 17,
+            "fp": 0,
+            "fn": 9
+          },
+          "subject": {
+            "tp": 16,
+            "fp": 1,
+            "fn": 10
+          },
+          "attribute": {
+            "tp": 17,
+            "fp": 0,
+            "fn": 9
+          },
+          "value": {
+            "tp": 15,
+            "fp": 2,
+            "fn": 11
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 3,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 2,
+            "fp": 1,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 17,
+            "fp": 0,
+            "fn": 9
+          }
+        },
+        "pipeline_errors": 3,
+        "write_errors": 0,
+        "accepted_updates": 18,
+        "correct_accepted_updates": 2,
+        "correct_accepted_candidates": 2,
+        "latency_mean_seconds": 2.749146011241604,
+        "latency_median_seconds": 2.91527085454436,
+        "model_calls": 26,
+        "input_tokens": 44800,
+        "output_tokens": 4325,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "extraction": 16,
+          "entity_resolution": 22,
+          "permission": 2,
+          "incorrect_acceptance": 16,
+          "decision": 8,
+          "response_error": 3
+        },
+        "decision_confusion": {
+          "accept -> accept": 18,
+          "accept -> review": 1,
+          "accept -> pipeline_error": 3,
+          "accept -> reject": 4
+        }
+      },
+      "tentative_claim": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 1,
+          "denominator": 2,
+          "rate": 0.5
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 6,
+          "denominator": 12,
+          "rate": 0.5
+        },
+        "field_f1": 0.6666666666666666,
+        "field_counts": {
+          "entity_type": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "subject": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "attribute": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "value": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "organization": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "pipeline_errors": 0,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.419602208014112,
+        "latency_median_seconds": 2.419602208014112,
+        "model_calls": 2,
+        "input_tokens": 3509,
+        "output_tokens": 291,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "entity_resolution": 2,
+          "extraction": 1,
+          "decision": 1
+        },
+        "decision_confusion": {
+          "review -> review": 1,
+          "review -> reject": 1
+        }
+      },
+      "undated_conflict": {
+        "cases": 2,
+        "decision_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "accepted_update_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "useful_update_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "accepted_candidate_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "exact_candidate_coverage": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "unsafe_case_withholding": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "entity_resolution_accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "rate": 0.0
+        },
+        "candidate_exact_match": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "verification_accuracy_on_correct_candidates": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "quote_match_rate": {
+          "numerator": 2,
+          "denominator": 2,
+          "rate": 1.0
+        },
+        "accepted_source_permission": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "field_precision": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_recall": {
+          "numerator": 12,
+          "denominator": 12,
+          "rate": 1.0
+        },
+        "field_f1": 1.0,
+        "field_counts": {
+          "entity_type": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "subject": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "attribute": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "value": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "organization": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "effective_date": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "source_id": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "pipeline_errors": 2,
+        "write_errors": 0,
+        "accepted_updates": 0,
+        "correct_accepted_updates": 0,
+        "correct_accepted_candidates": 0,
+        "latency_mean_seconds": 2.992086728976574,
+        "latency_median_seconds": 2.992086728976574,
+        "model_calls": 2,
+        "input_tokens": 3555,
+        "output_tokens": 395,
+        "estimated_api_cost_usd": 0.0,
+        "failure_counts": {
+          "response_error": 2,
+          "entity_resolution": 2,
+          "decision": 2
+        },
+        "decision_confusion": {
+          "review -> pipeline_error": 2
+        }
+      }
+    }
+  },
+  "consistency": {
+    "guided": {
+      "numerator": 5,
+      "denominator": 6,
+      "rate": 0.8333333333333334,
+      "errored_comparisons": 1,
+      "agreement_on_healthy_comparisons": {
+        "numerator": 5,
+        "denominator": 5,
+        "rate": 1.0
+      }
+    }
+  },
+  "paired_comparison": {
+    "status": "requires_both_strategies"
+  }
+}
